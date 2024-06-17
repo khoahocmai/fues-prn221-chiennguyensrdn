@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\CN\\CN7\\PRN221-ChienNV33\\WorkspacePRN221\\fues-prn212-chiennguyensrdn\\Repositories\\Repositories.csproj": {}
+    "D:\\CN\\CN7\\PRN221-ChienNV33\\fues-prn212-chiennguyensrdn\\Repositories\\Repositories.csproj": {}
   },
   "projects": {
-    "D:\\CN\\CN7\\PRN221-ChienNV33\\WorkspacePRN221\\fues-prn212-chiennguyensrdn\\Repositories\\Repositories.csproj": {
+    "D:\\CN\\CN7\\PRN221-ChienNV33\\fues-prn212-chiennguyensrdn\\Repositories\\Repositories.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\CN\\CN7\\PRN221-ChienNV33\\WorkspacePRN221\\fues-prn212-chiennguyensrdn\\Repositories\\Repositories.csproj",
+        "projectUniqueName": "D:\\CN\\CN7\\PRN221-ChienNV33\\fues-prn212-chiennguyensrdn\\Repositories\\Repositories.csproj",
         "projectName": "Repositories",
-        "projectPath": "D:\\CN\\CN7\\PRN221-ChienNV33\\WorkspacePRN221\\fues-prn212-chiennguyensrdn\\Repositories\\Repositories.csproj",
+        "projectPath": "D:\\CN\\CN7\\PRN221-ChienNV33\\fues-prn212-chiennguyensrdn\\Repositories\\Repositories.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\CN\\CN7\\PRN221-ChienNV33\\WorkspacePRN221\\fues-prn212-chiennguyensrdn\\Repositories\\obj\\",
+        "outputPath": "D:\\CN\\CN7\\PRN221-ChienNV33\\fues-prn212-chiennguyensrdn\\Repositories\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

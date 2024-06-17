@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\CN\\CN7\\PRN221-ChienNV33\\WorkspacePRN221\\fues-prn212-chiennguyensrdn\\BusinnessObjects\\BusinnessObjects.csproj",
+      "projectUniqueName": "D:\\CN\\CN7\\PRN221-ChienNV33\\fues-prn212-chiennguyensrdn\\BusinnessObjects\\BusinnessObjects.csproj",
       "projectName": "BusinnessObjects",
-      "projectPath": "D:\\CN\\CN7\\PRN221-ChienNV33\\WorkspacePRN221\\fues-prn212-chiennguyensrdn\\BusinnessObjects\\BusinnessObjects.csproj",
+      "projectPath": "D:\\CN\\CN7\\PRN221-ChienNV33\\fues-prn212-chiennguyensrdn\\BusinnessObjects\\BusinnessObjects.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "D:\\CN\\CN7\\PRN221-ChienNV33\\WorkspacePRN221\\fues-prn212-chiennguyensrdn\\BusinnessObjects\\obj\\",
+      "outputPath": "D:\\CN\\CN7\\PRN221-ChienNV33\\fues-prn212-chiennguyensrdn\\BusinnessObjects\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
