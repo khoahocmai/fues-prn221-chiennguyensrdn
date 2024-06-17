@@ -7,4 +7,8 @@
     <RootNamespace>fues_prn212_chiennguyensrdn</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Repositories\Repositories.csproj" />
+  </ItemGroup>
+
 </Project>

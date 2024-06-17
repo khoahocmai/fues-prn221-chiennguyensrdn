@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Authentication.Cookies;
+﻿using DataAccessObjects;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.EntityFrameworkCore;
+using Repositories.IRepo;
+using Repositories.Repo;
 
 namespace fues_prn212_chiennguyensrdn
 {
@@ -20,10 +24,7 @@ namespace fues_prn212_chiennguyensrdn
             services.AddSignalR();
 
             // Add service to the container.
-            //services.AddScoped<ICustomerRepository, CustomerRepository>();
-            //services.AddScoped<IRoomInformationRepository, RoomInformationRepository>();
-            //services.AddScoped<IBookingReservationRepository, BookingReservationRepository>();
-            //services.AddScoped<IBookingDetailRepository, BookingDetailRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             // Add authentication services
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -34,7 +35,7 @@ namespace fues_prn212_chiennguyensrdn
                 });
 
             // DI
-            //services.AddDbContext<FuminiHotelManagementContext>(options => options.UseSqlServer(_configuration.GetConnectionString("SqlConnection")));
+            services.AddDbContext<FUESManagementContext>(options => options.UseSqlServer(_configuration.GetConnectionString("SqlConnection")));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -58,7 +59,6 @@ namespace fues_prn212_chiennguyensrdn
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
-                //endpoints.MapHub<RoomHub>("/RoomHub");
             });
         }
     }

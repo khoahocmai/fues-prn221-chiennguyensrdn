@@ -18,6 +18,14 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = D:\CN\CN7\PRN221-ChienNV33\fues-prn212-chiennguyensrdn\fues-prn212-chiennguyensrdn
 build_property._RazorSourceGeneratorDebug = 
 
+[D:/CN/CN7/PRN221-ChienNV33/fues-prn212-chiennguyensrdn/fues-prn212-chiennguyensrdn/Pages/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudFxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/CN/CN7/PRN221-ChienNV33/fues-prn212-chiennguyensrdn/fues-prn212-chiennguyensrdn/Pages/Account/Logout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudFxMb2dvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/CN/CN7/PRN221-ChienNV33/fues-prn212-chiennguyensrdn/fues-prn212-chiennguyensrdn/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

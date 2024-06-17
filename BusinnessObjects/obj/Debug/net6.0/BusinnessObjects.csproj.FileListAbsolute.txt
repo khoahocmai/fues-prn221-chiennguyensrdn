@@ -1,0 +1,15 @@
+D:\CN\CN7\PRN221-ChienNV33\fues-prn212-chiennguyensrdn\BusinnessObjects\bin\Debug\net6.0\BusinnessObjects.deps.json
+D:\CN\CN7\PRN221-ChienNV33\fues-prn212-chiennguyensrdn\BusinnessObjects\bin\Debug\net6.0\BusinnessObjects.dll
+D:\CN\CN7\PRN221-ChienNV33\fues-prn212-chiennguyensrdn\BusinnessObjects\bin\Debug\net6.0\BusinnessObjects.pdb
+D:\CN\CN7\PRN221-ChienNV33\fues-prn212-chiennguyensrdn\BusinnessObjects\obj\Debug\net6.0\BusinnessObjects.GeneratedMSBuildEditorConfig.editorconfig
+D:\CN\CN7\PRN221-ChienNV33\fues-prn212-chiennguyensrdn\BusinnessObjects\obj\Debug\net6.0\BusinnessObjects.AssemblyInfoInputs.cache
+D:\CN\CN7\PRN221-ChienNV33\fues-prn212-chiennguyensrdn\BusinnessObjects\obj\Debug\net6.0\BusinnessObjects.AssemblyInfo.cs
+D:\CN\CN7\PRN221-ChienNV33\fues-prn212-chiennguyensrdn\BusinnessObjects\obj\Debug\net6.0\BusinnessObjects.csproj.CoreCompileInputs.cache
+D:\CN\CN7\PRN221-ChienNV33\fues-prn212-chiennguyensrdn\BusinnessObjects\obj\Debug\net6.0\BusinnessObjects.sourcelink.json
+D:\CN\CN7\PRN221-ChienNV33\fues-prn212-chiennguyensrdn\BusinnessObjects\obj\Debug\net6.0\BusinnessObjects.dll
+D:\CN\CN7\PRN221-ChienNV33\fues-prn212-chiennguyensrdn\BusinnessObjects\obj\Debug\net6.0\refint\BusinnessObjects.dll
+D:\CN\CN7\PRN221-ChienNV33\fues-prn212-chiennguyensrdn\BusinnessObjects\obj\Debug\net6.0\BusinnessObjects.pdb
+D:\CN\CN7\PRN221-ChienNV33\fues-prn212-chiennguyensrdn\BusinnessObjects\obj\Debug\net6.0\ref\BusinnessObjects.dll
+D:\CN\CN7\PRN221-ChienNV33\fues-prn212-chiennguyensrdn\BusinnessObjects\bin\Debug\net6.0\BusinnessObjects.runtimeconfig.json
+D:\CN\CN7\PRN221-ChienNV33\fues-prn212-chiennguyensrdn\BusinnessObjects\obj\Debug\net6.0\BusinnessObjects.csproj.AssemblyReference.cache
+D:\CN\CN7\PRN221-ChienNV33\fues-prn212-chiennguyensrdn\BusinnessObjects\obj\Debug\net6.0\BusinnessObjects.genruntimeconfig.cache
