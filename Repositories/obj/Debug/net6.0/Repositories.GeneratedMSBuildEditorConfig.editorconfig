@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Repositories
-build_property.ProjectDir = D:\CN\CN7\PRN221-ChienNV33\WorkspacePRN221\fues-prn212-chiennguyensrdn\Repositories\
+build_property.ProjectDir = D:\CN\CN7\PRN221-ChienNV33\fues-prn212-chiennguyensrdn\Repositories\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

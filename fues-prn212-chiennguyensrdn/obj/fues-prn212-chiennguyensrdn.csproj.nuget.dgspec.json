@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\CN\\CN7\\PRN221-ChienNV33\\WorkspacePRN221\\fues-prn212-chiennguyensrdn\\fues-prn212-chiennguyensrdn\\fues-prn212-chiennguyensrdn.csproj": {}
+    "D:\\CN\\CN7\\PRN221-ChienNV33\\fues-prn212-chiennguyensrdn\\fues-prn212-chiennguyensrdn\\fues-prn212-chiennguyensrdn.csproj": {}
   },
   "projects": {
-    "D:\\CN\\CN7\\PRN221-ChienNV33\\WorkspacePRN221\\fues-prn212-chiennguyensrdn\\fues-prn212-chiennguyensrdn\\fues-prn212-chiennguyensrdn.csproj": {
+    "D:\\CN\\CN7\\PRN221-ChienNV33\\fues-prn212-chiennguyensrdn\\BusinnessObjects\\BusinnessObjects.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\CN\\CN7\\PRN221-ChienNV33\\WorkspacePRN221\\fues-prn212-chiennguyensrdn\\fues-prn212-chiennguyensrdn\\fues-prn212-chiennguyensrdn.csproj",
-        "projectName": "fues-prn212-chiennguyensrdn",
-        "projectPath": "D:\\CN\\CN7\\PRN221-ChienNV33\\WorkspacePRN221\\fues-prn212-chiennguyensrdn\\fues-prn212-chiennguyensrdn\\fues-prn212-chiennguyensrdn.csproj",
+        "projectUniqueName": "D:\\CN\\CN7\\PRN221-ChienNV33\\fues-prn212-chiennguyensrdn\\BusinnessObjects\\BusinnessObjects.csproj",
+        "projectName": "BusinnessObjects",
+        "projectPath": "D:\\CN\\CN7\\PRN221-ChienNV33\\fues-prn212-chiennguyensrdn\\BusinnessObjects\\BusinnessObjects.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\CN\\CN7\\PRN221-ChienNV33\\WorkspacePRN221\\fues-prn212-chiennguyensrdn\\fues-prn212-chiennguyensrdn\\obj\\",
+        "outputPath": "D:\\CN\\CN7\\PRN221-ChienNV33\\fues-prn212-chiennguyensrdn\\BusinnessObjects\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -49,6 +49,160 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[6.0.31, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.31, )"
+            },
+            "Microsoft.Extensions.Configuration.Json": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.205\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\CN\\CN7\\PRN221-ChienNV33\\fues-prn212-chiennguyensrdn\\DataAccessObjects\\DataAccessObjects.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\CN\\CN7\\PRN221-ChienNV33\\fues-prn212-chiennguyensrdn\\DataAccessObjects\\DataAccessObjects.csproj",
+        "projectName": "DataAccessObjects",
+        "projectPath": "D:\\CN\\CN7\\PRN221-ChienNV33\\fues-prn212-chiennguyensrdn\\DataAccessObjects\\DataAccessObjects.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "D:\\CN\\CN7\\PRN221-ChienNV33\\fues-prn212-chiennguyensrdn\\DataAccessObjects\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "D:\\CN\\CN7\\PRN221-ChienNV33\\fues-prn212-chiennguyensrdn\\BusinnessObjects\\BusinnessObjects.csproj": {
+                "projectPath": "D:\\CN\\CN7\\PRN221-ChienNV33\\fues-prn212-chiennguyensrdn\\BusinnessObjects\\BusinnessObjects.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.205\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\CN\\CN7\\PRN221-ChienNV33\\fues-prn212-chiennguyensrdn\\fues-prn212-chiennguyensrdn\\fues-prn212-chiennguyensrdn.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\CN\\CN7\\PRN221-ChienNV33\\fues-prn212-chiennguyensrdn\\fues-prn212-chiennguyensrdn\\fues-prn212-chiennguyensrdn.csproj",
+        "projectName": "fues-prn212-chiennguyensrdn",
+        "projectPath": "D:\\CN\\CN7\\PRN221-ChienNV33\\fues-prn212-chiennguyensrdn\\fues-prn212-chiennguyensrdn\\fues-prn212-chiennguyensrdn.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "D:\\CN\\CN7\\PRN221-ChienNV33\\fues-prn212-chiennguyensrdn\\fues-prn212-chiennguyensrdn\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "D:\\CN\\CN7\\PRN221-ChienNV33\\fues-prn212-chiennguyensrdn\\Repositories\\Repositories.csproj": {
+                "projectPath": "D:\\CN\\CN7\\PRN221-ChienNV33\\fues-prn212-chiennguyensrdn\\Repositories\\Repositories.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
           "imports": [
             "net461",
             "net462",
@@ -64,6 +218,75 @@
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
             },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.205\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\CN\\CN7\\PRN221-ChienNV33\\fues-prn212-chiennguyensrdn\\Repositories\\Repositories.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\CN\\CN7\\PRN221-ChienNV33\\fues-prn212-chiennguyensrdn\\Repositories\\Repositories.csproj",
+        "projectName": "Repositories",
+        "projectPath": "D:\\CN\\CN7\\PRN221-ChienNV33\\fues-prn212-chiennguyensrdn\\Repositories\\Repositories.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "D:\\CN\\CN7\\PRN221-ChienNV33\\fues-prn212-chiennguyensrdn\\Repositories\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "D:\\CN\\CN7\\PRN221-ChienNV33\\fues-prn212-chiennguyensrdn\\DataAccessObjects\\DataAccessObjects.csproj": {
+                "projectPath": "D:\\CN\\CN7\\PRN221-ChienNV33\\fues-prn212-chiennguyensrdn\\DataAccessObjects\\DataAccessObjects.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }

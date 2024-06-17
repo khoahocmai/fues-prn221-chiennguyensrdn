@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\fues-prn212-chiennguyensrdn.props" />
+</Project>

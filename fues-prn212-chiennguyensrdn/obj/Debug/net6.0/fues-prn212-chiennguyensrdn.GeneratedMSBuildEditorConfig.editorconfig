@@ -9,39 +9,47 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = fues_prn212_chiennguyensrdn
 build_property.RootNamespace = fues_prn212_chiennguyensrdn
-build_property.ProjectDir = D:\CN\CN7\PRN221-ChienNV33\WorkspacePRN221\fues-prn212-chiennguyensrdn\fues-prn212-chiennguyensrdn\
+build_property.ProjectDir = D:\CN\CN7\PRN221-ChienNV33\fues-prn212-chiennguyensrdn\fues-prn212-chiennguyensrdn\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = D:\CN\CN7\PRN221-ChienNV33\WorkspacePRN221\fues-prn212-chiennguyensrdn\fues-prn212-chiennguyensrdn
+build_property.MSBuildProjectDirectory = D:\CN\CN7\PRN221-ChienNV33\fues-prn212-chiennguyensrdn\fues-prn212-chiennguyensrdn
 build_property._RazorSourceGeneratorDebug = 
 
-[D:/CN/CN7/PRN221-ChienNV33/WorkspacePRN221/fues-prn212-chiennguyensrdn/fues-prn212-chiennguyensrdn/Pages/Error.cshtml]
+[D:/CN/CN7/PRN221-ChienNV33/fues-prn212-chiennguyensrdn/fues-prn212-chiennguyensrdn/Pages/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudFxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/CN/CN7/PRN221-ChienNV33/fues-prn212-chiennguyensrdn/fues-prn212-chiennguyensrdn/Pages/Account/Logout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudFxMb2dvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/CN/CN7/PRN221-ChienNV33/fues-prn212-chiennguyensrdn/fues-prn212-chiennguyensrdn/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/CN/CN7/PRN221-ChienNV33/WorkspacePRN221/fues-prn212-chiennguyensrdn/fues-prn212-chiennguyensrdn/Pages/Index.cshtml]
+[D:/CN/CN7/PRN221-ChienNV33/fues-prn212-chiennguyensrdn/fues-prn212-chiennguyensrdn/Pages/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/CN/CN7/PRN221-ChienNV33/WorkspacePRN221/fues-prn212-chiennguyensrdn/fues-prn212-chiennguyensrdn/Pages/Privacy.cshtml]
+[D:/CN/CN7/PRN221-ChienNV33/fues-prn212-chiennguyensrdn/fues-prn212-chiennguyensrdn/Pages/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJpdmFjeS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/CN/CN7/PRN221-ChienNV33/WorkspacePRN221/fues-prn212-chiennguyensrdn/fues-prn212-chiennguyensrdn/Pages/Shared/_ValidationScriptsPartial.cshtml]
+[D:/CN/CN7/PRN221-ChienNV33/fues-prn212-chiennguyensrdn/fues-prn212-chiennguyensrdn/Pages/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/CN/CN7/PRN221-ChienNV33/WorkspacePRN221/fues-prn212-chiennguyensrdn/fues-prn212-chiennguyensrdn/Pages/_ViewImports.cshtml]
+[D:/CN/CN7/PRN221-ChienNV33/fues-prn212-chiennguyensrdn/fues-prn212-chiennguyensrdn/Pages/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/CN/CN7/PRN221-ChienNV33/WorkspacePRN221/fues-prn212-chiennguyensrdn/fues-prn212-chiennguyensrdn/Pages/_ViewStart.cshtml]
+[D:/CN/CN7/PRN221-ChienNV33/fues-prn212-chiennguyensrdn/fues-prn212-chiennguyensrdn/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/CN/CN7/PRN221-ChienNV33/WorkspacePRN221/fues-prn212-chiennguyensrdn/fues-prn212-chiennguyensrdn/Pages/Shared/_Layout.cshtml]
+[D:/CN/CN7/PRN221-ChienNV33/fues-prn212-chiennguyensrdn/fues-prn212-chiennguyensrdn/Pages/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-xm8m3itu84

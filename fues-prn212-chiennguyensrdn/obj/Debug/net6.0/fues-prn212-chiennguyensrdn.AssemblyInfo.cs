@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("fues-prn212-chiennguyensrdn")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+458d55bc57b3e670da881265efceed58209a5502")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3cf277260bff21919e574aee01915d14ca5806af")]
 [assembly: System.Reflection.AssemblyProductAttribute("fues-prn212-chiennguyensrdn")]
 [assembly: System.Reflection.AssemblyTitleAttribute("fues-prn212-chiennguyensrdn")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
