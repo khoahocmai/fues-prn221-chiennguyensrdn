@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\buildMultiTargeting\fues-prn212-chiennguyensrdn.props" />
-</Project>
