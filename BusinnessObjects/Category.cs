@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace BusinnessObjects
 {
-    public partial class Categorie
+    public partial class Category
     {
-        public Categorie()
+        public Category()
         {
             Products = new HashSet<Product>();
         }

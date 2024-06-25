@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using BusinnessObjects;
-using Microsoft.Extensions.Configuration;
 
 namespace DataAccessObjects
 {
@@ -19,7 +18,7 @@ namespace DataAccessObjects
         }
 
         public virtual DbSet<Ban> Bans { get; set; } = null!;
-        public virtual DbSet<Categorie> Categories { get; set; } = null!;
+        public virtual DbSet<Category> Categories { get; set; } = null!;
         public virtual DbSet<Comment> Comments { get; set; } = null!;
         public virtual DbSet<ExchangeRequest> ExchangeRequests { get; set; } = null!;
         public virtual DbSet<Message> Messages { get; set; } = null!;
@@ -30,16 +29,12 @@ namespace DataAccessObjects
         public virtual DbSet<User> Users { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer(GetConnectionString());
-
-        string GetConnectionString()
         {
-            IConfiguration builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", true, true)
-                .Build();
-            return builder["ConnectionStrings:SqlConnection"];
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("Server=ADMIN-PC\\KHOADDD;Database= FUESManagement;Uid=sa;Pwd=12345;TrustServerCertificate=True");
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -63,9 +58,9 @@ namespace DataAccessObjects
                     .HasConstraintName("FK_Ban_User");
             });
 
-            modelBuilder.Entity<Categorie>(entity =>
+            modelBuilder.Entity<Category>(entity =>
             {
-                entity.ToTable("Categorie");
+                entity.ToTable("Category");
 
                 entity.Property(e => e.Name).HasMaxLength(255);
             });
@@ -109,13 +104,8 @@ namespace DataAccessObjects
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
-                entity.HasOne(d => d.OwnProduct)
-                    .WithMany(p => p.ExchangeRequestOwnProducts)
-                    .HasForeignKey(d => d.OwnProductId)
-                    .HasConstraintName("FK_ExchangeRequest_Product_Own");
-
                 entity.HasOne(d => d.Product)
-                    .WithMany(p => p.ExchangeRequestProducts)
+                    .WithMany(p => p.ExchangeRequests)
                     .HasForeignKey(d => d.ProductId)
                     .HasConstraintName("FK_ExchangeRequest_Product");
 
@@ -169,7 +159,7 @@ namespace DataAccessObjects
                 entity.HasOne(d => d.Category)
                     .WithMany(p => p.Products)
                     .HasForeignKey(d => d.CategoryId)
-                    .HasConstraintName("FK_Product_Categorie");
+                    .HasConstraintName("FK_Product_Category");
 
                 entity.HasOne(d => d.Seller)
                     .WithMany(p => p.Products)
@@ -217,13 +207,8 @@ namespace DataAccessObjects
                     .HasForeignKey(d => d.ProductId)
                     .HasConstraintName("FK_Report_Product");
 
-                entity.HasOne(d => d.Reported)
-                    .WithMany(p => p.ReportReporteds)
-                    .HasForeignKey(d => d.ReportedId)
-                    .HasConstraintName("FK_Report_User_Reported");
-
                 entity.HasOne(d => d.Reporter)
-                    .WithMany(p => p.ReportReporters)
+                    .WithMany(p => p.Reports)
                     .HasForeignKey(d => d.ReporterId)
                     .HasConstraintName("FK_Report_User_Reporter");
             });

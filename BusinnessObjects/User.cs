@@ -15,8 +15,7 @@ namespace BusinnessObjects
             MessageSenders = new HashSet<Message>();
             Products = new HashSet<Product>();
             Ratings = new HashSet<Rating>();
-            ReportReporteds = new HashSet<Report>();
-            ReportReporters = new HashSet<Report>();
+            Reports = new HashSet<Report>();
             Transactions = new HashSet<Transaction>();
         }
 
@@ -35,8 +34,7 @@ namespace BusinnessObjects
         public virtual ICollection<Message> MessageSenders { get; set; }
         public virtual ICollection<Product> Products { get; set; }
         public virtual ICollection<Rating> Ratings { get; set; }
-        public virtual ICollection<Report> ReportReporteds { get; set; }
-        public virtual ICollection<Report> ReportReporters { get; set; }
+        public virtual ICollection<Report> Reports { get; set; }
         public virtual ICollection<Transaction> Transactions { get; set; }
     }
 }
