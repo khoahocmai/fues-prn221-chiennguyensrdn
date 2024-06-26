@@ -1,0 +1,49 @@
+﻿@page
+@model fues_prn212_chiennguyensrdn.Pages.Chat.ChatPageModel
+@{
+}
+
+<div class="container">
+    <div>
+        <label>Your name:</label>
+        <input type="text" id="displayname"/>
+    </div>
+
+    <div class="mt-5">
+        <input type="text" id="message"/>
+        <input type="button" id="sendmessage" value="Send"/>
+    </div>
+
+    <div class="mt-3">
+        <ul id="dicussion"></ul> 
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.7/signalr.min.js"></script>
+
+<script>
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl("/chat-hub")
+        .build();
+
+    connection.on("ReceiveMessage", function (user, message) {
+        const msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        const encodedMsg = user + ": " + msg;
+        const li = document.createElement("li");
+        li.textContent = encodedMsg;
+        document.getElementById("dicussion").appendChild(li);
+    });
+
+    connection.start().catch(function (err) {
+        return console.error(err.toString());
+    });
+
+    document.getElementById("sendmessage").addEventListener("click", function (event) {
+        const user = document.getElementById("displayname").value;
+        const message = document.getElementById("message").value;
+        connection.invoke("SendMessage", user, message).catch(function (err) {
+            return console.error(err.toString());
+        });
+        event.preventDefault();
+    });
+</script>

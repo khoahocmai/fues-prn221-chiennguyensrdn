@@ -59,7 +59,9 @@ namespace fues_prn212_chiennguyensrdn
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
+                endpoints.MapHub<ChatHub>("/chat-hub");
             });
+
         }
     }
 }
