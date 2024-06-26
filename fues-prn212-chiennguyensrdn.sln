@@ -5,11 +5,11 @@ VisualStudioVersion = 17.9.34902.65
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fues-prn212-chiennguyensrdn", "fues-prn212-chiennguyensrdn\fues-prn212-chiennguyensrdn.csproj", "{5631C55D-AE75-48EE-887D-A20C830340B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinnessObjects", "BusinnessObjects\BusinnessObjects.csproj", "{719059B8-96DB-468D-932C-FD970D37C201}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinnessObjects", "BusinnessObjects\BusinnessObjects.csproj", "{719059B8-96DB-468D-932C-FD970D37C201}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessObjects", "DataAccessObjects\DataAccessObjects.csproj", "{57D80157-91C0-47C2-B592-A83CB251B54A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccessObjects", "DataAccessObjects\DataAccessObjects.csproj", "{57D80157-91C0-47C2-B592-A83CB251B54A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositories", "Repositories\Repositories.csproj", "{B236A50F-8ACD-40DC-A788-B6FBB0A07D3F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repositories", "Repositories\Repositories.csproj", "{B236A50F-8ACD-40DC-A788-B6FBB0A07D3F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
