@@ -1,4 +1,5 @@
 ﻿using BusinessObjects;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,29 +17,62 @@ namespace DataAccessObjects.DAO
             _context = context;
         }
 
-        public Rating GetRating(int id)
+        private static RatingDAO instance = null;
+        public static readonly object Lock = new object();
+        private RatingDAO() { }
+        public static RatingDAO Instance
         {
-            Rating rating = _context.Ratings.Find(id);
-            return rating;
+            get
+            {
+                lock (Lock)
+                {
+                    if (instance == null)
+                    {
+                        instance = new RatingDAO();
+                    }
+                    return instance;
+                }
+            }
         }
 
-        public List<Rating> GetRatings()
+        public async Task<List<Rating>> GetRatings()
         {
-            List<Rating> ratings = _context.Ratings.ToList();
-            return ratings;
-        }
-        public void CreateRating(Rating rating)
-        {
-             _context.Ratings.Add(rating);
-        }
-        public void UpdateRating(Rating rating) {
-            Rating currentRating = _context.Ratings.Find(rating.Id);
-            _context.Ratings.Update(currentRating);
-        }
-        public void DeleteRating(int id) {
-            Rating rating = _context.Ratings.Find(id);
-            _context.Ratings.Remove(rating);
+            return await _context.Ratings.ToListAsync();
         }
 
+        public async Task<Rating> GetRatingById(int id)
+        {
+            return await _context.Ratings.SingleOrDefaultAsync(r => r.Id == id);
+        }
+
+        public async Task AddRating(Rating rating)
+        {
+            await _context.Ratings.AddAsync(rating);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task UpdateRating(Rating rating)
+        {
+            var existingRating = await _context.Ratings.FindAsync(rating.Id);
+            if (existingRating != null)
+            {
+                existingRating.ProductId = rating.ProductId;
+                existingRating.UserId = rating.UserId;
+                existingRating.Rating1 = rating.Rating1;
+
+                _context.Ratings.Update(existingRating);
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        public async Task RemoveRating(int id)
+        {
+            var rating = await _context.Ratings.FindAsync(id);
+            if (rating != null)
+            {
+                _context.Ratings.Remove(rating);
+                await _context.SaveChangesAsync();
+            }
+        }
     }
 }

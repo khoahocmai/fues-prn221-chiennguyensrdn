@@ -1,4 +1,5 @@
 ﻿using BusinessObjects;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,32 +17,62 @@ namespace DataAccessObjects.DAO
             _context = context;
         }
 
-        public Message GetMessage(int id)
+        private static MessageDAO instance = null;
+        public static readonly object Lock = new object();
+        private MessageDAO() { }
+        public static MessageDAO Instance
         {
-            Message message = _context.Messages.Find(id);
-            return message;
+            get
+            {
+                lock (Lock)
+                {
+                    if (instance == null)
+                    {
+                        instance = new MessageDAO();
+                    }
+                    return instance;
+                }
+            }
+        }
+        public async Task<List<Message>> GetMessages()
+        {
+            return await _context.Messages.ToListAsync();
         }
 
-        public List<Message> GetMessages()
+        public async Task<Message> GetMessageById(int id)
         {
-            List<Message> messages = _context.Messages.ToList();
-            return messages;
-        }
-        public void CreateMessage(Message message)
-        {
-             _context.Messages.Add(message);
+            return await _context.Messages.SingleOrDefaultAsync(c => c.Id == id);
         }
 
-        public void UpdateMessage(Message message)
+        public async Task AddMessage(Message message)
         {
-            Message currentMessage = _context.Messages.Find(message.Id);
-            _context.Messages.Update(currentMessage);
+            await _context.Messages.AddAsync(message);
+            await _context.SaveChangesAsync();
         }
 
-        public void DeleteMessage(int id)
+        public async Task UpdateMessage(Message message)
         {
-            Message message = _context.Messages.Find(id);
-            _context.Messages.Remove(message);
+            var existingMessage = await _context.Messages.FindAsync(message.Id);
+            if (existingMessage != null)
+            {
+                existingMessage.SenderId = message.SenderId;
+                existingMessage.ReceiverId = message.ReceiverId;
+                existingMessage.Message1 = message.Message1;
+                existingMessage.UpdatedAt = DateTime.Now;
+
+                _context.Messages.Update(existingMessage);
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        public async Task RemoveMessage(int id)
+        {
+            var message = await _context.Messages.FindAsync(id);
+            if (message != null)
+            {
+                _context.Messages.Remove(message);
+                await _context.SaveChangesAsync();
+            }
         }
     }
 }
