@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace fues_prn212_chiennguyensrdn.Pages
+namespace fues_prn221_chiennguyensrdn.Pages
 {
     public class IndexModel : PageModel
     {

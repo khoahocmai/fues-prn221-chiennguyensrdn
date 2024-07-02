@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34902.65
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fues-prn212-chiennguyensrdn", "fues-prn212-chiennguyensrdn\fues-prn212-chiennguyensrdn.csproj", "{5631C55D-AE75-48EE-887D-A20C830340B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fues-prn221-chiennguyensrdn", "fues-prn212-chiennguyensrdn\fues-prn221-chiennguyensrdn.csproj", "{5631C55D-AE75-48EE-887D-A20C830340B8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinnessObjects", "BusinnessObjects\BusinnessObjects.csproj", "{719059B8-96DB-468D-932C-FD970D37C201}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessObjects", "BusinnessObjects\BusinessObjects.csproj", "{719059B8-96DB-468D-932C-FD970D37C201}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccessObjects", "DataAccessObjects\DataAccessObjects.csproj", "{57D80157-91C0-47C2-B592-A83CB251B54A}"
 EndProject

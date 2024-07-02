@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BusinnessObjects
+namespace BusinessObjects
 {
     public partial class Category
     {
