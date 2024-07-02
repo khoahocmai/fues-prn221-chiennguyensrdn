@@ -9,9 +9,10 @@ namespace Repositories.IRepo
 {
     public interface ICategoryRepository
     {
-        Task<Category> CreateAsync(Category category);
-        Task<List<Category>> GetAllAsync();
-        Task<Category> UpdateAsync(Category category);
-        Task<bool> DeleteAsync(int id);
+        Task<List<Category>> GetCategories();
+        Task<Category> GetCategoryById(int id);
+        Task AddCategory(Category category);
+        Task UpdateCategory(Category category);
+        Task RemoveCategory(int id);
     }
 }

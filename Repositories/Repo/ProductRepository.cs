@@ -11,46 +11,19 @@ namespace Repositories.Repo
 {
     public class ProductRepository : IProductRepository
     {
-        private readonly ProductDAO _productDAO;
+        public Task<List<Product>> GetProducts()
+            => ProductDAO.Instance.GetProducts();
 
-        public ProductRepository(ProductDAO productDAO)
-        {
-            _productDAO = productDAO;
-        }
+        public Task<Product> GetProductById(int id)
+            => ProductDAO.Instance.GetProductById(id);
 
-        public Task<Product> CreateAsync(Product product)
-        {
-            return _productDAO.CreateAsync(product);
-        }
+        public Task AddProduct(Product product)
+            => ProductDAO.Instance.AddProduct(product);
 
-        public Task<Product> GetByIdAsync(int id)
-        {
-            return _productDAO.GetByIdAsync(id);
-        }
+        public Task UpdateProduct(Product product)
+            => ProductDAO.Instance.UpdateProduct(product);
 
-        public Task<List<Product>> GetAllAsync()
-        {
-            return _productDAO.GetAllAsync();
-        }
-
-        public Task<Product> UpdateAsync(Product product)
-        {
-            return _productDAO.UpdateAsync(product);
-        }
-
-        public Task<bool> DeleteAsync(int id)
-        {
-            return _productDAO.DeleteAsync(id);
-        }
-
-        public Task<List<Product>> SearchAsync(string query)
-        {
-            return _productDAO.SearchAsync(query);
-        }
-
-        public Task<List<Product>> FilterAsync(int? categoryId, decimal? minPrice, decimal? maxPrice)
-        {
-            return _productDAO.FilterAsync(categoryId, minPrice, maxPrice);
-        }
+        public Task RemoveProduct(int id)
+            => ProductDAO.Instance.RemoveProduct(id);
     }
 }

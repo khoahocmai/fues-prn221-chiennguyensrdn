@@ -9,12 +9,10 @@ namespace Repositories.IRepo
 {
     public interface IProductRepository
     {
-        Task<Product> CreateAsync(Product product);
-        Task<Product> GetByIdAsync(int id);
-        Task<List<Product>> GetAllAsync();
-        Task<Product> UpdateAsync(Product product);
-        Task<bool> DeleteAsync(int id);
-        Task<List<Product>> SearchAsync(string query);
-        Task<List<Product>> FilterAsync(int? categoryId, decimal? minPrice, decimal? maxPrice);
+        Task<List<Product>> GetProducts();
+        Task<Product> GetProductById(int id);
+        Task AddProduct(Product product);
+        Task UpdateProduct(Product product);
+        Task RemoveProduct(int id);
     }
 }

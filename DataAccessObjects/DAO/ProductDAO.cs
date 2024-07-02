@@ -17,40 +17,58 @@ namespace DataAccessObjects.DAO
             _context = context;
         }
 
-        public async Task<Product> CreateAsync(Product product)
+        private static ProductDAO instance = null;
+        public static readonly object Lock = new object();
+        private ProductDAO() { }
+        public static ProductDAO Instance
         {
-            _context.Products.Add(product);
-            await _context.SaveChangesAsync();
-            return product;
+            get
+            {
+                lock (Lock)
+                {
+                    if (instance == null)
+                    {
+                        instance = new ProductDAO();
+                    }
+                    return instance;
+                }
+            }
         }
 
-        public async Task<Product> GetByIdAsync(int id)
-        {
-            return await _context.Products
-                .Include(p => p.Category)
-                .Include(p => p.Seller)
-                .Include(p => p.Comments)
-                .Include(p => p.ExchangeRequests)
-                .Include(p => p.Ratings)
-                .Include(p => p.Reports)
-                .Include(p => p.Transactions)
-                .FirstOrDefaultAsync(p => p.Id == id);
-        }
-
-        public async Task<List<Product>> GetAllAsync()
+        public async Task<List<Product>> GetProducts()
         {
             return await _context.Products
-                .Include(p => p.Category)
-                .Include(p => p.Seller)
-                .Include(p => p.Comments)
-                .Include(p => p.ExchangeRequests)
-                .Include(p => p.Ratings)
-                .Include(p => p.Reports)
-                .Include(p => p.Transactions)
-                .ToListAsync();
+                 .Include(p => p.Category)
+                 .Include(p => p.Seller)
+                 .Include(p => p.Comments)
+                 .Include(p => p.ExchangeRequests)
+                 .Include(p => p.Ratings)
+                 .Include(p => p.Reports)
+                 .Include(p => p.Transactions)
+                 .ToListAsync();
         }
 
-        public async Task<Product> UpdateAsync(Product product)
+        public async Task<Product> GetProductById(int id)
+        {
+            return await _context.Products
+                 .Include(p => p.Category)
+                 .Include(p => p.Seller)
+                 .Include(p => p.Comments)
+                 .Include(p => p.ExchangeRequests)
+                 .Include(p => p.Ratings)
+                 .Include(p => p.Reports)
+                 .Include(p => p.Transactions)
+                 .FirstOrDefaultAsync(p => p.Id == id);
+        }
+
+        public async Task AddProduct(Product product)
+        {
+            using var db = new FUESManagementContext();
+            await db.Products.AddAsync(product);
+            await db.SaveChangesAsync();
+        }
+
+        public async Task UpdateProduct(Product product)
         {
             var existingProduct = await _context.Products.FindAsync(product.Id);
             if (existingProduct == null)
@@ -66,54 +84,17 @@ namespace DataAccessObjects.DAO
 
             _context.Products.Update(existingProduct);
             await _context.SaveChangesAsync();
-            return existingProduct;
         }
 
-        public async Task<bool> DeleteAsync(int id)
+        public async Task RemoveProduct(int id)
         {
-            var product = await _context.Products.FindAsync(id);
-            if (product == null)
+            using var db = new FUESManagementContext();
+            var product = await db.Products.FindAsync(id);
+            if (product != null)
             {
-                return false;
+                db.Products.Remove(product);
+                await db.SaveChangesAsync();
             }
-
-            _context.Products.Remove(product);
-            await _context.SaveChangesAsync();
-            return true;
-        }
-
-        public async Task<List<Product>> SearchAsync(string query)
-        {
-            return await _context.Products
-                .Where(p => p.Title.Contains(query) || p.Description.Contains(query))
-                .Include(p => p.Category)
-                .Include(p => p.Seller)
-                .ToListAsync();
-        }
-
-        public async Task<List<Product>> FilterAsync(int? categoryId, decimal? minPrice, decimal? maxPrice)
-        {
-            var query = _context.Products.AsQueryable();
-
-            if (categoryId.HasValue)
-            {
-                query = query.Where(p => p.CategoryId == categoryId);
-            }
-
-            if (minPrice.HasValue)
-            {
-                query = query.Where(p => p.Price >= minPrice);
-            }
-
-            if (maxPrice.HasValue)
-            {
-                query = query.Where(p => p.Price <= maxPrice);
-            }
-
-            return await query
-                .Include(p => p.Category)
-                .Include(p => p.Seller)
-                .ToListAsync();
         }
     }
 }
