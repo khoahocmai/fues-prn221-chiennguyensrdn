@@ -4,7 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>fues_prn212_chiennguyensrdn</RootNamespace>
+    <RootNamespace>fues_prn221_chiennguyensrdn</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

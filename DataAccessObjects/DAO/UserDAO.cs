@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using BusinnessObjects;
+using BusinessObjects;
 
 namespace DataAccessObjects.DAO
 {

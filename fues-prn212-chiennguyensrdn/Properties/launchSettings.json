@@ -8,7 +8,7 @@
     }
   },
   "profiles": {
-    "fues_prn212_chiennguyensrdn": {
+    "fues_prn221_chiennguyensrdn": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
