@@ -17,21 +17,43 @@ namespace DataAccessObjects.DAO
             _context = context;
         }
 
-        public async Task<Category> CreateAsync(Category category)
+        private static CategoryDAO instance = null;
+        public static readonly object Lock = new object();
+        private CategoryDAO() { }
+        public static CategoryDAO Instance
         {
-            _context.Categories.Add(category);
-            await _context.SaveChangesAsync();
-            return category;
+            get
+            {
+                lock (Lock)
+                {
+                    if (instance == null)
+                    {
+                        instance = new CategoryDAO();
+                    }
+                    return instance;
+                }
+            }
         }
 
-        public async Task<List<Category>> GetAllAsync()
+        public async Task<List<Category>> GetCategories()
         {
             return await _context.Categories
                 .Include(c => c.Products)
                 .ToListAsync();
         }
 
-        public async Task<Category> UpdateAsync(Category category)
+        public async Task<Category> GetCategoryById(int id)
+        {
+            return await _context.Categories.SingleOrDefaultAsync(c => c.Id == id);
+        }
+
+        public async Task AddCategory(Category category)
+        {
+            _context.Categories.AddAsync(category);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task UpdateCategory(Category category)
         {
             var existingCategory = await _context.Categories.FindAsync(category.Id);
             if (existingCategory == null)
@@ -43,20 +65,16 @@ namespace DataAccessObjects.DAO
 
             _context.Categories.Update(existingCategory);
             await _context.SaveChangesAsync();
-            return existingCategory;
         }
 
-        public async Task<bool> DeleteAsync(int id)
+        public async Task RemoveCategory(int id)
         {
             var category = await _context.Categories.FindAsync(id);
-            if (category == null)
+            if (category != null)
             {
-                return false;
+                _context.Categories.Remove(category);
+                await _context.SaveChangesAsync();
             }
-
-            _context.Categories.Remove(category);
-            await _context.SaveChangesAsync();
-            return true;
         }
     }
 }

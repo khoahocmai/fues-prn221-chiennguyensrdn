@@ -11,31 +11,19 @@ namespace Repositories.Repo
 {
     public class CategoryRepository : ICategoryRepository
     {
-        private readonly CategoryDAO _categoryDAO;
+        public Task<List<Category>> GetCategories()
+            => CategoryDAO.Instance.GetCategories();
 
-        public CategoryRepository(CategoryDAO categoryDAO)
-        {
-            _categoryDAO = categoryDAO;
-        }
+        public Task<Category> GetCategoryById(int id)
+            => CategoryDAO.Instance.GetCategoryById(id);
 
-        public Task<Category> CreateAsync(Category category)
-        {
-            return _categoryDAO.CreateAsync(category);
-        }
+        public Task AddCategory(Category category)
+            => CategoryDAO.Instance.AddCategory(category);
 
-        public Task<List<Category>> GetAllAsync()
-        {
-            return _categoryDAO.GetAllAsync();
-        }
+        public Task UpdateCategory(Category category)
+            => CategoryDAO.Instance.UpdateCategory(category);
 
-        public Task<Category> UpdateAsync(Category category)
-        {
-            return _categoryDAO.UpdateAsync(category);
-        }
-
-        public Task<bool> DeleteAsync(int id)
-        {
-            return _categoryDAO.DeleteAsync(id);
-        }
+        public Task RemoveCategory(int id)
+            => CategoryDAO.Instance.RemoveCategory(id);
     }
 }
