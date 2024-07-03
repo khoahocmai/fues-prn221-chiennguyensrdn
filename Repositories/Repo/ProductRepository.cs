@@ -1,10 +1,7 @@
 ﻿using BusinessObjects;
 using DataAccessObjects.DAO;
 using Repositories.IRepo;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Repositories.Repo
@@ -13,6 +10,9 @@ namespace Repositories.Repo
     {
         public Task<List<Product>> GetProducts()
             => ProductDAO.Instance.GetProducts();
+
+        public Task<List<Product>> GetProductsBySellerId(int sellerId)
+            => ProductDAO.Instance.GetProductsBySellerId(sellerId);
 
         public Task<Product> GetProductById(int id)
             => ProductDAO.Instance.GetProductById(id);

@@ -1,0 +1,47 @@
+﻿@page
+@model fues_prn221_chiennguyensrdn.Pages.Seller.ManageProduct.ViewProductModel
+@attribute [Microsoft.AspNetCore.Authorization.Authorize]
+@{
+    ViewData["Title"] = "View Product";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Seller</th>
+            <th>Created At</th>
+            <th>Updated At</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model.Products)
+        {
+            <tr>
+                <td>@product.Title</td>
+                <td>@product.Description</td>
+                <td>@product.Price</td>
+                <td>@product.Category?.Name</td>
+                <td>@product.Seller?.Name</td> 
+                <td>@product.CreatedAt</td>
+                <td>@product.UpdatedAt</td>
+                <td>
+                    <a asp-page="/Seller/ManageProduct/EditProduct" asp-route-id="@product.Id">Edit</a> |
+                    <a asp-page="/Seller/ManageProduct/DeleteProduct" asp-route-id="@product.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    <form asp-page="/Seller/ManageProduct/CreateProduct" method="get">
+        <button type="submit" class="btn btn-primary">Create New Product</button>
+    </form>
+</div>
+

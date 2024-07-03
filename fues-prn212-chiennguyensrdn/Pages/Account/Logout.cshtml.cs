@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Threading.Tasks;
 
-namespace DoDuongDangKhoa_NET1701_A02.Pages.Account
+namespace fues_prn221_chiennguyensrdn.Pages.Account
 {
     public class LogoutModel : PageModel
     {
