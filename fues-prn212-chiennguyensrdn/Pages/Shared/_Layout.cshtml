@@ -7,7 +7,7 @@
     <title>@ViewData["Title"] - fues_prn221_chiennguyensrdn</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/fues_prn221_chiennguyensrdn.styles.css" asp-append-version="true" />
+    @* <link rel="stylesheet" href="~/fues_prn221_chiennguyensrdn.styles.css" asp-append-version="true" /> *@
 </head>
 <body>
     <header>
@@ -26,12 +26,33 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
                         </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            @if (User.IsInRole("Seller"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Seller/ManageProduct/CreateProduct">Create Product</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Seller/ManageProduct/ViewProduct">View Product</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Seller/ManageER/ExchangeRequest">Exchange Request</a>
+                                </li>
+                            }
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Admin/Dashboard">Admin Dashboard</a>
+                                </li>
+                            }
+                        }
                     </ul>
                     <ul class="navbar-nav">
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <span class="navbar-text mr-2">@User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.UserData)?.Value</span>
+                                <span class="navbar-text mr-2">Hello: @User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.UserData)?.Value</span>
                                 <form method="post" asp-page="/Account/Logout">
                                     <button type="submit" class="btn btn-link nav-link text-dark">Logout</button>
                                 </form>
@@ -41,6 +62,9 @@
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-page="/Account/Login">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Account/Register">Register</a>
                             </li>
                         }
                     </ul>
@@ -60,6 +84,7 @@
         </div>
     </footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.11/signalr.min.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
@@ -67,4 +92,3 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
-

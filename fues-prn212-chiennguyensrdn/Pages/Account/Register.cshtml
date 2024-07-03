@@ -1,13 +1,13 @@
 ﻿@page
-@model fues_prn221_chiennguyensrdn.Pages.Account.LoginModel
+@model fues_prn221_chiennguyensrdn.Pages.Account.RegisterModel
 @{
-    ViewData["Title"] = "Login";
+    ViewData["Title"] = "Register";
 }
 
-<div class="login-container">
+<div class="register-container">
     <h3>@ViewData["Title"]</h3>
     <hr />
-    <form method="post" class="login-form">
+    <form method="post" class="register-form">
         <div class="form-group">
             <label asp-for="Username" class="control-label">Username</label>
             <input asp-for="Username" class="form-control" />
@@ -19,7 +19,17 @@
             <span asp-validation-for="Password" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <input type="submit" value="Login" class="btn btn-primary btn-block" />
+            <label asp-for="Email" class="control-label">Email</label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Name" class="control-label">Name</label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Register" class="btn btn-primary btn-block" />
         </div>
     </form>
 </div>
@@ -29,7 +39,7 @@
 }
 
 <style>
-    .login-container {
+    .register-container {
         max-width: 400px;
         margin: 50px auto;
         padding: 20px;
@@ -39,30 +49,30 @@
         background-color: #fff;
     }
 
-        .login-container h3 {
+        .register-container h3 {
             margin-bottom: 20px;
             text-align: center;
             color: #333;
         }
 
-    .login-form .form-group {
+    .register-form .form-group {
         margin-bottom: 15px;
     }
 
-    .login-form .form-control {
+    .register-form .form-control {
         border-radius: 5px;
         padding: 10px;
         font-size: 16px;
     }
 
-    .login-form .btn {
+    .register-form .btn {
         width: 100%;
         padding: 10px;
         font-size: 16px;
         border-radius: 5px;
     }
 
-    .login-form .text-danger {
+    .register-form .text-danger {
         font-size: 14px;
     }
 </style>

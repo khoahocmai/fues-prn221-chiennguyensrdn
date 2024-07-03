@@ -3,20 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DataAccessObjects.DAO
 {
     public class CategoryDAO
     {
-        private readonly FUESManagementContext _context;
-
-        public CategoryDAO(FUESManagementContext context)
-        {
-            _context = context;
-        }
-
         private static CategoryDAO instance = null;
         public static readonly object Lock = new object();
         private CategoryDAO() { }
@@ -37,25 +29,29 @@ namespace DataAccessObjects.DAO
 
         public async Task<List<Category>> GetCategories()
         {
-            return await _context.Categories
+            using var db = new FUESManagementContext();
+            return await db.Categories
                 .Include(c => c.Products)
                 .ToListAsync();
         }
 
         public async Task<Category> GetCategoryById(int id)
         {
-            return await _context.Categories.SingleOrDefaultAsync(c => c.Id == id);
+            using var db = new FUESManagementContext();
+            return await db.Categories.SingleOrDefaultAsync(c => c.Id == id);
         }
 
         public async Task AddCategory(Category category)
         {
-            _context.Categories.AddAsync(category);
-            await _context.SaveChangesAsync();
+            using var db = new FUESManagementContext();
+            db.Categories.AddAsync(category);
+            await db.SaveChangesAsync();
         }
 
         public async Task UpdateCategory(Category category)
         {
-            var existingCategory = await _context.Categories.FindAsync(category.Id);
+            using var db = new FUESManagementContext();
+            var existingCategory = await db.Categories.FindAsync(category.Id);
             if (existingCategory == null)
             {
                 throw new ArgumentException("Category not found");
@@ -63,18 +59,19 @@ namespace DataAccessObjects.DAO
 
             existingCategory.Name = category.Name;
 
-            _context.Categories.Update(existingCategory);
-            await _context.SaveChangesAsync();
+            db.Categories.Update(existingCategory);
+            await db.SaveChangesAsync();
         }
 
         public async Task RemoveCategory(int id)
         {
-            var category = await _context.Categories.FindAsync(id);
+            using var db = new FUESManagementContext();
+            var category = await db.Categories.FindAsync(id);
             if (category != null)
             {
-                _context.Categories.Remove(category);
-                await _context.SaveChangesAsync();
-            }
+                db.Categories.Remove(category);
+                await db.SaveChangesAsync();
+            }   
         }
     }
 }

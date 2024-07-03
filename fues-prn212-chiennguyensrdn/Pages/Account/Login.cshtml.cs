@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
 using Repositories.IRepo;
 
-namespace DoDuongDangKhoa_NET1701_A02.Pages.Account
+namespace fues_prn221_chiennguyensrdn.Pages.Account
 {
     public class LoginModel : PageModel
     {
@@ -50,9 +50,14 @@ namespace DoDuongDangKhoa_NET1701_A02.Pages.Account
             {
                 var claims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.UserData, user.Username),
-                    new Claim("Id", user.Id.ToString())
+                    new Claim(ClaimTypes.UserData, user.Name),
+                    new Claim("UserId", user.Id.ToString()),
                 };
+
+                if (!string.IsNullOrEmpty(user.Role))
+                {
+                    claims.Add(new Claim(ClaimTypes.Role, user.Role));
+                }
 
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 

@@ -4,7 +4,7 @@ using Repositories.IRepo;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Repositories.Repositories
+namespace Repositories.Repo
 {
     public class BanRepository : IBanRepository
     {

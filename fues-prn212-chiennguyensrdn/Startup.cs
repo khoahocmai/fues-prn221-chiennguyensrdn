@@ -17,14 +17,15 @@ namespace fues_prn212_chiennguyensrdn
 
         public void ConfigureServices(IServiceCollection services)
         {
-            // Add services to the container.
-            services.AddRazorPages();
-
             // Add SignalR to the container.
             services.AddSignalR();
 
             // Add service to the container.
+            services.AddRazorPages();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IExchangeRequestRepository, ExchangeRequestRepository>();
 
             // Add authentication services
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -61,7 +62,6 @@ namespace fues_prn212_chiennguyensrdn
                 endpoints.MapRazorPages();
                 endpoints.MapHub<ChatHub>("/chat-hub");
             });
-
         }
     }
 }

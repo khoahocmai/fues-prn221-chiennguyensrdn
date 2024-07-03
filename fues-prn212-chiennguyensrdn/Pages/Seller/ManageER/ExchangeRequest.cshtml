@@ -1,0 +1,38 @@
+﻿@page
+@model fues_prn221_chiennguyensrdn.Pages.Seller.ManageER.ExchangeRequestModel
+@attribute [Microsoft.AspNetCore.Authorization.Authorize]
+@{
+    ViewData["Title"] = "Exchange Request Product Management";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Requester</th>
+            <th>Status</th>
+            <th>Message</th>
+            <th>Created At</th>
+            <th>Updated At</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var exchangeRequest in Model.ExchangeRequests)
+        {
+            <tr>
+                <td>@exchangeRequest.Product?.Title</td>
+                <td>@exchangeRequest.Requester?.Name</td>
+                <td>@exchangeRequest.Status</td>
+                <td>@exchangeRequest.Message</td>
+                <td>@exchangeRequest.CreatedAt.ToString("yyyy-MM-dd HH:mm")</td>
+                <td>@exchangeRequest.UpdatedAt.ToString("yyyy-MM-dd HH:mm")</td>
+                <td>
+                    <a asp-page="/Seller/ConfirmExchangeRequest" asp-route-exchangeRequestId="@exchangeRequest.Id" asp-route-productId="@exchangeRequest.Product?.Id" class="btn btn-primary">Select Buyer</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

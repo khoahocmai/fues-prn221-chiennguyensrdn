@@ -10,13 +10,6 @@ namespace DataAccessObjects.DAO
 {
     public class ProductDAO
     {
-        private readonly FUESManagementContext _context;
-
-        public ProductDAO(FUESManagementContext context)
-        {
-            _context = context;
-        }
-
         private static ProductDAO instance = null;
         public static readonly object Lock = new object();
         private ProductDAO() { }
@@ -37,7 +30,23 @@ namespace DataAccessObjects.DAO
 
         public async Task<List<Product>> GetProducts()
         {
-            return await _context.Products
+            using var db = new FUESManagementContext();
+            return await db.Products
+                 .Include(p => p.Category)
+                 .Include(p => p.Seller)
+                 .Include(p => p.Comments)
+                 .Include(p => p.ExchangeRequests)
+                 .Include(p => p.Ratings)
+                 .Include(p => p.Reports)
+                 .Include(p => p.Transactions)
+                 .ToListAsync();
+        }
+
+        public async Task<List<Product>> GetProductsBySellerId(int sellerId)
+        {
+            using var db = new FUESManagementContext();
+            return await db.Products
+                .Where(p => p.SellerId == sellerId)
                  .Include(p => p.Category)
                  .Include(p => p.Seller)
                  .Include(p => p.Comments)
@@ -50,7 +59,8 @@ namespace DataAccessObjects.DAO
 
         public async Task<Product> GetProductById(int id)
         {
-            return await _context.Products
+            using var db = new FUESManagementContext();
+            return await db.Products
                  .Include(p => p.Category)
                  .Include(p => p.Seller)
                  .Include(p => p.Comments)
@@ -70,7 +80,8 @@ namespace DataAccessObjects.DAO
 
         public async Task UpdateProduct(Product product)
         {
-            var existingProduct = await _context.Products.FindAsync(product.Id);
+            using var db = new FUESManagementContext();
+            var existingProduct = await db.Products.FindAsync(product.Id);
             if (existingProduct == null)
             {
                 throw new ArgumentException("Product not found");
@@ -82,8 +93,8 @@ namespace DataAccessObjects.DAO
             existingProduct.CategoryId = product.CategoryId;
             existingProduct.UpdatedAt = DateTime.Now;
 
-            _context.Products.Update(existingProduct);
-            await _context.SaveChangesAsync();
+            db.Products.Update(existingProduct);
+            await db.SaveChangesAsync();
         }
 
         public async Task RemoveProduct(int id)
