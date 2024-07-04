@@ -8,7 +8,7 @@ namespace BusinessObjects
         public int Id { get; set; }
         public int? BuyerId { get; set; }
         public int? ProductId { get; set; }
-        public string Status { get; set; } = null!;
+        public string Status { get; set; } = null!; // 'Pending', 'Completed', 'Canceled'
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
 

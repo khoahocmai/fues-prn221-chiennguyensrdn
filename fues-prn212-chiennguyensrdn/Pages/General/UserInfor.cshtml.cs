@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Repositories.IRepo;
 
-namespace fues_prn221_chiennguyensrdn.Pages.CustomerInfor
+namespace fues_prn221_chiennguyensrdn.Pages.General
 {
     public class CustomerInforModel : PageModel
     {

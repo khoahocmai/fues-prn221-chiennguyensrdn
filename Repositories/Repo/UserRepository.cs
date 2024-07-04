@@ -34,5 +34,11 @@ namespace Repositories.Repo
 
         public Task AssignRole(int userId, string role)
             => UserDAO.Instance.AssignRole(userId, role);
+
+        public Task<int> GetTotalUsersByRole(string role)
+            => UserDAO.Instance.GetTotalUsersByRole(role);
+
+        public Task<List<User>> GetUsersByRole(string role)
+            => UserDAO.Instance.GetUsersByRole(role);
     }
 }

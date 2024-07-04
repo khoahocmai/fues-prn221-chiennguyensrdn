@@ -9,13 +9,6 @@ namespace DataAccessObjects.DAO
 {
     public class BanDAO
     {
-        private readonly FUESManagementContext _context;
-
-        public BanDAO(FUESManagementContext context)
-        {
-            _context = context;
-        }
-
         private static BanDAO instance = null;
         public static readonly object Lock = new object();
         private BanDAO() { }
@@ -36,44 +29,69 @@ namespace DataAccessObjects.DAO
 
         public async Task<List<Ban>> GetBans()
         {
-            return await _context.Bans.ToListAsync();
+            using var db = new FUESManagementContext();
+            return await db.Bans
+                .Include(b => b.Product)
+                .Include(b => b.Moderator)
+                .ToListAsync();
         }
 
         public async Task<Ban> GetBanById(int id)
         {
-            return await _context.Bans.SingleOrDefaultAsync(b => b.Id == id);
+            using var db = new FUESManagementContext();
+            return await db.Bans.SingleOrDefaultAsync(b => b.Id == id);
+        }
+
+        public async Task<List<Ban>> GetBanByModeratorId(int moderatorId)
+        {
+            using var db = new FUESManagementContext();
+            return await db.Bans
+                .Where(b => b.ModeratorId == moderatorId)
+                .Include(b => b.Product)
+                .ToListAsync();
         }
 
         public async Task AddBan(Ban ban)
         {
-            await _context.Bans.AddAsync(ban);
-            await _context.SaveChangesAsync();
+            using var db = new FUESManagementContext();
+            await db.Bans.AddAsync(ban);
+            await db.SaveChangesAsync();
         }
 
         public async Task UpdateBan(Ban ban)
         {
-            var existingBan = await _context.Bans.FindAsync(ban.Id);
+            using var db = new FUESManagementContext();
+            var existingBan = await db.Bans.FindAsync(ban.Id);
             if (existingBan != null)
             {
-                existingBan.UserId = ban.UserId;
-                existingBan.AdminId = ban.AdminId;
+                existingBan.ProductId = ban.ProductId;
+                existingBan.ModeratorId = ban.ModeratorId;
                 existingBan.Reason = ban.Reason;
                 existingBan.StartDate = ban.StartDate;
                 existingBan.EndDate = ban.EndDate;
 
-                _context.Bans.Update(existingBan);
-                await _context.SaveChangesAsync();
+                db.Bans.Update(existingBan);
+                await db.SaveChangesAsync();
             }
         }
 
         public async Task RemoveBan(int id)
         {
-            var ban = await _context.Bans.FindAsync(id);
+            using var db = new FUESManagementContext();
+            var ban = await db.Bans.FindAsync(id);
             if (ban != null)
             {
-                _context.Bans.Remove(ban);
-                await _context.SaveChangesAsync();
+                db.Bans.Remove(ban);
+                await db.SaveChangesAsync();
             }
+        }
+
+        public async Task<int> GetBannedProducts()
+        {
+            using var db = new FUESManagementContext();
+            return await db.Bans
+                  .Where(b => b.EndDate == null || b.EndDate > DateTime.Now)
+                  .CountAsync();
         }
     }
 }

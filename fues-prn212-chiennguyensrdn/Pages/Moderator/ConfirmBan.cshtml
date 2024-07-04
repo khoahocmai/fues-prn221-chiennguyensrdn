@@ -1,0 +1,29 @@
+﻿@page "{productId:int}"
+@model fues_prn221_chiennguyensrdn.Pages.Moderator.ConfirmBanModel
+@attribute [Microsoft.AspNetCore.Authorization.Authorize]
+@{
+    ViewData["Title"] = "Confirm Ban";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div>
+    <p>Product: @Model.Product.Title</p>
+    <p>Description: @Model.Product.Description</p>
+    <p>Seller: @Model.Product.Seller?.Name</p>
+</div>
+
+<hr />
+
+<h4>Ban Reason</h4>
+<form method="post">
+    <input type="hidden" asp-for="ProductId" />
+    <input type="hidden" asp-for="Product.Title"/>
+    <div class="form-group">
+        <label for="reason">Reason:</label>
+        <textarea id="reason" class="form-control" asp-for="Reason" rows="3"></textarea>
+        <span asp-validation-for="Reason" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-danger">Ban Product</button>
+    <a asp-page="/Moderator/ViewReport" class="btn btn-secondary">Cancel</a>
+</form>

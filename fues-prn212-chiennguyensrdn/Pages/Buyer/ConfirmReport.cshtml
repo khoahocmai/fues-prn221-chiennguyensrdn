@@ -10,6 +10,45 @@
 <p>Are you sure you want to report the product "@Model.Product.Title"?</p>
 
 <form method="post">
+    <div class="form-group">
+        <input type="hidden" asp-for="ProductId" />
+        <input type="hidden" asp-for="Product.Title" />
+        <label for="reportReason">Reason (Optional):</label>
+        <textarea id="reportReason" class="form-control" asp-for="ReportReason" rows="3"></textarea>
+        <span asp-validation-for="ReportReason" class="text-danger"></span>
+    </div>
     <button type="submit" class="btn btn-danger">Report</button>
-    <a asp-page="/Buyer/ViewProduct" class="btn btn-secondary">Cancel</a>
+    <a asp-page="/General/ViewProduct" class="btn btn-secondary">Cancel</a>
 </form>
+
+<!-- Modal -->
+<div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="errorModalLabel">Error</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                You have already reported this item!
+            </div>
+            <div class="modal-footer d-flex justify-content-between">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(document).ready(function () {
+        @if (Model.ShowPopup)
+        {
+            <text>
+                    $('#errorModal').modal('show');
+            </text>
+        }
+                });
+    </script>
+}

@@ -1,0 +1,45 @@
+﻿@page
+@model fues_prn221_chiennguyensrdn.Pages.Buyer.TransactionsModel
+@attribute [Microsoft.AspNetCore.Authorization.Authorize]
+@{
+    ViewData["Title"] = "Transactions";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Status</th>
+            <th>Created At</th>
+            <th>Updated At</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var transaction in Model.Transactions)
+        {
+            <tr>
+                <td>@transaction.Product?.Title</td>
+                <td>@transaction.Status</td>
+                <td>@transaction.CreatedAt.ToString("yyyy-MM-dd HH:mm")</td>
+                <td>@transaction.UpdatedAt.ToString("yyyy-MM-dd HH:mm")</td>
+                <td>
+                    @if (transaction.Status != "Completed" && transaction.Status != "Canceled")
+                    {
+                        <form method="post" asp-page-handler="UpdateStatus">
+                            <input type="hidden" name="transactionId" value="@transaction.Id" />
+                            <button type="submit" name="status" value="Completed" class="btn btn-success">Agree</button>
+                            <button type="submit" name="status" value="Canceled" class="btn btn-danger">Cancel</button>
+                        </form>
+                    }
+                    else
+                    {
+                        @transaction.Status
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

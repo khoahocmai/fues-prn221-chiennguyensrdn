@@ -34,7 +34,7 @@
         <span asp-validation-for="Message" class="text-danger"></span>
     </div>
     <button type="submit" class="btn btn-primary">Confirm Purchase</button>
-    <a asp-page="/Buyer/ViewProduct" class="btn btn-secondary">Cancel</a>
+    <a asp-page="/General/ViewProduct" class="btn btn-secondary">Cancel</a>
 </form>
 
 
@@ -60,12 +60,12 @@
     <partial name="_ValidationScriptsPartial" />
     <script>
         $(document).ready(function () {
-            @if (Model.ShowPopup)
-            {
-                <text>
-                        $('#errorModal').modal('show');
-                </text>
-            }
-        });
+        @if (Model.ShowPopup)
+        {
+            <text>
+                    $('#errorModal').modal('show');
+            </text>
+        }
+                });
     </script>
 }

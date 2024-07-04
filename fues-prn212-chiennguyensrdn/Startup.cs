@@ -22,13 +22,15 @@ namespace fues_prn212_chiennguyensrdn
 
             // Add service to the container.
             services.AddRazorPages();
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IBanRepository, BanRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
-            services.AddScoped<IExchangeRequestRepository, ExchangeRequestRepository>();
-            services.AddScoped<IReportRepository,  ReportRepository>();
             services.AddScoped<ICommentRepository, CommentRepository>();
+            services.AddScoped<IExchangeRequestRepository, ExchangeRequestRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IRatingRepository, RatingRepository>();
+            services.AddScoped<IReportRepository,  ReportRepository>();
+            services.AddScoped<ITransactionRepository, TransactionRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             // Add authentication services
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

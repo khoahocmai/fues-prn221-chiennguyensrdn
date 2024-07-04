@@ -17,5 +17,7 @@ namespace Repositories.IRepo
         Task Register(User user);
         Task<bool> ResetPassword(int userId, string oldPassword, string newPassword);
         Task AssignRole(int userId, string role);
+        Task<int> GetTotalUsersByRole(string role);
+        Task<List<User>> GetUsersByRole(string role);
     }
 }

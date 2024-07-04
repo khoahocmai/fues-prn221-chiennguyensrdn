@@ -10,11 +10,17 @@ namespace fues_prn221_chiennguyensrdn.Pages.Seller.ManageER
     {
         private readonly IExchangeRequestRepository _exchangeRequestRepo;
         private readonly IProductRepository _productRepo;
+        private readonly ITransactionRepository _transactionRepo;
 
-        public ConfirmExchangeRequestModel(IExchangeRequestRepository exchangeRequestRepo, IProductRepository productRepository)
+        public ConfirmExchangeRequestModel(
+            IExchangeRequestRepository exchangeRequestRepo, 
+            IProductRepository productRepository,
+            ITransactionRepository transactionRepo
+            )
         {
             _exchangeRequestRepo = exchangeRequestRepo;
             _productRepo = productRepository;
+            _transactionRepo = transactionRepo;
         }
 
         [BindProperty]
@@ -69,11 +75,16 @@ namespace fues_prn221_chiennguyensrdn.Pages.Seller.ManageER
             exchangeRequest.Status = "Accepted";
             exchangeRequest.UpdatedAt = DateTime.UtcNow;
             await _exchangeRequestRepo.UpdateExchangeRequest(exchangeRequest);
+            var transaction = new Transaction
+            {
+                BuyerId = exchangeRequest.RequesterId,
+                ProductId = productId,
+                Status = "Pending",
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow
+            };
 
-            var product = await _productRepo.GetProductById(productId);
-            product.Status = "Sold";
-            await _productRepo.UpdateProduct(product);
-
+            await _transactionRepo.AddTransaction(transaction);
             return RedirectToPage("/Seller/ManageER/ExchangeRequest");
         }
 

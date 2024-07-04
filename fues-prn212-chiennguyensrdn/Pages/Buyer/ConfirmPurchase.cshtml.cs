@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Repositories.IRepo;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace fues_prn221_chiennguyensrdn.Pages.Buyer
 {
+    [Authorize]
     public class ConfirmPurchaseModel : PageModel
     {
         private readonly IProductRepository _productRepo;
@@ -66,7 +68,7 @@ namespace fues_prn221_chiennguyensrdn.Pages.Buyer
 
             await _exchangeRequestRepo.AddExchangeRequest(exchangeRequest);
 
-            return RedirectToPage("/Buyer/ViewProduct");
+            return RedirectToPage("/General/ViewProduct");
         }
     }
 }

@@ -22,5 +22,11 @@ namespace Repositories.Repo
 
         public Task RemoveTransaction(int id)
             => TransactionDAO.Instance.RemoveTransaction(id);
+
+        public Task<List<Transaction>> GetTransactionsByBuyerId(int buyerId)
+            => TransactionDAO.Instance.GetTransactionsByBuyerId(buyerId);
+
+        public Task UpdateTransactionStatus(int transactionId, string status)
+            => TransactionDAO.Instance.UpdateTransactionStatus(transactionId, status);
     }
 }

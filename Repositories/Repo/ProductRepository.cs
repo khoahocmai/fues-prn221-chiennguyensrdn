@@ -28,5 +28,14 @@ namespace Repositories.Repo
 
         public Task<List<Product>> GetProductsByCategoryId(int categoryId)
             => ProductDAO.Instance.GetProductsByCategoryId(categoryId);
+
+        public Task<int> GetTotalProducts()
+            => ProductDAO.Instance.GetTotalProducts();
+
+        public Task<List<Product>> GetProductBanned()
+            => ProductDAO.Instance.GetProductBanned();
+
+        public Task UpdateProductStatus(int productId, string status)
+            => ProductDAO.Instance.UpdateProductStatus(productId, status);
     }
 }

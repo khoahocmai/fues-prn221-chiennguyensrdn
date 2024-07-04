@@ -9,13 +9,6 @@ namespace DataAccessObjects.DAO
 {
     public class TransactionDAO
     {
-        private readonly FUESManagementContext _context;
-
-        public TransactionDAO(FUESManagementContext context)
-        {
-            _context = context;
-        }
-
         private static TransactionDAO instance = null;
         public static readonly object Lock = new object();
         private TransactionDAO() { }
@@ -36,23 +29,27 @@ namespace DataAccessObjects.DAO
 
         public async Task<List<Transaction>> GetTransactions()
         {
-            return await _context.Transactions.ToListAsync();
+            using var db = new FUESManagementContext();
+            return await db.Transactions.ToListAsync();
         }
 
         public async Task<Transaction> GetTransactionById(int id)
         {
-            return await _context.Transactions.SingleOrDefaultAsync(t => t.Id == id);
+            using var db = new FUESManagementContext();
+            return await db.Transactions.SingleOrDefaultAsync(t => t.Id == id);
         }
 
         public async Task AddTransaction(Transaction transaction)
         {
-            await _context.Transactions.AddAsync(transaction);
-            await _context.SaveChangesAsync();
+            using var db = new FUESManagementContext();
+            await db.Transactions.AddAsync(transaction);
+            await db.SaveChangesAsync();
         }
 
         public async Task UpdateTransaction(Transaction transaction)
         {
-            var existingTransaction = await _context.Transactions.FindAsync(transaction.Id);
+            using var db = new FUESManagementContext();
+            var existingTransaction = await db.Transactions.FindAsync(transaction.Id);
             if (existingTransaction != null)
             {
                 existingTransaction.BuyerId = transaction.BuyerId;
@@ -60,19 +57,42 @@ namespace DataAccessObjects.DAO
                 existingTransaction.Status = transaction.Status;
                 existingTransaction.UpdatedAt = DateTime.Now;
 
-                _context.Transactions.Update(existingTransaction);
-                await _context.SaveChangesAsync();
+                db.Transactions.Update(existingTransaction);
+                await db.SaveChangesAsync();
             }
         }
 
         public async Task RemoveTransaction(int id)
         {
-            var transaction = await _context.Transactions.FindAsync(id);
+            using var db = new FUESManagementContext();
+            var transaction = await db.Transactions.FindAsync(id);
             if (transaction != null)
             {
-                _context.Transactions.Remove(transaction);
-                await _context.SaveChangesAsync();
+                db.Transactions.Remove(transaction);
+                await db.SaveChangesAsync();
             }
         }
+
+        public async Task<List<Transaction>> GetTransactionsByBuyerId(int buyerId)
+        {
+            using var db = new FUESManagementContext();
+            return await db.Transactions
+                          .Where(t => t.BuyerId == buyerId)
+                          .Include(t => t.Product)
+                          .ToListAsync();
+        }
+
+        public async Task UpdateTransactionStatus(int transactionId, string status)
+        {
+            using var db = new FUESManagementContext();
+            var transaction = await db.Transactions.FindAsync(transactionId);
+            if (transaction != null)
+            {
+                transaction.Status = status;
+                transaction.UpdatedAt = DateTime.Now;
+                await db.SaveChangesAsync();
+            }
+        }
+
     }
 }
