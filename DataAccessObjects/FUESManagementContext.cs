@@ -52,15 +52,15 @@ namespace DataAccessObjects
 
                 entity.Property(e => e.StartDate).HasColumnType("datetime");
 
-                entity.HasOne(d => d.Admin)
-                    .WithMany(p => p.BanAdmins)
-                    .HasForeignKey(d => d.AdminId)
-                    .HasConstraintName("FK_Ban_Admin");
+                entity.HasOne(d => d.Moderator)
+                    .WithMany(p => p.Bans)
+                    .HasForeignKey(d => d.ModeratorId)
+                    .HasConstraintName("FK_Ban_Moderator");
 
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.BanUsers)
-                    .HasForeignKey(d => d.UserId)
-                    .HasConstraintName("FK_Ban_User");
+                entity.HasOne(d => d.Product)
+                    .WithMany(p => p.Bans)
+                    .HasForeignKey(d => d.ProductId)
+                    .HasConstraintName("FK_Ban_Product");
             });
 
             modelBuilder.Entity<Category>(entity =>
@@ -202,6 +202,8 @@ namespace DataAccessObjects
                 entity.Property(e => e.CreatedAt)
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Reason).HasMaxLength(100);
 
                 entity.Property(e => e.Status).HasMaxLength(50);
 

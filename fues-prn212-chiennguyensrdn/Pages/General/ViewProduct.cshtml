@@ -1,6 +1,5 @@
 ﻿@page
-@model fues_prn221_chiennguyensrdn.Pages.Buyer.ViewProductsModel
-@attribute [Microsoft.AspNetCore.Authorization.Authorize]
+@model fues_prn221_chiennguyensrdn.Pages.General.ViewProductsModel
 @{
     ViewData["Title"] = "List Products";
 }
@@ -50,7 +49,7 @@
                 <td>
                     <a asp-page="/Buyer/ConfirmPurchase" asp-route-id="@product.Id" class="btn btn-primary">Trade</a>
                     <a asp-page="/Buyer/ConfirmReport" asp-route-id="@product.Id" class="btn btn-danger">Report</a>
-                    <a asp-page="/Buyer/ViewProductDetail" asp-route-id="@product.Id" class="btn btn-info">View Details</a>
+                    <a asp-page="/General/ViewProductDetail" asp-route-id="@product.Id" class="btn btn-info">View Details</a>
                 </td>
             </tr>
         }

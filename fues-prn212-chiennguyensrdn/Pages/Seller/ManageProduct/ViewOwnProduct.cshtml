@@ -1,5 +1,5 @@
 ﻿@page
-@model fues_prn221_chiennguyensrdn.Pages.Seller.ManageProduct.ViewProductModel
+@model fues_prn221_chiennguyensrdn.Pages.Seller.ManageProduct.ViewOwnProductModel
 @attribute [Microsoft.AspNetCore.Authorization.Authorize]
 @{
     ViewData["Title"] = "View Product";
@@ -14,6 +14,7 @@
             <th>Description</th>
             <th>Price</th>
             <th>Category</th>
+            <th>Status</th>
             <th>Created At</th>
             <th>Updated At</th>
             <th>Actions</th>
@@ -27,6 +28,7 @@
                 <td>@product.Description</td>
                 <td>@product.Price</td>
                 <td>@product.Category?.Name</td>
+                <td>@product.Status</td>
                 <td>@product.CreatedAt</td>
                 <td>@product.UpdatedAt</td>
                 <td>

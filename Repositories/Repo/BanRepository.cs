@@ -14,6 +14,9 @@ namespace Repositories.Repo
         public Task<Ban> GetBanById(int id)
             => BanDAO.Instance.GetBanById(id);
 
+        public Task<List<Ban>> GetBanByModeratorId(int moderatorId)
+            => BanDAO.Instance.GetBanByModeratorId(moderatorId);
+
         public Task AddBan(Ban ban)
             => BanDAO.Instance.AddBan(ban);
 
@@ -22,5 +25,8 @@ namespace Repositories.Repo
 
         public Task RemoveBan(int id)
             => BanDAO.Instance.RemoveBan(id);
+
+        public Task<int> GetBannedProducts()
+            => BanDAO.Instance.GetBannedProducts();
     }
 }

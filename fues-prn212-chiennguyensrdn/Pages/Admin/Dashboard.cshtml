@@ -1,0 +1,150 @@
+﻿@page
+@model fues_prn221_chiennguyensrdn.Pages.Admin.DashboardModel
+@attribute [Microsoft.AspNetCore.Authorization.Authorize(Roles = "Admin")]
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="row mb-4">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Total Products</h5>
+                <p class="card-text">@Model.TotalProducts</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Total Banned Products</h5>
+                <p class="card-text">@Model.TotalBannedProducts</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Total Buyers</h5>
+                <p class="card-text">@Model.TotalBuyers</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Total Sellers</h5>
+                <p class="card-text">@Model.TotalSellers</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Total Moderators</h5>
+                <p class="card-text">@Model.TotalModerators</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h3>Product Details</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model.ProductDetails)
+        {
+            <tr>
+                <td>@product.Title</td>
+                <td>@product.Description</td>
+                <td>@product.Price</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h3>Product Banned Details</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model.BannedProductDetails)
+        {
+            <tr>
+                <td>@product.Title</td>
+                <td>@product.Description</td>
+                <td>@product.Price</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h3>Buyer Details</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var buyer in Model.BuyerDetails)
+        {
+            <tr>
+                <td>@buyer.Name</td>
+                <td>@buyer.Email</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h3>Seller Details</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var seller in Model.SellerDetails)
+        {
+            <tr>
+                <td>@seller.Name</td>
+                <td>@seller.Email</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h3>Moderator Details</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var moderator in Model.ModeratorDetails)
+        {
+            <tr>
+                <td>@moderator.Name</td>
+                <td>@moderator.Email</td>
+            </tr>
+        }
+    </tbody>
+</table>

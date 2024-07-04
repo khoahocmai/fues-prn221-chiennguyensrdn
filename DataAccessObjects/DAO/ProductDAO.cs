@@ -32,7 +32,7 @@ namespace DataAccessObjects.DAO
         {
             using var db = new FUESManagementContext();
             return await db.Products
-                .Where(p => p.Status == "Pending")
+                .Where(p => p.Status == "Pending" && p.Status != "Banned")
                  .Include(p => p.Category)
                  .Include(p => p.Seller)
                  .Include(p => p.Comments)
@@ -92,6 +92,7 @@ namespace DataAccessObjects.DAO
             existingProduct.Description = product.Description;
             existingProduct.Price = product.Price;
             existingProduct.CategoryId = product.CategoryId;
+            existingProduct.Status = product.Status;
             existingProduct.UpdatedAt = DateTime.Now;
 
             db.Products.Update(existingProduct);
@@ -118,5 +119,33 @@ namespace DataAccessObjects.DAO
                 .Include(p => p.Seller)
                 .ToListAsync();
         }
+
+        public async Task<int> GetTotalProducts()
+        {
+            using var db = new FUESManagementContext();
+            return await db.Products.CountAsync();
+        }
+
+        public async Task<List<Product>> GetProductBanned()
+        {
+            using var db = new FUESManagementContext();
+            var bannedProducts = await db.Bans
+                .Where(b => b.EndDate == null || b.EndDate > DateTime.Now)
+                .Select(b => b.Product)
+                .ToListAsync();
+            return bannedProducts;
+        }
+
+        public async Task UpdateProductStatus(int productId, string status)
+        {
+            using var db = new FUESManagementContext();
+            var product = await db.Products.FindAsync(productId);
+            if (product != null)
+            {
+                product.Status = status;
+                await db.SaveChangesAsync();
+            }
+        }
+
     }
 }

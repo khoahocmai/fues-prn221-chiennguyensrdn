@@ -30,13 +30,25 @@ namespace DataAccessObjects.DAO
         public async Task<List<Report>> GetReports()
         {
             using var db = new FUESManagementContext();
-            return await db.Reports.ToListAsync();
+            return await db.Reports
+                .Where(r => r.Status == "Pending")
+                .Include(r => r.Reporter)
+                .Include(r => r.Product)
+                .ToListAsync();
         }
 
         public async Task<Report> GetReportById(int id)
         {
             using var db = new FUESManagementContext();
             return await db.Reports.SingleOrDefaultAsync(r => r.Id == id);
+        }
+
+        public async Task<List<Report>> GetReportByProductId(int productId)
+        {
+            using var db = new FUESManagementContext();
+            return await db.Reports
+                .Where(r => r.ProductId == productId)
+                .ToListAsync();
         }
 
         public async Task AddReport(Report report)
@@ -71,6 +83,13 @@ namespace DataAccessObjects.DAO
                 db.Reports.Remove(report);
                 await db.SaveChangesAsync();
             }
+        }
+
+        public async Task<bool> HasBuyerAlreadyReportedProduct(int buyerId, int productId)
+        {
+            using var db = new FUESManagementContext();
+            return await db.Reports
+                .AnyAsync(er => er.ReporterId == buyerId && er.ProductId == productId);
         }
     }
 }

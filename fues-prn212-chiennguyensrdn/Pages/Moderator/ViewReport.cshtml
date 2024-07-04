@@ -1,0 +1,41 @@
+﻿@page
+@model fues_prn221_chiennguyensrdn.Pages.Moderator.ViewReportModel
+@attribute [Microsoft.AspNetCore.Authorization.Authorize]
+@{
+    ViewData["Title"] = "View Report";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Reporter</th>
+            <th>Product</th>
+            <th>Reason</th>
+            <th>Status</th>
+            <th>Created At</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var report in Model.Reports)
+        {
+            <tr>
+                <td>@report.Reporter?.Name</td>
+                <td>@report.Product?.Title</td>
+                <td>@report.Reason</td>
+                <td>@report.Status</td>
+                <td>@report.CreatedAt.ToString("yyyy-MM-dd HH:mm")</td>
+                <td>
+                    <a asp-page="/General/ViewProductDetail" asp-route-id="@report.ProductId" class="btn btn-info">View Product Detail</a>
+                    <a asp-page="/Moderator/ConfirmBan" asp-route-productId="@report.ProductId" class="btn btn-danger">Ban</a>
+                    <form asp-page-handler="Reject" method="post">
+                        <input type="hidden" name="productId" value="@report.ProductId" />
+                        <button type="submit" class="btn btn-warning">Reject</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

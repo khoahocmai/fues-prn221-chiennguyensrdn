@@ -11,5 +11,7 @@ namespace Repositories.IRepo
         Task AddTransaction(Transaction transaction);
         Task UpdateTransaction(Transaction transaction);
         Task RemoveTransaction(int id);
+        Task<List<Transaction>> GetTransactionsByBuyerId(int buyerId);
+        Task UpdateTransactionStatus(int transactionId, string status);
     }
 }

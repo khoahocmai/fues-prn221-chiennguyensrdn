@@ -2,11 +2,13 @@ using BusinessObjects;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Repositories.IRepo;
+using Microsoft.AspNetCore.Authorization;
 
-namespace fues_prn221_chiennguyensrdn.Pages.Buyer
-{
+namespace fues_prn221_chiennguyensrdn.Pages.General
+{ 
+    [Authorize]
     public class ViewProductDetailModel : PageModel
-    {
+    {       
         private readonly IProductRepository _productRepo;
         private readonly ICommentRepository _commentRepo;
         private readonly IRatingRepository _ratingRepo;
@@ -24,6 +26,7 @@ namespace fues_prn221_chiennguyensrdn.Pages.Buyer
         public Product Product { get; set; }
         public List<Comment> Comments { get; set; }
         public Rating UserRating { get; set; }
+        public double AverageRating { get; set; }
 
         [BindProperty]
         public string NewComment { get; set; }
@@ -44,6 +47,7 @@ namespace fues_prn221_chiennguyensrdn.Pages.Buyer
             int userId = userIdClaim != null ? int.Parse(userIdClaim.Value) : 0;
 
             UserRating = await _ratingRepo.GetRatingsByProductIdAndUserId(Id, userId);
+            AverageRating = await _ratingRepo.GetAverageRatingByProductId(Id);
 
             return Page();
         }
@@ -77,7 +81,7 @@ namespace fues_prn221_chiennguyensrdn.Pages.Buyer
             };
             await _commentRepo.AddComment(newComment);
 
-            return RedirectToPage("/Buyer/ViewProductDetail", new { id = product.Id });
+            return RedirectToPage("/General/ViewProductDetail", new { id = product.Id });
         }
         public async Task<IActionResult> OnPostRatingAsync()
         {
@@ -126,7 +130,7 @@ namespace fues_prn221_chiennguyensrdn.Pages.Buyer
                 await _ratingRepo.UpdateRating(existingRating);
             }
 
-            return RedirectToPage("/Buyer/ViewProductDetail", new { id = product.Id });
+            return RedirectToPage("/General/ViewProductDetail", new { id = product.Id });
         }
 
     }

@@ -7,8 +7,7 @@ namespace BusinessObjects
     {
         public User()
         {
-            BanAdmins = new HashSet<Ban>();
-            BanUsers = new HashSet<Ban>();
+            Bans = new HashSet<Ban>();
             Comments = new HashSet<Comment>();
             ExchangeRequests = new HashSet<ExchangeRequest>();
             MessageReceivers = new HashSet<Message>();
@@ -26,8 +25,7 @@ namespace BusinessObjects
         public string Email { get; set; } = null!;
         public string Role { get; set; } = null!;
 
-        public virtual ICollection<Ban> BanAdmins { get; set; }
-        public virtual ICollection<Ban> BanUsers { get; set; }
+        public virtual ICollection<Ban> Bans { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<ExchangeRequest> ExchangeRequests { get; set; }
         public virtual ICollection<Message> MessageReceivers { get; set; }

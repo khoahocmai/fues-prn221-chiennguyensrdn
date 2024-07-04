@@ -6,13 +6,13 @@ namespace BusinessObjects
     public partial class Ban
     {
         public int Id { get; set; }
-        public int? UserId { get; set; }
-        public int? AdminId { get; set; }
+        public int? ProductId { get; set; }
+        public int? ModeratorId { get; set; }
         public string? Reason { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime? EndDate { get; set; }
 
-        public virtual User? Admin { get; set; }
-        public virtual User? User { get; set; }
+        public virtual User? Moderator { get; set; }
+        public virtual Product? Product { get; set; }
     }
 }

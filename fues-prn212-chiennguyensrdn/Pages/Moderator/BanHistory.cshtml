@@ -1,0 +1,30 @@
+﻿@page
+@model fues_prn221_chiennguyensrdn.Pages.Moderator.BanHistoryModel
+@attribute [Microsoft.AspNetCore.Authorization.Authorize]
+@{
+    ViewData["Title"] = "Ban History";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Reason</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var ban in Model.Bans)
+        {
+            <tr>
+                <td>@ban.Product?.Title</td>
+                <td>@ban.Reason</td>
+                <td>@ban.StartDate.ToString("yyyy-MM-dd HH:mm")</td>
+                <td>@(ban.EndDate.HasValue ? ban.EndDate.Value.ToString("yyyy-MM-dd HH:mm") : "N/A")</td>
+            </tr>
+        }
+    </tbody>
+</table>

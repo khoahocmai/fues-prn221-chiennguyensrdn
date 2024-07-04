@@ -7,10 +7,10 @@ using Repositories.IRepo;
 
 namespace fues_prn221_chiennguyensrdn.Pages.Seller.ManageProduct
 {
-    public class ViewProductModel : PageModel
+    public class ViewOwnProductModel : PageModel
     {
         private readonly IProductRepository _productRepo;
-        public ViewProductModel(IProductRepository productRepository)
+        public ViewOwnProductModel(IProductRepository productRepository)
         {
             _productRepo = productRepository;
         }

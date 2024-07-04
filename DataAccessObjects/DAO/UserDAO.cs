@@ -104,5 +104,19 @@ namespace DataAccessObjects.DAO
                 await db.SaveChangesAsync();
             }
         }
+
+        public async Task<int> GetTotalUsersByRole(string role)
+        {
+            using var db = new FUESManagementContext();
+            return await db.Users.CountAsync(u => u.Role == role);
+        }
+
+        public async Task<List<User>> GetUsersByRole(string role)
+        {
+            using var db = new FUESManagementContext();
+            return await db.Users
+                .Where(u => u.Role == role)
+                .ToListAsync();
+        }
     }
 }

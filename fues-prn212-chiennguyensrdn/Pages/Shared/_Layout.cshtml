@@ -21,17 +21,20 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/UserInformation/UserInfor">User Information</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/General/UserInfor">User Information</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/General/ViewProduct">View Product</a>
                         </li>
                         @if (User.Identity.IsAuthenticated)
                         {
                             @if (User.IsInRole("Seller"))
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-page="/Seller/ManageProduct/CreateProduct">Create Product</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Seller/ManageProduct/ViewOwnProduct">View Own Product</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-page="/Seller/ManageProduct/ViewProduct">View Product</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Seller/ManageProduct/CreateProduct">Create Product</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-page="/Seller/ManageER/ExchangeRequest">Exchange Request</a>
@@ -43,16 +46,25 @@
                             @if (User.IsInRole("Buyer"))
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-page="/Buyer/ViewProduct">View Product</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Buyer/ViewExchangeRequest">View Request</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-page="/Buyer/ViewExchangeRequest">View Request</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Buyer/Transactions">Transaction</a>
+                                </li>
+                            }
+                            @if (User.IsInRole("Moderator"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Moderator/ViewReport">View Report</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Moderator/BanHistory">View History Ban</a>
                                 </li>
                             }
                             @if (User.IsInRole("Admin"))
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-page="/Admin/Dashboard">Admin Dashboard</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Admin/Dashboard">Dashboard</a>
                                 </li>
                             }
                         }

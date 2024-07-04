@@ -54,7 +54,7 @@ namespace fues_prn221_chiennguyensrdn.Pages.Seller.ManageProduct
             UpdateProductValues(existingProduct, Product);
 
             await _productRepo.UpdateProduct(existingProduct);
-            return RedirectToPage("./ViewProduct");
+            return RedirectToPage("./ViewOwnProduct");
         }
 
         private void UpdateProductValues(Product existingProduct, Product newProduct)
