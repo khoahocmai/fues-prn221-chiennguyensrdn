@@ -22,5 +22,8 @@ namespace Repositories.Repo
 
         public Task RemoveComment(int id)
             => CommentDAO.Instance.RemoveComment(id);
+
+        public Task<List<Comment>> GetCommentsByProductId(int productId)
+            => CommentDAO.Instance.GetCommentsByProductId(productId);
     }
 }

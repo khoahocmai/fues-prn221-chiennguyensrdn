@@ -26,6 +26,9 @@ namespace fues_prn212_chiennguyensrdn
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IExchangeRequestRepository, ExchangeRequestRepository>();
+            services.AddScoped<IReportRepository,  ReportRepository>();
+            services.AddScoped<ICommentRepository, CommentRepository>();
+            services.AddScoped<IRatingRepository, RatingRepository>();
 
             // Add authentication services
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

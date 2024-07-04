@@ -155,6 +155,8 @@ namespace DataAccessObjects
 
                 entity.Property(e => e.Price).HasColumnType("money");
 
+                entity.Property(e => e.Status).HasMaxLength(50);
+
                 entity.Property(e => e.Title).HasMaxLength(255);
 
                 entity.Property(e => e.UpdatedAt)

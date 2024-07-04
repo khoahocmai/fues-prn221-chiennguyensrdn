@@ -1,0 +1,15 @@
+﻿@page "{id:int}"
+@model fues_prn221_chiennguyensrdn.Pages.Buyer.ConfirmReportModel
+@attribute [Microsoft.AspNetCore.Authorization.Authorize]
+@{
+    ViewData["Title"] = "Confirm Report";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p>Are you sure you want to report the product "@Model.Product.Title"?</p>
+
+<form method="post">
+    <button type="submit" class="btn btn-danger">Report</button>
+    <a asp-page="/Buyer/ViewProduct" class="btn btn-secondary">Cancel</a>
+</form>

@@ -1,0 +1,35 @@
+﻿@page
+@model fues_prn221_chiennguyensrdn.Pages.Buyer.ViewExchangeRequestModel
+@{
+    ViewData["Title"] = "My Exchange Requests";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Message</th>
+            <th>Status</th>
+            <th>Created At</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var request in Model.ExchangeRequests)
+        {
+            <tr>
+                <td>@request.Product?.Title</td>
+                <td>@request.Message</td>
+                <td>@request.Status</td>
+                <td>@request.CreatedAt</td>
+                <td>
+                    <form method="post" asp-page-handler="Delete" asp-route-id="@request.Id" onsubmit="return confirm('Are you sure you want to delete this request?');">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

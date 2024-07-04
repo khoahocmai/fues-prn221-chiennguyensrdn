@@ -9,13 +9,6 @@ namespace DataAccessObjects.DAO
 {
     public class RatingDAO
     {
-        private readonly FUESManagementContext _context;
-
-        public RatingDAO(FUESManagementContext context)
-        {
-            _context = context;
-        }
-
         private static RatingDAO instance = null;
         public static readonly object Lock = new object();
         private RatingDAO() { }
@@ -36,42 +29,72 @@ namespace DataAccessObjects.DAO
 
         public async Task<List<Rating>> GetRatings()
         {
-            return await _context.Ratings.ToListAsync();
+            using var db = new FUESManagementContext();
+            return await db.Ratings.ToListAsync();
         }
 
         public async Task<Rating> GetRatingById(int id)
         {
-            return await _context.Ratings.SingleOrDefaultAsync(r => r.Id == id);
+            using var db = new FUESManagementContext();
+            return await db.Ratings.SingleOrDefaultAsync(r => r.Id == id);
         }
 
         public async Task AddRating(Rating rating)
         {
-            await _context.Ratings.AddAsync(rating);
-            await _context.SaveChangesAsync();
+            using var db = new FUESManagementContext();
+            await db.Ratings.AddAsync(rating);
+            await db.SaveChangesAsync();
         }
 
         public async Task UpdateRating(Rating rating)
         {
-            var existingRating = await _context.Ratings.FindAsync(rating.Id);
+            using var db = new FUESManagementContext();
+            var existingRating = await db.Ratings.FindAsync(rating.Id);
             if (existingRating != null)
             {
                 existingRating.ProductId = rating.ProductId;
                 existingRating.UserId = rating.UserId;
                 existingRating.Rating1 = rating.Rating1;
 
-                _context.Ratings.Update(existingRating);
-                await _context.SaveChangesAsync();
+                db.Ratings.Update(existingRating);
+                await db.SaveChangesAsync();
             }
         }
 
         public async Task RemoveRating(int id)
         {
-            var rating = await _context.Ratings.FindAsync(id);
+            using var db = new FUESManagementContext();
+            var rating = await db.Ratings.FindAsync(id);
             if (rating != null)
             {
-                _context.Ratings.Remove(rating);
-                await _context.SaveChangesAsync();
+                db.Ratings.Remove(rating);
+                await db.SaveChangesAsync();
             }
+        }
+
+        public async Task<Rating> GetRatingsByProductIdAndUserId(int productId, int userId)
+        {
+            using var db = new FUESManagementContext();
+            return await db.Ratings.SingleOrDefaultAsync(r => r.ProductId == productId && r.UserId == userId);
+        }
+
+        public async Task<double> GetAverageRatingByProductId(int productId)
+        {
+            using var db = new FUESManagementContext();
+
+            // Check if there are any ratings for the product
+            var ratings = await db.Ratings
+                     .Where(r => r.ProductId == productId)
+                     .ToListAsync();
+
+            // If there are no ratings, return 0
+            if (ratings == null || ratings.Count == 0)
+            {
+                return 0;
+            }
+
+            double averageRating = ratings.Average(r => r.Rating1.Value);
+            return averageRating;
         }
     }
 }

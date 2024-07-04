@@ -25,5 +25,8 @@ namespace Repositories.Repo
 
         public Task RemoveProduct(int id)
             => ProductDAO.Instance.RemoveProduct(id);
+
+        public Task<List<Product>> GetProductsByCategoryId(int categoryId)
+            => ProductDAO.Instance.GetProductsByCategoryId(categoryId);
     }
 }

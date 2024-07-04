@@ -11,8 +11,11 @@ namespace Repositories.Repo
         public Task<List<ExchangeRequest>> GetExchangeRequests()
             => ExchangeRequestDAO.Instance.GetExchangeRequests();
 
-        public Task<List<ExchangeRequest>> GetExchangeRequestsBySellerId(int sellerId)
-            => ExchangeRequestDAO.Instance.GetExchangeRequestsBySellerId(sellerId);
+        public Task<List<ExchangeRequest>> GetExchangeRequestsBySellerId(int sellerId, string status)
+            => ExchangeRequestDAO.Instance.GetExchangeRequestsBySellerId(sellerId, status);
+
+        public Task<List<ExchangeRequest>> GetExchangeRequestsByBuyerId(int buyerId)
+            => ExchangeRequestDAO.Instance.GetExchangeRequestsByBuyerId(buyerId);
 
         public Task<List<ExchangeRequest>> GetExchangeRequestsByProductId(int productId)
             => ExchangeRequestDAO.Instance.GetExchangeRequestsByProductId(productId);
@@ -28,5 +31,8 @@ namespace Repositories.Repo
 
         public Task RemoveExchangeRequest(int id)
             => ExchangeRequestDAO.Instance.RemoveExchangeRequest(id);
+
+        public Task<bool> HasBuyerAlreadyTradedProduct(int buyerId, int productId)
+            => ExchangeRequestDAO.Instance.HasBuyerAlreadyTradedProduct( buyerId, productId);
     }
 }

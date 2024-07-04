@@ -11,5 +11,7 @@ namespace Repositories.IRepo
         Task AddRating(Rating rating);
         Task UpdateRating(Rating rating);
         Task RemoveRating(int id);
+        Task<Rating> GetRatingsByProductIdAndUserId(int productId, int userId);
+        Task<double> GetAverageRatingByProductId(int productId);
     }
 }

@@ -34,11 +34,21 @@ namespace DataAccessObjects.DAO
             return await db.ExchangeRequests.ToListAsync();
         }
 
-        public async Task<List<ExchangeRequest>> GetExchangeRequestsBySellerId(int sellerId)
+        public async Task<List<ExchangeRequest>> GetExchangeRequestsBySellerId(int sellerId, string status)
         {
             using var db = new FUESManagementContext();
             return await db.ExchangeRequests
-                .Where(er => er.Product.SellerId == sellerId && er.Status == "Pending")
+                .Where(er => er.Product.SellerId == sellerId && er.Status == status)
+                .Include(er => er.Product)
+                .Include(er => er.Requester)
+                .ToListAsync();
+        }
+
+        public async Task<List<ExchangeRequest>> GetExchangeRequestsByBuyerId(int buyerId)
+        {
+            using var db = new FUESManagementContext();
+            return await db.ExchangeRequests
+                .Where(er => er.RequesterId == buyerId)
                 .Include(er => er.Product)
                 .Include(er => er.Requester)
                 .ToListAsync();
@@ -74,20 +84,31 @@ namespace DataAccessObjects.DAO
 
         public async Task UpdateExchangeRequest(ExchangeRequest exchangeRequest)
         {
+            // Validation: Ensure the provided exchangeRequest is not null
+            if (exchangeRequest == null)
+            {
+                throw new ArgumentNullException(nameof(exchangeRequest), "Exchange request cannot be null");
+            }
+
             using var db = new FUESManagementContext();
+
+            // Retrieve the existing request from the database
             var existingRequest = await db.ExchangeRequests.FindAsync(exchangeRequest.Id);
             if (existingRequest == null)
             {
-                throw new ArgumentException("Exchange Request not found");
+                throw new ArgumentException("Exchange Request not found", nameof(exchangeRequest.Id));
             }
-                existingRequest.ProductId = exchangeRequest.ProductId;
-                existingRequest.RequesterId = exchangeRequest.RequesterId;
-                existingRequest.Message = exchangeRequest.Message;
-                existingRequest.Status = exchangeRequest.Status;
-                existingRequest.UpdatedAt = DateTime.Now;
 
-                db.ExchangeRequests.Update(existingRequest);
-                await db.SaveChangesAsync();
+            // Update the properties
+            existingRequest.ProductId = exchangeRequest.ProductId;
+            existingRequest.RequesterId = exchangeRequest.RequesterId;
+            existingRequest.Message = exchangeRequest.Message;
+            existingRequest.Status = exchangeRequest.Status;
+            existingRequest.UpdatedAt = DateTime.Now;
+
+            // Save changes to the database
+            db.ExchangeRequests.Update(existingRequest);
+            await db.SaveChangesAsync();
         }
 
         public async Task RemoveExchangeRequest(int id)
@@ -99,6 +120,13 @@ namespace DataAccessObjects.DAO
                 db.ExchangeRequests.Remove(exchangeRequest);
                 await db.SaveChangesAsync();
             }
+        }
+
+        public async Task<bool> HasBuyerAlreadyTradedProduct(int buyerId, int productId)
+        {
+            using var db = new FUESManagementContext();
+            return await db.ExchangeRequests
+                .AnyAsync(er => er.RequesterId == buyerId && er.ProductId == productId);
         }
     }
 }

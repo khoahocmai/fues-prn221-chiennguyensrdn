@@ -12,6 +12,7 @@ namespace BusinessObjects
             Ratings = new HashSet<Rating>();
             Reports = new HashSet<Report>();
             Transactions = new HashSet<Transaction>();
+            Status = "Pending";
         }
 
         public int Id { get; set; }
@@ -20,6 +21,7 @@ namespace BusinessObjects
         public string? Description { get; set; }
         public decimal Price { get; set; }
         public int? CategoryId { get; set; }
+        public string Status { get; set; } = null!; // 'Removed', 'Pending', 'Sold'
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
 

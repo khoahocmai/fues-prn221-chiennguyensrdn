@@ -11,5 +11,6 @@ namespace Repositories.IRepo
         Task AddComment(Comment comment);
         Task UpdateComment(Comment comment);
         Task RemoveComment(int id);
+        Task<List<Comment>> GetCommentsByProductId(int productId);
     }
 }

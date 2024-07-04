@@ -9,7 +9,7 @@ namespace BusinessObjects
         public int? ProductId { get; set; }
         public int? RequesterId { get; set; }
         public string? Message { get; set; }
-        public string Status { get; set; } = null!;
+        public string Status { get; set; } = null!; // 'Pending', 'Accepted', 'Rejected'
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
 

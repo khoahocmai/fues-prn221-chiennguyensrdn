@@ -22,5 +22,11 @@ namespace Repositories.Repo
 
         public Task RemoveRating(int id)
             => RatingDAO.Instance.RemoveRating(id);
+
+        public Task<Rating> GetRatingsByProductIdAndUserId(int productId, int userId)
+            => RatingDAO.Instance.GetRatingsByProductIdAndUserId(productId, userId);
+
+        public Task<double> GetAverageRatingByProductId(int productId)
+            => RatingDAO.Instance.GetAverageRatingByProductId(productId);
     }
 }

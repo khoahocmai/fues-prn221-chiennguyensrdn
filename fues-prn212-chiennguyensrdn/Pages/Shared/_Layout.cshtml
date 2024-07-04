@@ -7,7 +7,7 @@
     <title>@ViewData["Title"] - fues_prn221_chiennguyensrdn</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    @* <link rel="stylesheet" href="~/fues_prn221_chiennguyensrdn.styles.css" asp-append-version="true" /> *@
+    <link rel="stylesheet" href="~/fues_prn221_chiennguyensrdn.styles.css" asp-append-version="true" />
 </head>
 <body>
     <header>
@@ -21,10 +21,7 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/UserInformation/UserInfor">User Information</a>
                         </li>
                         @if (User.Identity.IsAuthenticated)
                         {
@@ -38,6 +35,18 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-page="/Seller/ManageER/ExchangeRequest">Exchange Request</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Seller/ManageER/HistoryExchangeRequest">History Exchange Request</a>
+                                </li>
+                            }
+                            @if (User.IsInRole("Buyer"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Buyer/ViewProduct">View Product</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Buyer/ViewExchangeRequest">View Request</a>
                                 </li>
                             }
                             @if (User.IsInRole("Admin"))
