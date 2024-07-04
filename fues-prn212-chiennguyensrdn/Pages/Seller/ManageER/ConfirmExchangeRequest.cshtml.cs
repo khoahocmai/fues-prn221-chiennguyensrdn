@@ -9,10 +9,12 @@ namespace fues_prn221_chiennguyensrdn.Pages.Seller.ManageER
     public class ConfirmExchangeRequestModel : PageModel
     {
         private readonly IExchangeRequestRepository _exchangeRequestRepo;
+        private readonly IProductRepository _productRepo;
 
-        public ConfirmExchangeRequestModel(IExchangeRequestRepository exchangeRequestRepo)
+        public ConfirmExchangeRequestModel(IExchangeRequestRepository exchangeRequestRepo, IProductRepository productRepository)
         {
             _exchangeRequestRepo = exchangeRequestRepo;
+            _productRepo = productRepository;
         }
 
         [BindProperty]
@@ -44,12 +46,12 @@ namespace fues_prn221_chiennguyensrdn.Pages.Seller.ManageER
                 return NotFound("No exchange requests found for the given product.");
             }
 
-            // Cập nhật trạng thái của tất cả các yêu cầu trao đổi về "Reject"
+            // Cập nhật trạng thái của tất cả các yêu cầu trao đổi về "Rejected"
             foreach (var request in exchangeRequests)
             {
                 if (request.Id != exchangeRequestId)
                 {
-                    request.Status = "Reject";
+                    request.Status = "Rejected";
                     request.UpdatedAt = DateTime.UtcNow;
                     await _exchangeRequestRepo.UpdateExchangeRequest(request);
                 }
@@ -63,12 +65,16 @@ namespace fues_prn221_chiennguyensrdn.Pages.Seller.ManageER
                 return NotFound("Specific exchange request not found.");
             }
 
-            // Cập nhật trạng thái của yêu cầu trao đổi cụ thể về "Approve"
-            exchangeRequest.Status = "Approve";
+            // Cập nhật trạng thái của yêu cầu trao đổi cụ thể về "Accepted"
+            exchangeRequest.Status = "Accepted";
             exchangeRequest.UpdatedAt = DateTime.UtcNow;
             await _exchangeRequestRepo.UpdateExchangeRequest(exchangeRequest);
 
-            return RedirectToPage("./ExchangeRequest");
+            var product = await _productRepo.GetProductById(productId);
+            product.Status = "Sold";
+            await _productRepo.UpdateProduct(product);
+
+            return RedirectToPage("/Seller/ManageER/ExchangeRequest");
         }
 
     }

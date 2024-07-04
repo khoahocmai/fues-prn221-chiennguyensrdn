@@ -32,6 +32,7 @@ namespace DataAccessObjects.DAO
         {
             using var db = new FUESManagementContext();
             return await db.Products
+                .Where(p => p.Status == "Pending")
                  .Include(p => p.Category)
                  .Include(p => p.Seller)
                  .Include(p => p.Comments)
@@ -106,6 +107,16 @@ namespace DataAccessObjects.DAO
                 db.Products.Remove(product);
                 await db.SaveChangesAsync();
             }
+        }
+
+        public async Task<List<Product>> GetProductsByCategoryId(int categoryId)
+        {
+            using var db = new FUESManagementContext();
+            return await db.Products
+                .Where(p => p.CategoryId == categoryId)
+                .Include(p => p.Category)
+                .Include(p => p.Seller)
+                .ToListAsync();
         }
     }
 }

@@ -1,0 +1,149 @@
+﻿@page
+@model fues_prn221_chiennguyensrdn.Pages.CustomerInfor.CustomerInforModel
+@attribute [Microsoft.AspNetCore.Authorization.Authorize]
+
+@{
+    ViewData["Title"] = "User Information";
+}
+
+<h3>@ViewData["Title"]</h3>
+<hr />
+<div>
+    <dl class="row">
+        <dt class="col-sm-3">Full Name</dt>
+        <dd class="col-sm-9">@Model.UserName</dd>
+
+        <dt class="col-sm-3">Email</dt>
+        <dd class="col-sm-9">@Model.Email</dd>
+    </dl>
+</div>
+<hr />
+<div class="d-flex justify-content-between">
+    <button id="editButton" class="btn btn-primary btn-small" onclick="toggleEditForm()">Edit Information</button>
+    <button id="deleteButton" class="btn btn-danger btn-small" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete Account</button>
+</div>
+<div id="editForm" style="display: none;">
+    <h4>Update Information</h4>
+    <form method="post">
+        <div class="form-group">
+            <label asp-for="UserName" class="control-label">Full Name</label>
+            <input asp-for="UserName" class="form-control" />
+            <span asp-validation-for="UserName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Email" class="control-label">Email</label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Password" class="control-label">Password</label>
+            <input asp-for="Password" type="password" class="form-control" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Update" class="btn btn-primary btn-small btn-block" />
+        </div>
+    </form>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete your account? This action cannot be undone.
+            </div>
+            <div class="modal-footer d-flex justify-content-between">
+                <form method="post" asp-page-handler="Delete">
+                    <input type="submit" value="Delete" class="btn btn-danger" />
+                </form>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.18/signalr.min.js"></script>
+    <script type="text/javascript">
+        // Kết nối với SignalR Hub
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/RoomHub")
+            .build();
+
+        connection.on("ReceiveMessage", (user, message) => {
+            const msg = user + ": " + message;
+            const li = document.createElement("li");
+            li.textContent = msg;
+            document.getElementById("messagesList").appendChild(li);
+        });
+
+        connection.start().catch(err => console.error(err.toString()));
+
+        document.getElementById("sendButton").addEventListener("click", event => {
+            const user = document.getElementById("userInput").value;
+            const message = document.getElementById("messageInput").value;
+            connection.invoke("SendMessage", user, message).catch(err => console.error(err.toString()));
+            event.preventDefault();
+        });
+    </script>
+
+    <script>
+        function toggleEditForm() {
+            var editForm = document.getElementById("editForm");
+            var editButton = document.getElementById("editButton");
+            if (editForm.style.display === "none") {
+                editForm.style.display = "block";
+                editButton.textContent = "Cancel";
+            } else {
+                editForm.style.display = "none";
+                editButton.textContent = "Edit Information";
+            }
+        }
+    </script>
+}
+
+<style>
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-control {
+        border-radius: 5px;
+        padding: 10px;
+        font-size: 16px;
+    }
+
+    .btn {
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 5px;
+    }
+
+    .btn-small {
+        padding: 5px 10px;
+        font-size: 14px;
+        border-radius: 3px;
+    }
+
+    .text-danger {
+        font-size: 14px;
+    }
+
+    .modal-footer {
+        display: flex;
+        flex-shrink: 0;
+        align-items: center;
+        justify-content: center;
+        padding: .75rem;
+        border-top: 1px solid #dee2e6;
+        border-bottom-right-radius: calc(.3rem - 1px);
+        border-bottom-left-radius: calc(.3rem - 1px);
+    }
+    }
+</style>

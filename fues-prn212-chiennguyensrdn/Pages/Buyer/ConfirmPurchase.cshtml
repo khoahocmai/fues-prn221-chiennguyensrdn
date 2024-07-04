@@ -1,0 +1,71 @@
+﻿@page "{id:int}"
+@model fues_prn221_chiennguyensrdn.Pages.Buyer.ConfirmPurchaseModel
+@attribute [Microsoft.AspNetCore.Authorization.Authorize]
+@{
+    ViewData["Title"] = "Confirm Purchase";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Product.Title">Title</label>
+        <input asp-for="Product.Title" class="form-control" readonly />
+        <span asp-validation-for="Product.Title" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Product.Description">Description</label>
+        <textarea asp-for="Product.Description" class="form-control" readonly></textarea>
+        <span asp-validation-for="Product.Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Product.Price">Price</label>
+        <input asp-for="Product.Price" class="form-control" readonly />
+        <span asp-validation-for="Product.Price" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Product.Category.Name">Category</label>
+        <input asp-for="Product.Category.Name" class="form-control" readonly />
+        <span asp-validation-for="Product.Category.Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Message">Message</label>
+        <textarea asp-for="Message" class="form-control"></textarea>
+        <span asp-validation-for="Message" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Confirm Purchase</button>
+    <a asp-page="/Buyer/ViewProduct" class="btn btn-secondary">Cancel</a>
+</form>
+
+
+<!-- Modal -->
+<div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="errorModalLabel">Error</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                You have already submitted a request to exchange this item!
+            </div>
+            <div class="modal-footer d-flex justify-content-between">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(document).ready(function () {
+            @if (Model.ShowPopup)
+            {
+                <text>
+                        $('#errorModal').modal('show');
+                </text>
+            }
+        });
+    </script>
+}

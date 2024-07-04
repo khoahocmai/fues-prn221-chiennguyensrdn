@@ -1,0 +1,59 @@
+﻿@page
+@model fues_prn221_chiennguyensrdn.Pages.Buyer.ViewProductsModel
+@attribute [Microsoft.AspNetCore.Authorization.Authorize]
+@{
+    ViewData["Title"] = "List Products";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form method="get">
+    <div class="form-group">
+        <label for="categorySelect">Select Category:</label>
+        <select id="categorySelect" class="form-control" asp-for="SelectedCategoryId" asp-items="@(new SelectList(Model.Categories, "Id", "Name"))">
+            <option value="">All Categories</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="minPrice">Min Price:</label>
+        <input type="number" id="minPrice" class="form-control" asp-for="MinPrice" />
+    </div>
+    <div class="form-group">
+        <label for="maxPrice">Max Price:</label>
+        <input type="number" id="maxPrice" class="form-control" asp-for="MaxPrice" />
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Seller</th>
+            <th>Created At</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model.Products)
+        {
+            <tr>
+                <td>@product.Title</td>
+                <td>@product.Description</td>
+                <td>@product.Price</td>
+                <td>@product.Category?.Name</td>
+                <td>@product.Seller?.Name</td>
+                <td>@product.CreatedAt.ToString("yyyy-MM-dd HH:mm")</td>
+                <td>
+                    <a asp-page="/Buyer/ConfirmPurchase" asp-route-id="@product.Id" class="btn btn-primary">Trade</a>
+                    <a asp-page="/Buyer/ConfirmReport" asp-route-id="@product.Id" class="btn btn-danger">Report</a>
+                    <a asp-page="/Buyer/ViewProductDetail" asp-route-id="@product.Id" class="btn btn-info">View Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

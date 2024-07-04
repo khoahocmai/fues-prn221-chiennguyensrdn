@@ -12,5 +12,6 @@ namespace Repositories.IRepo
         Task AddProduct(Product product);
         Task UpdateProduct(Product product);
         Task RemoveProduct(int id);
+        Task<List<Product>> GetProductsByCategoryId(int categoryId);
     }
 }

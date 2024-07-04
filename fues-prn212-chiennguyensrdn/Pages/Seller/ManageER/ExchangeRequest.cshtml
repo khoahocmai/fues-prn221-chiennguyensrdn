@@ -30,7 +30,7 @@
                 <td>@exchangeRequest.CreatedAt.ToString("yyyy-MM-dd HH:mm")</td>
                 <td>@exchangeRequest.UpdatedAt.ToString("yyyy-MM-dd HH:mm")</td>
                 <td>
-                    <a asp-page="/Seller/ConfirmExchangeRequest" asp-route-exchangeRequestId="@exchangeRequest.Id" asp-route-productId="@exchangeRequest.Product?.Id" class="btn btn-primary">Select Buyer</a>
+                    <a asp-page="/Seller/ManageER/ConfirmExchangeRequest" asp-route-exchangeRequestId="@exchangeRequest.Id" asp-route-productId="@exchangeRequest.Product?.Id" class="btn btn-primary">Select Buyer</a>
                 </td>
             </tr>
         }

@@ -1,17 +1,15 @@
 using BusinessObjects;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using Repositories.IRepo;
-
 
 namespace fues_prn221_chiennguyensrdn.Pages.Seller.ManageER
 {
-    public class ExchangeRequestModel : PageModel
+    public class HIstoryExchangeRequestModel : PageModel
     {
         private readonly IExchangeRequestRepository _exchangeRequestRepo;
 
-        public ExchangeRequestModel(IExchangeRequestRepository exchangeRequestRepository)
+        public HIstoryExchangeRequestModel(IExchangeRequestRepository exchangeRequestRepository)
         {
             _exchangeRequestRepo = exchangeRequestRepository;
         }
@@ -21,7 +19,7 @@ namespace fues_prn221_chiennguyensrdn.Pages.Seller.ManageER
         {
             var userIdClaim = User.FindFirst("UserId");
             int userId = userIdClaim != null ? int.Parse(userIdClaim.Value) : 0;
-            ExchangeRequests = await _exchangeRequestRepo.GetExchangeRequestsBySellerId(userId, "Pending");
+            ExchangeRequests = await _exchangeRequestRepo.GetExchangeRequestsBySellerId(userId, "Accepted");
 
             return Page();
         }

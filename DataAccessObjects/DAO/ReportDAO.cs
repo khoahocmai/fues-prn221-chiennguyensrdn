@@ -9,13 +9,6 @@ namespace DataAccessObjects.DAO
 {
     public class ReportDAO
     {
-        private readonly FUESManagementContext _context;
-
-        public ReportDAO(FUESManagementContext context)
-        {
-            _context = context;
-        }
-
         private static ReportDAO instance = null;
         public static readonly object Lock = new object();
         private ReportDAO() { }
@@ -36,23 +29,27 @@ namespace DataAccessObjects.DAO
 
         public async Task<List<Report>> GetReports()
         {
-            return await _context.Reports.ToListAsync();
+            using var db = new FUESManagementContext();
+            return await db.Reports.ToListAsync();
         }
 
         public async Task<Report> GetReportById(int id)
         {
-            return await _context.Reports.SingleOrDefaultAsync(r => r.Id == id);
+            using var db = new FUESManagementContext();
+            return await db.Reports.SingleOrDefaultAsync(r => r.Id == id);
         }
 
         public async Task AddReport(Report report)
         {
-            await _context.Reports.AddAsync(report);
-            await _context.SaveChangesAsync();
+            using var db = new FUESManagementContext();
+            await db.Reports.AddAsync(report);
+            await db.SaveChangesAsync();
         }
 
         public async Task UpdateReport(Report report)
         {
-            var existingReport = await _context.Reports.FindAsync(report.Id);
+            using var db = new FUESManagementContext();
+            var existingReport = await db.Reports.FindAsync(report.Id);
             if (existingReport != null)
             {
                 existingReport.ReporterId = report.ReporterId;
@@ -60,18 +57,19 @@ namespace DataAccessObjects.DAO
                 existingReport.Status = report.Status;
                 existingReport.UpdatedAt = DateTime.Now;
 
-                _context.Reports.Update(existingReport);
-                await _context.SaveChangesAsync();
+                db.Reports.Update(existingReport);
+                await db.SaveChangesAsync();
             }
         }
 
         public async Task RemoveReport(int id)
         {
-            var report = await _context.Reports.FindAsync(id);
+            using var db = new FUESManagementContext();
+            var report = await db.Reports.FindAsync(id);
             if (report != null)
             {
-                _context.Reports.Remove(report);
-                await _context.SaveChangesAsync();
+                db.Reports.Remove(report);
+                await db.SaveChangesAsync();
             }
         }
     }

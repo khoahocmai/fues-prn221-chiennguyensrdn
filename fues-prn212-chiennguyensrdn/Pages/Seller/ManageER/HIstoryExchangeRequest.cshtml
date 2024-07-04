@@ -1,0 +1,30 @@
+﻿@page
+@model fues_prn221_chiennguyensrdn.Pages.Seller.ManageER.HIstoryExchangeRequestModel
+@attribute [Microsoft.AspNetCore.Authorization.Authorize]
+@{
+    ViewData["Title"] = "History Exchange Request";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Requester</th>
+            <th>Status</th>
+            <th>Message</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var exchangeRequest in Model.ExchangeRequests)
+        {
+            <tr>
+                <td>@exchangeRequest.Product?.Title</td>
+                <td>@exchangeRequest.Requester?.Name</td>
+                <td>@exchangeRequest.Status</td>
+                <td>@exchangeRequest.Message</td>
+            </tr>
+        }
+    </tbody>
+</table>

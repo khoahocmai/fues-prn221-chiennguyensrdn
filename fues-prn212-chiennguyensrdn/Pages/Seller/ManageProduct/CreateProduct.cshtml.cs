@@ -64,6 +64,7 @@ namespace fues_prn221_chiennguyensrdn.Pages.Seller.ManageProduct
                 Price = Price,
                 SellerId = userId,
                 CategoryId = CategoryId,
+                Status = "Pending",
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow
             };
