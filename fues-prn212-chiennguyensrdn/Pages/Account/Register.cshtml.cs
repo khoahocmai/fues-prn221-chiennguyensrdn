@@ -32,6 +32,10 @@ namespace fues_prn221_chiennguyensrdn.Pages.Account
         [BindProperty]
         [Required(ErrorMessage = "Name is required")]
         public string Name { get; set; } = null!;
+        
+        [BindProperty]
+        [Required(ErrorMessage = "UserType is required")]
+        public string UserType { get; set; }
 
         public async Task<IActionResult> OnPostAsync()
         {
@@ -46,7 +50,7 @@ namespace fues_prn221_chiennguyensrdn.Pages.Account
                 Username = Username,
                 Password = Password,
                 Name = Name,
-                Role = "Guest"
+                Role = UserType
             };
 
             await _userRepository.Register(user);
