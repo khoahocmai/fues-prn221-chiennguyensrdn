@@ -89,7 +89,7 @@ namespace DataAccessObjects.DAO
         {
             using var db = new FUESManagementContext();
             return await db.Reports
-                .AnyAsync(er => er.ReporterId == buyerId && er.ProductId == productId);
+                .AnyAsync(er => er.ReporterId == buyerId && er.ProductId == productId && er.Status != "Rejected");
         }
     }
 }

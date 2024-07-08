@@ -85,8 +85,10 @@ namespace fues_prn221_chiennguyensrdn.Pages.Moderator
             var reports = await _reportRepo.GetReportByProductId(ProductId);
             foreach (var report in reports)
             {
-                report.Status = "Actioned";
-                await _reportRepo.UpdateReport(report);
+                if(report.Status != "Rejected") { 
+                    report.Status = "Actioned";
+                    await _reportRepo.UpdateReport(report);
+                }
             }
 
             return RedirectToPage("/Moderator/ViewReport");
