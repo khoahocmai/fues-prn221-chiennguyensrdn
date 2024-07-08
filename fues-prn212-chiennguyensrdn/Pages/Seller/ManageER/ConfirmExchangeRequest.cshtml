@@ -1,6 +1,6 @@
 ﻿@page "{exchangeRequestId:int}/{productId:int}"
 @model fues_prn221_chiennguyensrdn.Pages.Seller.ManageER.ConfirmExchangeRequestModel
-@attribute [Microsoft.AspNetCore.Authorization.Authorize]
+@attribute [Microsoft.AspNetCore.Authorization.Authorize(Roles = "Seller")]
 @{
     ViewData["Title"] = "Confirm Exchange Request";
 }

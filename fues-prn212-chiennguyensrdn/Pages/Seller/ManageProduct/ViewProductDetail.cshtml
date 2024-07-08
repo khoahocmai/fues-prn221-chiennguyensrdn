@@ -1,5 +1,6 @@
 ﻿@page
 @model fues_prn221_chiennguyensrdn.Pages.Seller.ViewProductDetailModel
+@attribute [Microsoft.AspNetCore.Authorization.Authorize(Roles = "Seller")]
 @{
     ViewData["Title"] = "View Product Detail";
 }

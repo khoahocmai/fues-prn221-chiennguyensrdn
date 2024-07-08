@@ -1,6 +1,6 @@
 ﻿@page "{productId:int}"
 @model fues_prn221_chiennguyensrdn.Pages.Moderator.ConfirmBanModel
-@attribute [Microsoft.AspNetCore.Authorization.Authorize]
+@attribute [Microsoft.AspNetCore.Authorization.Authorize(Roles = "Moderator")]
 @{
     ViewData["Title"] = "Confirm Ban";
 }

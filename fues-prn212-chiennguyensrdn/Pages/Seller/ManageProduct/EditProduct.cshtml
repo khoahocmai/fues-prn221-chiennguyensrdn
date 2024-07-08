@@ -1,5 +1,6 @@
 ﻿@page "{id:int}"
 @model fues_prn221_chiennguyensrdn.Pages.Seller.ManageProduct.EditProductModel
+@attribute [Microsoft.AspNetCore.Authorization.Authorize(Roles = "Seller")]
 @using Microsoft.AspNetCore.Mvc.Rendering
 @{
     ViewData["Title"] = "Edit Product";
