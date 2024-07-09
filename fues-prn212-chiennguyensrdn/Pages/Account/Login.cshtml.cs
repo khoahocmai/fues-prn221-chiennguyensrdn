@@ -72,7 +72,7 @@ namespace fues_prn221_chiennguyensrdn.Pages.Account
             }
             else
             {
-                ErrorMessage = "Not found any user";
+                ErrorMessage = "Invalid Username or Password";
                 ModelState.AddModelError(string.Empty, ErrorMessage);
                 return Page();
             }

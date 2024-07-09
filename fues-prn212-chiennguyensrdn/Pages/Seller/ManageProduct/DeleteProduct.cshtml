@@ -1,6 +1,6 @@
 ﻿@page "{id:int}"
 @model fues_prn221_chiennguyensrdn.Pages.Seller.ManageProduct.DeleteProductModel
-@attribute [Microsoft.AspNetCore.Authorization.Authorize]
+@attribute [Microsoft.AspNetCore.Authorization.Authorize(Roles = "Seller")]
 @{
     ViewData["Title"] = "Delete Product";
 }

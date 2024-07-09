@@ -37,6 +37,8 @@ namespace fues_prn221_chiennguyensrdn.Pages.Account
         [Required(ErrorMessage = "UserType is required")]
         public string UserType { get; set; }
 
+        public string ErrorMessage { get; set; } = string.Empty;
+
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -53,9 +55,17 @@ namespace fues_prn221_chiennguyensrdn.Pages.Account
                 Role = UserType
             };
 
-            await _userRepository.Register(user);
-
-            return RedirectToPage("./RegisterSuccess");
+            try
+            {
+                await _userRepository.Register(user);
+                return RedirectToPage("./RegisterSuccess");
+            }
+            catch (Exception ex)
+            {
+                ErrorMessage = ex.Message;
+                ModelState.AddModelError(string.Empty, ErrorMessage);
+                return Page();
+            }
         }
     }
 }

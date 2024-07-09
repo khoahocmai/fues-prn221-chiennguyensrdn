@@ -1,5 +1,6 @@
 ﻿@page
 @model GroupProjectBySelf.Pages.Seller.SuccessPage.CreateSuccessModel
+@attribute [Microsoft.AspNetCore.Authorization.Authorize(Roles = "Seller")]
 @{
     ViewData["Title"] = "Product Created Successfully";
 }

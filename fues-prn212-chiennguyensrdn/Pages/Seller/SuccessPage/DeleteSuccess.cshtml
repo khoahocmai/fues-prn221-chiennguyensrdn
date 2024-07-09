@@ -1,5 +1,6 @@
 ﻿@page
 @model GroupProjectBySelf.Pages.Seller.SuccessPage.DeleteSuccessModel
+@attribute [Microsoft.AspNetCore.Authorization.Authorize(Roles = "Seller")]
 @{
     ViewData["Title"] = "Delete Success";
 }

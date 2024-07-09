@@ -74,9 +74,23 @@ namespace DataAccessObjects.DAO
 
         public async Task Register(User user)
         {
-            using var db = new FUESManagementContext();
-            await db.Users.AddAsync(user);
-            await db.SaveChangesAsync();
+            try
+            {
+                using var db = new FUESManagementContext();
+                var existingUser = await db.Users.SingleOrDefaultAsync(u => u.Email == user.Email);
+                if (existingUser == null)
+                {
+                    await db.Users.AddAsync(user);
+                    await db.SaveChangesAsync();
+                }
+                else
+                {
+                    throw new Exception("Email Already Existed");
+                }
+            }catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public async Task<bool> ResetPassword(int userId, string oldPassword, string newPassword)
