@@ -20,6 +20,9 @@ namespace Repositories.Repo
         public Task<List<ExchangeRequest>> GetExchangeRequestsByProductId(int productId)
             => ExchangeRequestDAO.Instance.GetExchangeRequestsByProductId(productId);
 
+        public Task<ExchangeRequest> GetExchangeRequestsByBuyerIdAndProductId(int buyerId, int productId)
+            => ExchangeRequestDAO.Instance.GetExchangeRequestsByBuyerIdAndProductId(buyerId, productId);
+
         public Task<ExchangeRequest> GetExchangeRequestById(int id)
             => ExchangeRequestDAO.Instance.GetExchangeRequestById(id);
 

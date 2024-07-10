@@ -30,6 +30,7 @@
                     {
                         <form method="post" asp-page-handler="UpdateStatus">
                             <input type="hidden" name="transactionId" value="@transaction.Id" />
+                            <input type="hidden" name="productId" value="@transaction.ProductId" />
                             <button type="submit" name="status" value="Completed" class="btn btn-success">Agree</button>
                             <button type="submit" name="status" value="Canceled" class="btn btn-danger">Cancel</button>
                         </form>
