@@ -64,6 +64,15 @@ namespace DataAccessObjects.DAO
                 .ToListAsync();
         }
 
+        public async Task<ExchangeRequest> GetExchangeRequestsByBuyerIdAndProductId(int buyerId, int productId)
+        {
+            using var db = new FUESManagementContext();
+            return await db.ExchangeRequests
+                .Where(er => er.RequesterId == buyerId && er.ProductId == productId)
+                .Include(er => er.Product)
+                .Include(er => er.Requester)
+                .FirstOrDefaultAsync();
+        }
 
         public async Task<ExchangeRequest> GetExchangeRequestById(int id)
         {
