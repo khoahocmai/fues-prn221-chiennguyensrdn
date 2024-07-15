@@ -42,7 +42,7 @@
             <tr>
                 <td>@product.Title</td>
                 <td>@product.Description</td>
-                <td>@product.Price</td>
+                <td>@string.Format("{0:N2} Đ", @product.Price)</td>
                 <td>@product.Category?.Name</td>
                 <td>@product.Seller?.Name</td>
                 <td>@product.CreatedAt.ToString("yyyy-MM-dd HH:mm")</td>
