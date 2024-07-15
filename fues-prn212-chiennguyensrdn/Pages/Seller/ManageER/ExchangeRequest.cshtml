@@ -30,9 +30,41 @@
                 <td>@exchangeRequest.CreatedAt.ToString("yyyy-MM-dd HH:mm")</td>
                 <td>@exchangeRequest.UpdatedAt.ToString("yyyy-MM-dd HH:mm")</td>
                 <td>
-                    <a asp-page="/Seller/ManageER/ConfirmExchangeRequest" asp-route-exchangeRequestId="@exchangeRequest.Id" asp-route-productId="@exchangeRequest.Product?.Id" class="btn btn-primary">Select Buyer</a>
+                    <a asp-page="/Seller/ManageER/ConfirmExchangeRequest" asp-route-exchangeRequestId="@exchangeRequest.Id" asp-route-productId="@exchangeRequest.Product?.Id" class="btn btn-primary btn-custom">Select Buyer</a>
+                    <form method="get" asp-page="/Chat/ChatPage" asp-route-receiverId="@exchangeRequest.RequesterId" style="display:inline-block;">
+                        <button type="submit" class="btn btn-primary btn-custom">Chat</button>
+                    </form>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+<style>
+    .btn-custom {
+        border-radius: 20px; /* Rounded corners */
+        padding: 10px 20px; /* Padding for a larger click area */
+        font-size: 16px; /* Larger text */
+        transition: all 0.3s ease; /* Smooth transition effect */
+    }
+
+    .btn-danger.btn-custom {
+        background-color: #dc3545;
+        border-color: #dc3545;
+    }
+
+        .btn-danger.btn-custom:hover {
+            background-color: #c82333;
+            border-color: #bd2130;
+        }
+
+    .btn-primary.btn-custom {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+        .btn-primary.btn-custom:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+</style>
