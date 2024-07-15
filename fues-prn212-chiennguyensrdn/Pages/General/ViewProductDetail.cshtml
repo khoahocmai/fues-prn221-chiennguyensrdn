@@ -9,7 +9,7 @@
 <div>
     <p>Title: @Model.Product.Title</p>
     <p>Description: @Model.Product.Description</p>
-    <p>Price: @Model.Product.Price</p>
+    <p>Price: @string.Format("{0:N2} Đ", @Model.Product.Price)</p>
     <p>Category: @Model.Product.Category?.Name</p>
     <p>Seller: @Model.Product.Seller?.Name</p>
     <p>Created At: @Model.Product.CreatedAt.ToString("yyyy-MM-dd HH:mm")</p>
