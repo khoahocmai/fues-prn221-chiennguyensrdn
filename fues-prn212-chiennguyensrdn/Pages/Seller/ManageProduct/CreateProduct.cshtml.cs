@@ -39,6 +39,10 @@ namespace fues_prn221_chiennguyensrdn.Pages.Seller.ManageProduct
         [Required(ErrorMessage = "Category is required")]
         public int CategoryId { get; set; }
 
+        [BindProperty]
+        [Required(ErrorMessage = "Image is required")]
+        public IFormFile Image { get; set; }
+
         public List<Category> Categories { get; set; }
 
         public async Task<IActionResult> OnGetAsync()
@@ -57,6 +61,16 @@ namespace fues_prn221_chiennguyensrdn.Pages.Seller.ManageProduct
             var userIdClaim = User.FindFirst("UserId");
             int userId = userIdClaim != null ? int.Parse(userIdClaim.Value) : 0;
 
+            byte[] imageData = null;
+            if (Image != null && Image.Length > 0)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    await Image.CopyToAsync(memoryStream);
+                    imageData = memoryStream.ToArray();
+                }
+            }
+
             var product = new Product
             {
                 Title = Title,
@@ -65,6 +79,7 @@ namespace fues_prn221_chiennguyensrdn.Pages.Seller.ManageProduct
                 SellerId = userId,
                 CategoryId = CategoryId,
                 Status = "Pending",
+                Image = imageData,
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow
             };

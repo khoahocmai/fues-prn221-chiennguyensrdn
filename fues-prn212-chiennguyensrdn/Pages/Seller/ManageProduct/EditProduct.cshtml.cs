@@ -23,6 +23,9 @@ namespace fues_prn221_chiennguyensrdn.Pages.Seller.ManageProduct
 
         public List<Category> Categories { get; set; }
 
+        [BindProperty]
+        public IFormFile ImageFile { get; set; }
+
         public async Task<IActionResult> OnGetAsync(int id)
         {
             Product = await _productRepo.GetProductById(id);
@@ -74,6 +77,14 @@ namespace fues_prn221_chiennguyensrdn.Pages.Seller.ManageProduct
             if (newProduct.CategoryId != existingProduct.CategoryId)
             {
                 existingProduct.CategoryId = newProduct.CategoryId;
+            }
+            if (ImageFile != null && ImageFile.Length > 0)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    ImageFile.CopyTo(memoryStream);
+                    existingProduct.Image = memoryStream.ToArray();
+                }
             }
         }
     }

@@ -21,6 +21,9 @@
         <div class="form-group">
             <input type="submit" value="Login" class="btn btn-primary btn-block" />
         </div>
+        <div class="form-group">
+            <a asp-page="/Account/ForgotPassword">Forgot Password?</a>
+        </div>
         @if (!string.IsNullOrEmpty(Model.ErrorMessage))
         {
             <div class="alert alert-danger">@Model.ErrorMessage</div>
