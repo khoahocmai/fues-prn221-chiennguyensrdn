@@ -17,6 +17,7 @@
             <th>Status</th>
             <th>Created At</th>
             <th>Updated At</th>
+            <th>Image</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -31,6 +32,12 @@
                 <td>@product.Status</td>
                 <td>@product.CreatedAt</td>
                 <td>@product.UpdatedAt</td>
+                <td>
+                    @if (product.Image != null)
+                    {
+                        <img src="data:image;base64,@Convert.ToBase64String(product.Image)" alt="@product.Title" style="max-width: 100px; max-height: 100px;" />
+                    }
+                </td>
                 <td>
                     <a asp-page="/Seller/ManageProduct/EditProduct" asp-route-id="@product.Id" class="btn btn-primary">Edit</a>
                     <a asp-page="/Seller/ManageProduct/DeleteProduct" asp-route-id="@product.Id" class="btn btn-danger">Delete</a>

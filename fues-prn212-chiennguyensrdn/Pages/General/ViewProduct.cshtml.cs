@@ -2,6 +2,7 @@ using BusinessObjects;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Repositories.IRepo;
+using System.Linq;
 
 namespace fues_prn221_chiennguyensrdn.Pages.General
 {

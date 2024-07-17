@@ -8,7 +8,7 @@
 
 <h2>@ViewData["Title"]</h2>
 
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     <div class="form-group">
         <label asp-for="Product.Title">Title</label>
         <input asp-for="Product.Title" class="form-control" />
@@ -30,6 +30,22 @@
             <option value="">Select category</option>
         </select>
         <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Current Image</label>
+        @if (Model.Product.Image != null)
+        {
+            <img src="data:image;base64,@Convert.ToBase64String(Model.Product.Image)" alt="Product Image" class="img-thumbnail" />
+        }
+        else
+        {
+            <p>No image available</p>
+        }
+    </div>
+    <div class="form-group">
+        <label asp-for="ImageFile">Upload New Image</label>
+        <input type="file" asp-for="ImageFile" class="form-control-file" />
+        <span asp-validation-for="ImageFile" class="text-danger"></span>
     </div>
     <button type="submit" class="btn btn-primary">Save</button>
 </form>

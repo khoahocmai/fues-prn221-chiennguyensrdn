@@ -93,6 +93,7 @@ namespace DataAccessObjects.DAO
             existingProduct.Price = product.Price;
             existingProduct.CategoryId = product.CategoryId;
             existingProduct.Status = product.Status;
+            existingProduct.Image = product.Image;
             existingProduct.UpdatedAt = DateTime.Now;
 
             db.Products.Update(existingProduct);

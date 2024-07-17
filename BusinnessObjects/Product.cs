@@ -23,6 +23,7 @@ namespace BusinessObjects
         public decimal Price { get; set; }
         public int? CategoryId { get; set; }
         public string Status { get; set; } = null!; // 'Removed', 'Pending', 'Sold','Banned'
+        public byte[]? Image { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
 

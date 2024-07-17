@@ -8,7 +8,7 @@
 
 <h2>@ViewData["Title"]</h2>
 
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     <div class="form-group">
         <label asp-for="Title">Title</label>
         <input asp-for="Title" class="form-control" />
@@ -30,6 +30,11 @@
             <option value="">Select category</option>
         </select>
         <span asp-validation-for="CategoryId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Image">Upload Image</label>
+        <input type="file" asp-for="Image" class="form-control-file" />
+        <span asp-validation-for="Image" class="text-danger"></span>
     </div>
     <button type="submit" class="btn btn-primary">Create</button>
 </form>
