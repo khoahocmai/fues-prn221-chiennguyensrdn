@@ -5,146 +5,224 @@
     ViewData["Title"] = "Admin Dashboard";
 }
 
-<h2>@ViewData["Title"]</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>@ViewData["Title"]</title>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+        }
 
-<div class="row mb-4">
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Total Products</h5>
-                <p class="card-text">@Model.TotalProducts</p>
+        .container {
+            margin-top: 30px;
+        }
+
+        h2 {
+            margin-bottom: 30px;
+            color: #333;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .card-title {
+            color: #007bff;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .table-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .table thead th {
+            background-color: #007bff;
+            color: white;
+            border: none;
+        }
+
+        .table tbody tr {
+            transition: all 0.3s ease;
+        }
+
+            .table tbody tr:hover {
+                background-color: #f1f1f1;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>@ViewData["Title"]</h2>
+
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Products</h5>
+                        <p class="card-text">@Model.TotalProducts</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Banned Products</h5>
+                        <p class="card-text">@Model.TotalBannedProducts</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Buyers</h5>
+                        <p class="card-text">@Model.TotalBuyers</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Sellers</h5>
+                        <p class="card-text">@Model.TotalSellers</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Moderators</h5>
+                        <p class="card-text">@Model.TotalModerators</p>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Total Banned Products</h5>
-                <p class="card-text">@Model.TotalBannedProducts</p>
-            </div>
+
+        <div class="table-container">
+            <h3>Product Details</h3>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var product in Model.ProductDetails)
+                    {
+                        <tr>
+                            <td>@product.Title</td>
+                            <td>@product.Description</td>
+                            <td>@product.Price</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table-container">
+            <h3>Product Banned Details</h3>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var product in Model.BannedProductDetails)
+                    {
+                        <tr>
+                            <td>@product.Title</td>
+                            <td>@product.Description</td>
+                            <td>@product.Price</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table-container">
+            <h3>Buyer Details</h3>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var buyer in Model.BuyerDetails)
+                    {
+                        <tr>
+                            <td>@buyer.Name</td>
+                            <td>@buyer.Email</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table-container">
+            <h3>Seller Details</h3>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var seller in Model.SellerDetails)
+                    {
+                        <tr>
+                            <td>@seller.Name</td>
+                            <td>@seller.Email</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table-container">
+            <h3>Moderator Details</h3>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var moderator in Model.ModeratorDetails)
+                    {
+                        <tr>
+                            <td>@moderator.Name</td>
+                            <td>@moderator.Email</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
         </div>
     </div>
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Total Buyers</h5>
-                <p class="card-text">@Model.TotalBuyers</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Total Sellers</h5>
-                <p class="card-text">@Model.TotalSellers</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Total Moderators</h5>
-                <p class="card-text">@Model.TotalModerators</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<h3>Product Details</h3>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Price</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var product in Model.ProductDetails)
-        {
-            <tr>
-                <td>@product.Title</td>
-                <td>@product.Description</td>
-                <td>@product.Price</td>
-            </tr>
-        }
-    </tbody>
-</table>
-
-<h3>Product Banned Details</h3>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Price</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var product in Model.BannedProductDetails)
-        {
-            <tr>
-                <td>@product.Title</td>
-                <td>@product.Description</td>
-                <td>@product.Price</td>
-            </tr>
-        }
-    </tbody>
-</table>
-
-<h3>Buyer Details</h3>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Email</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var buyer in Model.BuyerDetails)
-        {
-            <tr>
-                <td>@buyer.Name</td>
-                <td>@buyer.Email</td>
-            </tr>
-        }
-    </tbody>
-</table>
-
-<h3>Seller Details</h3>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Email</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var seller in Model.SellerDetails)
-        {
-            <tr>
-                <td>@seller.Name</td>
-                <td>@seller.Email</td>
-            </tr>
-        }
-    </tbody>
-</table>
-
-<h3>Moderator Details</h3>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Email</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var moderator in Model.ModeratorDetails)
-        {
-            <tr>
-                <td>@moderator.Name</td>
-                <td>@moderator.Email</td>
-            </tr>
-        }
-    </tbody>
-</table>
+</body>
+</html>

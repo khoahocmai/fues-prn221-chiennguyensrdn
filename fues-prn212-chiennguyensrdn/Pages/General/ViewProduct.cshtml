@@ -4,61 +4,178 @@
     ViewData["Title"] = "List Products";
 }
 
-<h2>@ViewData["Title"]</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>@ViewData["Title"]</title>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+        }
 
-<form method="get">
-    <div class="form-group">
-        <label for="categorySelect">Select Category:</label>
-        <select id="categorySelect" class="form-control" asp-for="SelectedCategoryId" asp-items="@(new SelectList(Model.Categories, "Id", "Name"))">
-            <option value="">All Categories</option>
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="minPrice">Min Price:</label>
-        <input type="number" id="minPrice" class="form-control" asp-for="MinPrice" />
-    </div>
-    <div class="form-group">
-        <label for="maxPrice">Max Price:</label>
-        <input type="number" id="maxPrice" class="form-control" asp-for="MaxPrice" />
-    </div>
-    <button type="submit" class="btn btn-primary">Search</button>
-</form>
+        .container {
+            margin-top: 30px;
+        }
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Price</th>
-            <th>Category</th>
-            <th>Seller</th>
-            <th>Created At</th>
-            <th>Image</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var product in Model.Products)
-        {
-            <tr>
-                <td>@product.Title</td>
-                <td>@product.Description</td>
-                <td>@string.Format("{0:N2} Đ", @product.Price)</td>
-                <td>@product.Category?.Name</td>
-                <td>@product.Seller?.Name</td>
-                <td>@product.CreatedAt.ToString("yyyy-MM-dd HH:mm")</td>
-                <td>
+        h2 {
+            margin-bottom: 30px;
+            color: #333;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .btn-primary {
+            border-radius: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+                border-color: #004085;
+            }
+
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .card {
+            flex: 1 1 calc(33.333% - 20px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+            .card img {
+                max-width: 100%;
+                height: 200px;
+                object-fit: cover;
+            }
+
+        .card-body {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .card-title {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .card-text {
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        .card-actions {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn {
+            border-radius: 20px;
+            padding: 10px 20px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+                border-color: #004085;
+            }
+
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+
+            .btn-danger:hover {
+                background-color: #c82333;
+                border-color: #bd2130;
+            }
+
+        .btn-info {
+            background-color: #17a2b8;
+            border-color: #17a2b8;
+        }
+
+            .btn-info:hover {
+                background-color: #117a8b;
+                border-color: #10707f;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>@ViewData["Title"]</h2>
+
+        <div class="form-container">
+            <form method="get" class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="categorySelect">Select Category:</label>
+                    <select id="categorySelect" class="form-control" asp-for="SelectedCategoryId" asp-items="@(new SelectList(Model.Categories, "Id", "Name"))">
+                        <option value="">All Categories</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="minPrice">Min Price:</label>
+                    <input type="number" id="minPrice" class="form-control" asp-for="MinPrice" />
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="maxPrice">Max Price:</label>
+                    <input type="number" id="maxPrice" class="form-control" asp-for="MaxPrice" />
+                </div>
+                <div class="form-group col-md-3 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary btn-block">Search</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="card-container">
+            @foreach (var product in Model.Products)
+            {
+                <div class="card">
                     @if (product.Image != null)
                     {
-                        <img src="data:image;base64,@Convert.ToBase64String(product.Image)" alt="@product.Title" style="max-width: 100px; max-height: 100px;" />
+                        <img src="data:image;base64,@Convert.ToBase64String(product.Image)" alt="@product.Title" />
                     }
-                </td>
-                <td>
-                    <a asp-page="/Buyer/ConfirmPurchase" asp-route-id="@product.Id" class="btn btn-primary">Trade</a>
-                    <a asp-page="/Buyer/ConfirmReport" asp-route-id="@product.Id" class="btn btn-danger">Report</a>
-                    <a asp-page="/General/ViewProductDetail" asp-route-id="@product.Id" class="btn btn-info">View Details</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+                    <div class="card-body">
+                        <h5 class="card-title">@product.Title</h5>
+                        <p class="card-text">@product.Description</p>
+                        <p class="card-text">@string.Format("{0:N2} Đ", @product.Price)</p>
+                        <div class="card-actions">
+                            <a asp-page="/Buyer/ConfirmPurchase" asp-route-id="@product.Id" class="btn btn-primary">Trade</a>
+                            <a asp-page="/Buyer/ConfirmReport" asp-route-id="@product.Id" class="btn btn-danger">Report</a>
+                            <a asp-page="/General/ViewProductDetail" asp-route-id="@product.Id" class="btn btn-info">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</body>
+</html>

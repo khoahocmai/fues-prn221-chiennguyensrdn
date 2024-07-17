@@ -6,52 +6,135 @@
     ViewData["Title"] = "Edit Product";
 }
 
-<h2>@ViewData["Title"]</h2>
-
-<form method="post" enctype="multipart/form-data">
-    <div class="form-group">
-        <label asp-for="Product.Title">Title</label>
-        <input asp-for="Product.Title" class="form-control" />
-        <span asp-validation-for="Product.Title" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Product.Description">Description</label>
-        <textarea asp-for="Product.Description" class="form-control"></textarea>
-        <span asp-validation-for="Product.Description" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Product.Price">Price</label>
-        <input asp-for="Product.Price" class="form-control" />
-        <span asp-validation-for="Product.Price" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Product.CategoryId">Category Name</label>
-        <select asp-for="Product.CategoryId" asp-items="@(new SelectList(Model.Categories, "Id", "Name"))" class="form-control">
-            <option value="">Select category</option>
-        </select>
-        <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label>Current Image</label>
-        @if (Model.Product.Image != null)
-        {
-            <img src="data:image;base64,@Convert.ToBase64String(Model.Product.Image)" alt="Product Image" class="img-thumbnail" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>@ViewData["Title"]</title>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
         }
-        else
-        {
-            <p>No image available</p>
-        }
-    </div>
-    <div class="form-group">
-        <label asp-for="ImageFile">Upload New Image</label>
-        <input type="file" asp-for="ImageFile" class="form-control-file" />
-        <span asp-validation-for="ImageFile" class="text-danger"></span>
-    </div>
-    <button type="submit" class="btn btn-primary">Save</button>
-</form>
 
-<div>
-    <form asp-page="/Seller/ManageProduct/ViewOwnProduct" method="get">
-        <button type="submit" class="btn btn-primary">Back to List</button>
-    </form>
-</div>
+        .container {
+            margin-top: 30px;
+            max-width: 800px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            margin-bottom: 30px;
+            color: #333;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .form-control, .form-control-file {
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        .img-thumbnail {
+            max-width: 200px;
+            max-height: 200px;
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            border-radius: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+                border-color: #004085;
+            }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+
+            .btn-secondary:hover {
+                background-color: #5a6268;
+                border-color: #545b62;
+            }
+
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>@ViewData["Title"]</h2>
+
+        <form method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label asp-for="Product.Title">Title</label>
+                <input asp-for="Product.Title" class="form-control" />
+                <span asp-validation-for="Product.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.Description">Description</label>
+                <textarea asp-for="Product.Description" class="form-control"></textarea>
+                <span asp-validation-for="Product.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.Price">Price</label>
+                <input asp-for="Product.Price" class="form-control" />
+                <span asp-validation-for="Product.Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.CategoryId">Category Name</label>
+                <select asp-for="Product.CategoryId" asp-items="@(new SelectList(Model.Categories, "Id", "Name"))" class="form-control">
+                    <option value="">Select category</option>
+                </select>
+                <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>Current Image</label>
+                @if (Model.Product.Image != null)
+                {
+                    <img src="data:image;base64,@Convert.ToBase64String(Model.Product.Image)" alt="Product Image" class="img-thumbnail" />
+                }
+                else
+                {
+                    <p>No image available</p>
+                }
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageFile">Upload New Image</label>
+                <input type="file" asp-for="ImageFile" class="form-control-file" />
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
+            </div>
+            <div class="btn-container">
+                <button type="submit" class="btn btn-primary">Save</button>
+                <a asp-page="/Seller/ManageProduct/ViewOwnProduct" class="btn btn-secondary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

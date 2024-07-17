@@ -5,51 +5,137 @@
     ViewData["Title"] = "View Product";
 }
 
-<h2>@ViewData["Title"]</h2>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Price</th>
-            <th>Category</th>
-            <th>Status</th>
-            <th>Created At</th>
-            <th>Updated At</th>
-            <th>Image</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var product in Model.Products)
-        {
-            <tr>
-                <td>@product.Title</td>
-                <td>@product.Description</td>
-                <td>@string.Format("{0:N2} Đ", product.Price)</td>
-                <td>@product.Category?.Name</td>
-                <td>@product.Status</td>
-                <td>@product.CreatedAt</td>
-                <td>@product.UpdatedAt</td>
-                <td>
-                    @if (product.Image != null)
-                    {
-                        <img src="data:image;base64,@Convert.ToBase64String(product.Image)" alt="@product.Title" style="max-width: 100px; max-height: 100px;" />
-                    }
-                </td>
-                <td>
-                    <a asp-page="/Seller/ManageProduct/EditProduct" asp-route-id="@product.Id" class="btn btn-primary">Edit</a>
-                    <a asp-page="/Seller/ManageProduct/DeleteProduct" asp-route-id="@product.Id" class="btn btn-danger">Delete</a>
-                    <a asp-page="/Seller/ManageProduct/ViewProductDetail" asp-route-id="@product.Id" class="btn btn-info">View Details</a>
-                </td>
-            </tr>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>@ViewData["Title"]</title>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
         }
-    </tbody>
-</table>
-<div>
-    <form asp-page="/Seller/ManageProduct/CreateProduct" method="get">
-        <button type="submit" class="btn btn-primary">Create New Product</button>
-    </form>
-</div>
 
+        .container {
+            margin-top: 30px;
+            max-width: 1200px;
+        }
+
+        h2 {
+            margin-bottom: 30px;
+            color: #333;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .table {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+        }
+
+            .table th, .table td {
+                vertical-align: middle;
+            }
+
+            .table img {
+                max-width: 80px;
+                max-height: 80px;
+                border-radius: 5px;
+            }
+
+        .btn-custom {
+            border-radius: 10px;
+            padding: 6px 12px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            margin-bottom: 5px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+                border-color: #004085;
+            }
+
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+
+            .btn-danger:hover {
+                background-color: #c82333;
+                border-color: #bd2130;
+            }
+
+        .btn-info {
+            background-color: #17a2b8;
+            border-color: #17a2b8;
+        }
+
+            .btn-info:hover {
+                background-color: #117a8b;
+                border-color: #10707f;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>@ViewData["Title"]</h2>
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Category</th>
+                    <th>Status</th>
+                    <th>Created At</th>
+                    <th>Updated At</th>
+                    <th>Image</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var product in Model.Products)
+                {
+                    <tr>
+                        <td>@product.Title</td>
+                        <td>@product.Description</td>
+                        <td>@string.Format("{0:N2} Đ", product.Price)</td>
+                        <td>@product.Category?.Name</td>
+                        <td>@product.Status</td>
+                        <td>@product.CreatedAt.ToString("yyyy-MM-dd HH:mm")</td>
+                        <td>@product.UpdatedAt.ToString("yyyy-MM-dd HH:mm")</td>
+                        <td>
+                            @if (product.Image != null)
+                            {
+                                <img src="data:image;base64,@Convert.ToBase64String(product.Image)" alt="@product.Title" />
+                            }
+                        </td>
+                        <td>
+                            <a asp-page="/Seller/ManageProduct/EditProduct" asp-route-id="@product.Id" class="btn btn-primary btn-custom">Edit</a>
+                            <a asp-page="/Seller/ManageProduct/DeleteProduct" asp-route-id="@product.Id" class="btn btn-danger btn-custom">Delete</a>
+                            <a asp-page="/Seller/ManageProduct/ViewProductDetail" asp-route-id="@product.Id" class="btn btn-info btn-custom">View Details</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div class="text-center mt-4">
+            <a asp-page="/Seller/ManageProduct/CreateProduct" class="btn btn-primary btn-custom">Create New Product</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -2,52 +2,56 @@
 @model fues_prn221_chiennguyensrdn.Pages.Account.RegisterModel
 @{
     ViewData["Title"] = "Register";
+    ViewData["HideHeaderAndFooter"] = true; // Hide header and footer
 }
 
-<div class="register-container">
-    <h3>@ViewData["Title"]</h3>
-    <hr />
-    <form method="post" class="register-form">
-        <div class="form-group">
-            <label asp-for="Username" class="control-label">Username</label>
-            <input asp-for="Username" class="form-control" />
-            <span asp-validation-for="Username" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Password" class="control-label">Password</label>
-            <input asp-for="Password" type="password" class="form-control" />
-            <span asp-validation-for="Password" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Email" class="control-label">Email</label>
-            <input asp-for="Email" class="form-control" />
-            <span asp-validation-for="Email" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Name" class="control-label">Name</label>
-            <input asp-for="Name" class="form-control" />
-            <span asp-validation-for="Name" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="UserType" class="control-label">User Type</label>
-            <div class="radio-group">
-                <label>
-                    <input asp-for="UserType" type="radio" value="Buyer" /> Buyer
-                </label>
-                <label>
-                    <input asp-for="UserType" type="radio" value="Seller" /> Seller
-                </label>
+<div class="container d-flex align-items-center justify-content-center min-vh-100">
+    <div class="register-container position-relative">
+        <a href="/" class="close-button" aria-label="Close">&times;</a>
+        <h3>@ViewData["Title"]</h3>
+        <hr />
+        <form method="post" class="register-form">
+            <div class="form-group">
+                <label asp-for="Username" class="control-label">Username</label>
+                <input asp-for="Username" class="form-control" />
+                <span asp-validation-for="Username" class="text-danger"></span>
             </div>
-            <span asp-validation-for="UserType" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Register" class="btn btn-primary btn-block" />
-        </div>
-        @if (!string.IsNullOrEmpty(Model.ErrorMessage))
-        {
-            <div class="alert alert-danger">@Model.ErrorMessage</div>
-        }
-    </form>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label">Password</label>
+                <input asp-for="Password" type="password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label">Email</label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">Name</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserType" class="control-label">User Type</label>
+                <div class="radio-group">
+                    <label>
+                        <input asp-for="UserType" type="radio" value="Buyer" /> Buyer
+                    </label>
+                    <label>
+                        <input asp-for="UserType" type="radio" value="Seller" /> Seller
+                    </label>
+                </div>
+                <span asp-validation-for="UserType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Register" class="btn btn-primary btn-block" />
+            </div>
+            @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+            {
+                <div class="alert alert-danger mt-3">@Model.ErrorMessage</div>
+            }
+        </form>
+    </div>
 </div>
 
 @section Scripts {
@@ -57,29 +61,50 @@
 <style>
     .register-container {
         max-width: 400px;
-        margin: 50px auto;
+        width: 100%;
         padding: 20px;
-        border: 1px solid #ccc;
+        background: #fff;
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        background-color: #fff;
+        text-align: center;
+        position: relative;
     }
 
-        .register-container h3 {
-            margin-bottom: 20px;
-            text-align: center;
-            color: #333;
+    .close-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 24px;
+        text-decoration: none;
+        color: #000;
+    }
+
+        .close-button:hover {
+            color: #f00;
         }
+
+    .register-container h3 {
+        margin-bottom: 20px;
+        font-weight: bold;
+    }
 
     .register-form .form-group {
         margin-bottom: 15px;
+        text-align: left;
     }
 
     .register-form .form-control {
-        border-radius: 5px;
+        border-radius: 0;
+        border: none;
+        border-bottom: 2px solid #ccc;
         padding: 10px;
         font-size: 16px;
     }
+
+        .register-form .form-control:focus {
+            border-bottom: 2px solid #6a11cb;
+            box-shadow: none;
+        }
 
     .register-form .radio-group {
         display: flex;
@@ -102,8 +127,15 @@
         width: 100%;
         padding: 10px;
         font-size: 16px;
-        border-radius: 5px;
+        border-radius: 50px;
+        background-color: #fff;
+        color: #000;
+        border: 1px solid #ccc;
     }
+
+        .register-form .btn:hover {
+            background-color: #f1f1f1;
+        }
 
     .register-form .text-danger {
         font-size: 14px;

@@ -5,67 +5,153 @@
     ViewData["Title"] = "Confirm Purchase";
 }
 
-<h2>@ViewData["Title"]</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>@ViewData["Title"]</title>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+        }
 
-<form method="post">
-    <div class="form-group">
-        <label asp-for="Product.Title">Title</label>
-        <input asp-for="Product.Title" class="form-control" readonly />
-        <span asp-validation-for="Product.Title" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Product.Description">Description</label>
-        <textarea asp-for="Product.Description" class="form-control" readonly></textarea>
-        <span asp-validation-for="Product.Description" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Product.Price">Price</label>
-        <input asp-for="Product.Price" class="form-control" readonly />
-        <span asp-validation-for="Product.Price" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Product.Category.Name">Category</label>
-        <input asp-for="Product.Category.Name" class="form-control" readonly />
-        <span asp-validation-for="Product.Category.Name" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Message">Message</label>
-        <textarea asp-for="Message" class="form-control"></textarea>
-        <span asp-validation-for="Message" class="text-danger"></span>
-    </div>
-    <button type="submit" class="btn btn-primary">Confirm Purchase</button>
-    <a asp-page="/General/ViewProduct" class="btn btn-secondary">Cancel</a>
-</form>
+        .container {
+            margin-top: 30px;
+        }
 
+        h2 {
+            margin-bottom: 30px;
+            color: #333;
+            text-align: center;
+            font-weight: bold;
+        }
 
-<!-- Modal -->
-<div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="errorModalLabel">Error</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                You have already submitted a request to exchange this item!
-            </div>
-            <div class="modal-footer d-flex justify-content-between">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK</button>
+        .form-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .form-control[readonly] {
+            background-color: #e9ecef;
+        }
+
+        .btn-primary {
+            border-radius: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+                border-color: #004085;
+            }
+
+        .btn-secondary {
+            border-radius: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+            .btn-secondary:hover {
+                background-color: #5a6268;
+                border-color: #545b62;
+            }
+
+        .modal-content {
+            border-radius: 10px;
+        }
+
+        .modal-header {
+            border-bottom: none;
+        }
+
+        .modal-footer {
+            border-top: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>@ViewData["Title"]</h2>
+
+        <div class="form-container">
+            <form method="post">
+                <div class="form-group">
+                    <label asp-for="Product.Title">Title</label>
+                    <input asp-for="Product.Title" class="form-control" readonly />
+                    <span asp-validation-for="Product.Title" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Product.Description">Description</label>
+                    <textarea asp-for="Product.Description" class="form-control" readonly></textarea>
+                    <span asp-validation-for="Product.Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Product.Price">Price</label>
+                    <input asp-for="Product.Price" class="form-control" readonly />
+                    <span asp-validation-for="Product.Price" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Product.Category.Name">Category</label>
+                    <input asp-for="Product.Category.Name" class="form-control" readonly />
+                    <span asp-validation-for="Product.Category.Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Message">Message</label>
+                    <textarea asp-for="Message" class="form-control"></textarea>
+                    <span asp-validation-for="Message" class="text-danger"></span>
+                </div>
+                <div class="form-group d-flex justify-content-between">
+                    <button type="submit" class="btn btn-primary">Confirm Purchase</button>
+                    <a asp-page="/General/ViewProduct" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="errorModalLabel">Error</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    You have already submitted a request to exchange this item!
+                </div>
+                <div class="modal-footer d-flex justify-content-between">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-    <script>
-        $(document).ready(function () {
-        @if (Model.ShowPopup)
-        {
-            <text>
-                    $('#errorModal').modal('show');
-            </text>
-        }
-                });
-    </script>
-}
+    @section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+        <script>
+            $(document).ready(function () {
+            @if (Model.ShowPopup)
+            {
+                <text>
+                        $('#errorModal').modal('show');
+                </text>
+            }
+                        });
+        </script>
+    }
+</body>
+</html>

@@ -5,64 +5,135 @@
     ViewData["Title"] = "Confirm Exchange Request";
 }
 
-<h2>@ViewData["Title"]</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>@ViewData["Title"]</title>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+        }
 
-<div>
-    <h4>Exchange Request Details: </h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            <strong>Product</strong>
-        </dt>
-        <dd class="col-sm-10">
-            @if (Model.ExchangeRequest.Product != null)
-            {
-                @Model.ExchangeRequest.Product.Title
-            }
-        </dd>
-        <dt class="col-sm-2">
-            <strong>Requester</strong>
-        </dt>
-        <dd class="col-sm-10">
-            @if (Model.ExchangeRequest.Requester != null)
-            {
-                @Model.ExchangeRequest.Requester.Name
-            }
-        </dd>
-        <dt class="col-sm-2">
-            <strong>Status</strong>
-        </dt>
-        <dd class="col-sm-10">
-            @Model.ExchangeRequest.Status
-        </dd>
-        <dt class="col-sm-2">
-            <strong>Message</strong>
-        </dt>
-        <dd class="col-sm-10">
-            @Model.ExchangeRequest.Message
-        </dd>
-        <dt class="col-sm-2">
-            <strong>Created At</strong>
-        </dt>
-        <dd class="col-sm-10">
-            @Model.ExchangeRequest.CreatedAt.ToString("yyyy-MM-dd HH:mm")
-        </dd>
-        <dt class="col-sm-2">
-            <strong>Updated At</strong>
-        </dt>
-        <dd class="col-sm-10">
-            @Model.ExchangeRequest.UpdatedAt.ToString("yyyy-MM-dd HH:mm")
-        </dd>
-    </dl>
-</div>
+        .container {
+            margin-top: 30px;
+            max-width: 800px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
 
-<div>
-    <form method="post">
-        <input type="hidden" asp-for="ExchangeRequest.Id" />
-        <input type="hidden" asp-for="ProductId" />
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary">Approve this guy</button>
+        h2 {
+            margin-bottom: 30px;
+            color: #333;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        dl.row dt {
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        dl.row dd {
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            border-radius: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+                border-color: #004085;
+            }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+
+            .btn-secondary:hover {
+                background-color: #5a6268;
+                border-color: #545b62;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>@ViewData["Title"]</h2>
+
+        <div>
+            <h4>Exchange Request Details: </h4>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-3">
+                    Product
+                </dt>
+                <dd class="col-sm-9">
+                    @if (Model.ExchangeRequest.Product != null)
+                    {
+                        @Model.ExchangeRequest.Product.Title
+                    }
+                </dd>
+                <dt class="col-sm-3">
+                    Requester
+                </dt>
+                <dd class="col-sm-9">
+                    @if (Model.ExchangeRequest.Requester != null)
+                    {
+                        @Model.ExchangeRequest.Requester.Name
+                    }
+                </dd>
+                <dt class="col-sm-3">
+                    Status
+                </dt>
+                <dd class="col-sm-9">
+                    @Model.ExchangeRequest.Status
+                </dd>
+                <dt class="col-sm-3">
+                    Message
+                </dt>
+                <dd class="col-sm-9">
+                    @Model.ExchangeRequest.Message
+                </dd>
+                <dt class="col-sm-3">
+                    Created At
+                </dt>
+                <dd class="col-sm-9">
+                    @Model.ExchangeRequest.CreatedAt.ToString("yyyy-MM-dd HH:mm")
+                </dd>
+                <dt class="col-sm-3">
+                    Updated At
+                </dt>
+                <dd class="col-sm-9">
+                    @Model.ExchangeRequest.UpdatedAt.ToString("yyyy-MM-dd HH:mm")
+                </dd>
+            </dl>
+        </div>
+
+        <div class="text-center mt-4">
+            <form method="post" style="display:inline;">
+                <input type="hidden" asp-for="ExchangeRequest.Id" />
+                <input type="hidden" asp-for="ProductId" />
+                <button type="submit" class="btn btn-primary">Approve this guy</button>
+            </form>
             <a asp-page="/Seller/ManageER/ExchangeRequest" class="btn btn-secondary">Back to Exchange Requests</a>
         </div>
-    </form>
-</div>
+    </div>
+</body>
+</html>

@@ -1,10 +1,144 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "ExchangePage - Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>@ViewData["Title"]</title>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .hero-section {
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .hero-text {
+            font-size: 3em;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .hero-description {
+            font-size: 1.2em;
+            color: #e0e0e0;
+            margin-bottom: 30px;
+        }
+
+        .cta-button {
+            background-color: #fff;
+            color: #007bff;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2em;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+            .cta-button:hover {
+                background-color: #e0e0e0;
+                color: #0056b3;
+            }
+
+        .feature-section {
+            background-color: white;
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        .feature-item {
+            margin: 20px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+            .feature-item:hover {
+                transform: translateY(-10px);
+            }
+
+        .feature-icon {
+            font-size: 3em;
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+
+        .feature-title {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .feature-description {
+            color: #6c757d;
+        }
+
+        .footer {
+            background-color: #f8f9fa;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 50px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+            .footer p {
+                margin: 0;
+                color: #6c757d;
+            }
+    </style>
+</head>
+<body>
+    <div class="hero-section">
+        <h1 class="hero-text">Welcome to ExchangePage</h1>
+        <p class="hero-description">Your trusted platform for exchanging items with ease and security.</p>
+        <a href="/Account/Register" class="cta-button">Get Started</a>
+    </div>
+
+    <div class="container">
+        <div class="feature-section">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="feature-item">
+                        <div class="feature-icon">🔄</div>
+                        <h2 class="feature-title">Easy Exchanges</h2>
+                        <p class="feature-description">Seamlessly exchange items with fellow students in a few simple steps.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-item">
+                        <div class="feature-icon">🔒</div>
+                        <h2 class="feature-title">Secure Transactions</h2>
+                        <p class="feature-description">All transactions are secured and protected to ensure your safety.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-item">
+                        <div class="feature-icon">📅</div>
+                        <h2 class="feature-title">Schedule Appointments</h2>
+                        <p class="feature-description">Easily schedule appointments for item exchanges at convenient times.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

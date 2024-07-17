@@ -2,9 +2,69 @@
 @model fues_prn221_chiennguyensrdn.Pages.Account.RegisterSuccessModel
 @{
     ViewData["Title"] = "Register Success";
+    ViewData["HideHeaderAndFooter"] = true; // Hide header and footer
 }
 
-<div class="alert alert-success" role="alert">
-    <h4 class="alert-heading">Registration Successful!</h4>
-    <p>You have successfully registered. Please <a asp-page="/Account/Login">login</a> to continue.</p>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>@ViewData["Title"]</title>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .success-container {
+            max-width: 500px;
+            width: 100%;
+            padding: 30px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .alert-success h4 {
+            margin-bottom: 20px;
+            color: #28a745;
+        }
+
+        .alert-success p {
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        .btn-primary {
+            border-radius: 50px;
+            padding: 10px 20px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            color: #fff;
+        }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+                border-color: #004085;
+            }
+    </style>
+</head>
+<body>
+    <div class="success-container">
+        <div class="alert alert-success" role="alert">
+            <h4 class="alert-heading">Registration Successful!</h4>
+            <p>You have successfully registered. Please <a asp-page="/Account/Login" class="btn btn-primary mt-2">Login</a> to continue.</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -7,58 +7,109 @@
 
 <h2>@ViewData["Title"]</h2>
 
-<div>
-    <p>Title: @Model.Product.Title</p>
-    <p>Description: @Model.Product.Description</p>
-    <p>Price: @string.Format("{0:N2} Đ", @Model.Product.Price)</p>
-    <p>Category: @Model.Product.Category?.Name</p>
-    <p>Created At: @Model.Product.CreatedAt.ToString("yyyy-MM-dd HH:mm")</p>
-    <p>
-        Image:
-        @if (Model.Product.Image != null)
-        {
-            <img src="data:image;base64,@Convert.ToBase64String(Model.Product.Image)" alt="@Model.Product.Title" style="max-width: 200px; max-height: 200px;" />
-        }
-        else
-        {
-            <span>No image available</span>
-        }
-    </p>
-</div>
-
-<hr />
-
-<h4>Comments</h4>
-<form method="post" asp-page-handler="Comment">
-    <input type="hidden" asp-for="Id" />
-    <div class="form-group">
-        <textarea id="newComment" class="form-control" asp-for="NewComment" rows="3"></textarea>
-        <span asp-validation-for="NewComment" class="text-danger"></span>
+<div class="container mt-4 p-4 bg-white rounded shadow-sm">
+    <div class="mb-4">
+        <p><strong>Title:</strong> @Model.Product.Title</p>
+        <p><strong>Description:</strong> @Model.Product.Description</p>
+        <p><strong>Price:</strong> @string.Format("{0:N2} Đ", @Model.Product.Price)</p>
+        <p><strong>Category:</strong> @Model.Product.Category?.Name</p>
+        <p><strong>Created At:</strong> @Model.Product.CreatedAt.ToString("yyyy-MM-dd HH:mm")</p>
+        <p>
+            <strong>Image:</strong>
+            @if (Model.Product.Image != null)
+            {
+                <img src="data:image;base64,@Convert.ToBase64String(Model.Product.Image)" alt="@Model.Product.Title" class="img-thumbnail" style="max-width: 200px; max-height: 200px;" />
+            }
+            else
+            {
+                <span>No image available</span>
+            }
+        </p>
     </div>
-    <button type="submit" class="btn btn-primary">Send</button>
-</form>
-<ul>
-    @foreach (var comment in Model.Comments)
-    {
-        <li>@comment.User.Name: @comment.Comment1</li>
-    }
-</ul>
-<hr />
 
-<h4>Rating</h4>
-@if (Model.AverageRating != null)
-{
-    <div>
-        <h5>Average Rating:</h5>
-        <p>@Model.AverageRating</p>
-    </div>
-}
-else
-{
-    <p>You have not rated this product yet.</p>
-}
-<div>
-    <form asp-page="/Seller/ManageProduct/ViewOwnProduct" method="get">
-        <button type="submit" class="btn btn-primary">Back to List</button>
+    <hr />
+
+    <h4>Comments</h4>
+    <form method="post" asp-page-handler="Comment" class="mb-4">
+        <input type="hidden" asp-for="Id" />
+        <div class="form-group">
+            <textarea id="newComment" class="form-control" asp-for="NewComment" rows="3"></textarea>
+            <span asp-validation-for="NewComment" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Send</button>
     </form>
+    <ul>
+        @foreach (var comment in Model.Comments)
+        {
+            <li><strong>@comment.User.Name:</strong> @comment.Comment1</li>
+        }
+    </ul>
+    <hr />
+
+    <h4>Rating</h4>
+    @if (Model.AverageRating != null)
+    {
+        <div>
+            <h5>Average Rating:</h5>
+            <p>@Model.AverageRating</p>
+        </div>
+    }
+    else
+    {
+        <p>No ratings available yet.</p>
+    }
+
+    <div class="text-center mt-4">
+        <form asp-page="/Seller/ManageProduct/ViewOwnProduct" method="get">
+            <button type="submit" class="btn btn-primary">Back to List</button>
+        </form>
+    </div>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+<style>
+    body {
+        background-color: #f8f9fa;
+        font-family: 'Arial', sans-serif;
+    }
+
+    h2 {
+        color: #333;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    .container {
+        max-width: 800px;
+    }
+
+    .form-group label {
+        font-weight: bold;
+    }
+
+    .form-control {
+        border-radius: 5px;
+        padding: 10px;
+        font-size: 16px;
+    }
+
+    .btn {
+        border-radius: 20px;
+        padding: 10px 20px;
+        font-size: 16px;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+</style>

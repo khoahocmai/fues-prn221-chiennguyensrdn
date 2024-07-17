@@ -1,48 +1,95 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
+﻿/* site.css */
 
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+/* General styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
 }
 
-a {
-  color: #0077cc;
+/* Header styling */
+header {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #0056b3 !important;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+.navbar-nav .nav-link {
+    font-size: 1rem;
+    color: #343a40 !important;
 }
 
-.border-top {
-  border-top: 1px solid #e5e5e5;
-}
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+    .navbar-nav .nav-link:hover {
+        color: #0056b3 !important;
+    }
+
+.navbar-nav .dropdown-menu {
+    min-width: 200px;
+    border-radius: 0.25rem;
 }
 
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+.navbar-text {
+    font-size: 1rem;
+    color: #343a40;
 }
 
-button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+.nav-item .dropdown-menu .dropdown-item {
+    font-size: 0.9rem;
+    color: #343a40;
 }
 
+    .nav-item .dropdown-menu .dropdown-item:hover {
+        background-color: #f8f9fa;
+        color: #0056b3;
+    }
+
+/* Footer styling */
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px;
+    background-color: #f8f9fa;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+    .footer a {
+        color: #0056b3;
+        text-decoration: none;
+    }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+/* Container styling */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+/* Main content styling */
+main {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 0.25rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 767.98px) {
+    .navbar-brand {
+        font-size: 1.25rem;
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 0.9rem;
+    }
+
+    .navbar-text {
+        font-size: 0.9rem;
+    }
 }

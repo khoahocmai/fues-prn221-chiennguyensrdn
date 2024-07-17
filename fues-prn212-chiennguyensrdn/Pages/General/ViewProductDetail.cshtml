@@ -4,116 +4,210 @@
     ViewData["Title"] = "View Product Detail";
 }
 
-<h2>@ViewData["Title"]</h2>
-
-<div>
-    <p>Title: @Model.Product.Title</p>
-    <p>Description: @Model.Product.Description</p>
-    <p>Price: @string.Format("{0:N2} Đ", @Model.Product.Price)</p>
-    <p>Category: @Model.Product.Category?.Name</p>
-    <p>Seller: @Model.Product.Seller?.Name</p>
-    <p>Created At: @Model.Product.CreatedAt.ToString("yyyy-MM-dd HH:mm")</p>
-    <p>
-        Image:
-        @if (Model.Product.Image != null)
-        {
-            <img src="data:image;base64,@Convert.ToBase64String(Model.Product.Image)" alt="@Model.Product.Title" style="max-width: 200px; max-height: 200px;" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>@ViewData["Title"]</title>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
         }
-        else
-        {
-            <span>No image available</span>
+
+        .container {
+            margin-top: 30px;
         }
-    </p>
-</div>
 
-<hr />
-<h4>Trade</h4>
-<a asp-page="/Buyer/ConfirmPurchase" asp-route-id="@Model.Product.Id" class="btn btn-primary">Trade</a>
-<hr />
+        h2 {
+            margin-bottom: 30px;
+            color: #333;
+            text-align: center;
+            font-weight: bold;
+        }
 
-<h4>Comments</h4>
-<form method="post" asp-page-handler="Comment">
-    <input type="hidden" asp-for="Id" />
-    <div class="form-group">
-        <textarea id="newComment" class="form-control" asp-for="NewComment" rows="3"></textarea>
-        <span asp-validation-for="NewComment" class="text-danger"></span>
+        .product-detail, .comments-section, .rating-section {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+            .product-detail img {
+                max-width: 150px;
+                max-height: 150px;
+                border-radius: 10px;
+            }
+
+            .product-detail p {
+                font-size: 1.1em;
+            }
+
+            .comments-section ul {
+                list-style-type: none;
+                padding: 0;
+            }
+
+            .comments-section li {
+                background-color: #f1f1f1;
+                padding: 10px;
+                border-radius: 5px;
+                margin-bottom: 10px;
+            }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            border-radius: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+                border-color: #004085;
+            }
+
+        .btn-secondary {
+            border-radius: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+            .btn-secondary:hover {
+                background-color: #5a6268;
+                border-color: #545b62;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>@ViewData["Title"]</h2>
+
+        <div class="product-detail">
+            <p><strong>Title:</strong> @Model.Product.Title</p>
+            <p><strong>Description:</strong> @Model.Product.Description</p>
+            <p><strong>Price:</strong> @string.Format("{0:N2} Đ", @Model.Product.Price)</p>
+            <p><strong>Category:</strong> @Model.Product.Category?.Name</p>
+            <p><strong>Seller:</strong> @Model.Product.Seller?.Name</p>
+            <p><strong>Created At:</strong> @Model.Product.CreatedAt.ToString("yyyy-MM-dd HH:mm")</p>
+            <p>
+                <strong>Image:</strong><br />
+                @if (Model.Product.Image != null)
+                {
+                    <img src="data:image;base64,@Convert.ToBase64String(Model.Product.Image)" alt="@Model.Product.Title" class="img-fluid" />
+                }
+                else
+                {
+                    <span>No image available</span>
+                }
+            </p>
+        </div>
+
+        <div class="product-detail">
+            <h4>Trade</h4>
+            <a asp-page="/Buyer/ConfirmPurchase" asp-route-id="@Model.Product.Id" class="btn btn-primary">Trade</a>
+        </div>
+
+        <div class="comments-section">
+            <h4>Comments</h4>
+            <form method="post" asp-page-handler="Comment">
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <label for="newComment">Add a comment:</label>
+                    <textarea id="newComment" class="form-control" asp-for="NewComment" rows="3"></textarea>
+                    <span asp-validation-for="NewComment" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-primary">Send</button>
+            </form>
+            <ul>
+                @foreach (var comment in Model.Comments)
+                {
+                    <li><strong>@comment.User.Name:</strong> @comment.Comment1</li>
+                }
+            </ul>
+        </div>
+
+        <div class="rating-section">
+            <h4>Rating</h4>
+            @if (User.IsInRole("Buyer") || User.IsInRole("Moderator"))
+            {
+                <form method="post" asp-page-handler="Rating">
+                    <input type="hidden" asp-for="Id" />
+                    <div class="form-group">
+                        <label for="newRating">Rating:</label>
+                        <select id="newRating" class="form-control" asp-for="NewRating">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit Rating</button>
+                </form>
+
+                @if (Model.UserRating != null)
+                {
+                    <div>
+                        <h5>Your Rating:</h5>
+                        <p>@Model.UserRating.Rating1</p>
+                    </div>
+                }
+                else
+                {
+                    <p>You have not rated this product yet.</p>
+                }
+            }
+            else if (User.IsInRole("Seller"))
+            {
+                @if (Model.AverageRating != null)
+                {
+                    <div>
+                        <h5>Average Rating:</h5>
+                        <p>@Model.AverageRating</p>
+                    </div>
+                }
+                else
+                {
+                    <p>No ratings available yet.</p>
+                }
+            }
+        </div>
+
+        <div class="text-center">
+            @{
+                string returnUrl = Url.Page("/Index");
+                if (User.IsInRole("Admin"))
+                {
+                    returnUrl = Url.Page("/Index");
+                }
+                else if (User.IsInRole("Seller"))
+                {
+                    returnUrl = Url.Page("/General/ViewProduct");
+                }
+                else if (User.IsInRole("Buyer"))
+                {
+                    returnUrl = Url.Page("/General/ViewProduct");
+                }
+                else if (User.IsInRole("Moderator"))
+                {
+                    returnUrl = Url.Page("/Moderator/ViewReport");
+                }
+            }
+            <form asp-page="@returnUrl" method="get">
+                <button type="submit" class="btn btn-primary">Back</button>
+            </form>
+        </div>
     </div>
-    <button type="submit" class="btn btn-primary">Send</button>
-</form>
-<ul>
-    @foreach (var comment in Model.Comments)
-    {
-        <li>@comment.User.Name: @comment.Comment1</li>
-    }
-</ul>
-<hr />
-
-<h4>Rating</h4>
-@if (User.IsInRole("Buyer") || User.IsInRole("Moderator"))
-{
-    <form method="post" asp-page-handler="Rating">
-        <input type="hidden" asp-for="Id" />
-        <div class="form-group">
-            <label for="newRating">Rating:</label>
-            <select id="newRating" class="form-control" asp-for="NewRating">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit Rating</button>
-    </form>
-
-    @if (Model.UserRating != null)
-    {
-        <div>
-            <h5>Your Rating:</h5>
-            <p>@Model.UserRating.Rating1</p>
-        </div>
-    }
-    else
-    {
-        <p>You have not rated this product yet.</p>
-    }
-}
-else if (User.IsInRole("Seller"))
-{
-    @if (Model.AverageRating != null)
-    {
-        <div>
-            <h5>Average Rating:</h5>
-            <p>@Model.AverageRating</p>
-        </div>
-    }
-    else
-    {
-        <p>No ratings available yet.</p>
-    }
-}
-
-<div>
-    @{
-        string returnUrl = Url.Page("/Index"); ;
-        if (User.IsInRole("Admin"))
-        {
-            returnUrl = Url.Page("/Index");
-        }
-        else if (User.IsInRole("Seller"))
-        {
-            returnUrl = Url.Page("/General/ViewProduct");
-        }
-        else if (User.IsInRole("Buyer"))
-        {
-            returnUrl = Url.Page("/General/ViewProduct");
-        }
-        else if (User.IsInRole("Moderator"))
-        {
-            returnUrl = Url.Page("/Moderator/ViewReport");
-        }
-    }
-    <form asp-page="@returnUrl" method="get">
-        <button type="submit" class="btn btn-primary">Back</button>
-    </form>
-</div>
+</body>
+</html>
