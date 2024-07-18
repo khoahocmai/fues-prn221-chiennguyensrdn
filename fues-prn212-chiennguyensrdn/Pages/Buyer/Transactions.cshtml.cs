@@ -16,10 +16,11 @@ namespace fues_prn221_chiennguyensrdn.Pages.Buyer
         private readonly IProductRepository _productRepo;
         private readonly IExchangeRequestRepository _exchangeRequestRepo;
 
-        public TransactionsModel(ITransactionRepository transactionRepo, IProductRepository productRepo)
+        public TransactionsModel(ITransactionRepository transactionRepo, IProductRepository productRepo, IExchangeRequestRepository exchangeRepo)
         {
             _transactionRepo = transactionRepo;
             _productRepo = productRepo;
+            _exchangeRequestRepo = exchangeRepo;
         }
 
         public List<Transaction> Transactions { get; set; }
