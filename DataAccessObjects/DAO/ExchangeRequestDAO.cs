@@ -134,8 +134,11 @@ namespace DataAccessObjects.DAO
         public async Task<bool> HasBuyerAlreadyTradedProduct(int buyerId, int productId)
         {
             using var db = new FUESManagementContext();
-            return await db.ExchangeRequests
-                .AnyAsync(er => er.RequesterId == buyerId && er.ProductId == productId);
+            bool isAlreadyExchaned = await db.ExchangeRequests
+                .AnyAsync(er => er.RequesterId == buyerId && er.ProductId == productId && er.Status == "Accepted");
+            bool IsNotCanceledInTracsaction = await db.Transactions
+                .AnyAsync(t => t.BuyerId == buyerId && t.ProductId == productId && t.Status != "Canceled");
+            return isAlreadyExchaned && IsNotCanceledInTracsaction;
         }
     }
 }
