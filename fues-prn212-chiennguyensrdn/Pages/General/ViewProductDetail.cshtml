@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <title>@ViewData["Title"]</title>
     <style>
         body {
@@ -23,6 +24,15 @@
             margin-top: 30px;
         }
 
+        .card {
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            background-color: #fff;
+            position: relative;
+        }
+
         h2 {
             margin-bottom: 30px;
             color: #333;
@@ -30,11 +40,21 @@
             font-weight: bold;
         }
 
+        .trade-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .section-title {
+            color: #0056b3;
+            font-weight: bold;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #0056b3;
+            padding-bottom: 5px;
+        }
+
         .product-detail, .comments-section, .rating-section {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             margin-bottom: 30px;
         }
 
@@ -42,11 +62,24 @@
                 max-width: 150px;
                 max-height: 150px;
                 border-radius: 10px;
+                margin-bottom: 20px;
             }
 
             .product-detail p {
                 font-size: 1.1em;
             }
+
+                .product-detail p.important {
+                    font-size: 1.2em;
+                    font-weight: bold;
+                    color: #333;
+                }
+
+                .product-detail p.highlight {
+                    background-color: #ffefc5;
+                    padding: 10px;
+                    border-radius: 5px;
+                }
 
             .comments-section ul {
                 list-style-type: none;
@@ -64,7 +97,7 @@
             font-weight: bold;
         }
 
-        .btn-primary {
+        .btn-primary, .btn-secondary {
             border-radius: 20px;
             padding: 10px 20px;
             font-size: 16px;
@@ -76,137 +109,169 @@
                 border-color: #004085;
             }
 
-        .btn-secondary {
-            border-radius: 20px;
-            padding: 10px 20px;
-            font-size: 16px;
-            transition: all 0.3s ease;
-        }
-
             .btn-secondary:hover {
                 background-color: #5a6268;
                 border-color: #545b62;
             }
+
+        .star-rating {
+            font-size: 1.5em;
+            color: #ccc;
+            cursor: pointer;
+        }
+
+            .star-rating .fa-star {
+                transition: color 0.2s;
+            }
+
+                .star-rating .fa-star.checked {
+                    color: #ffd700;
+                }
+
+        .rating-display .fa-star {
+            color: #ffd700;
+        }
     </style>
+    <script>
+        function setRating(rating) {
+            const stars = document.querySelectorAll('.star-rating .fa-star');
+            stars.forEach((star, index) => {
+                star.classList.toggle('checked', index < rating);
+            });
+            document.getElementById('newRating').value = rating;
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const stars = document.querySelectorAll('.star-rating .fa-star');
+            stars.forEach((star, index) => {
+                star.addEventListener('click', () => setRating(index + 1));
+            });
+        });
+    </script>
 </head>
 <body>
     <div class="container">
-        <h2>@ViewData["Title"]</h2>
+        <div class="card">
+            <h2>@ViewData["Title"]</h2>
 
-        <div class="product-detail">
-            <p><strong>Title:</strong> @Model.Product.Title</p>
-            <p><strong>Description:</strong> @Model.Product.Description</p>
-            <p><strong>Price:</strong> @string.Format("{0:N2} Đ", @Model.Product.Price)</p>
-            <p><strong>Category:</strong> @Model.Product.Category?.Name</p>
-            <p><strong>Seller:</strong> @Model.Product.Seller?.Name</p>
-            <p><strong>Created At:</strong> @Model.Product.CreatedAt.ToString("yyyy-MM-dd HH:mm")</p>
-            <p>
-                <strong>Image:</strong><br />
-                @if (Model.Product.Image != null)
-                {
-                    <img src="data:image;base64,@Convert.ToBase64String(Model.Product.Image)" alt="@Model.Product.Title" class="img-fluid" />
-                }
-                else
-                {
-                    <span>No image available</span>
-                }
-            </p>
-        </div>
+            <div class="trade-button">
+                <a asp-page="/Buyer/ConfirmPurchase" asp-route-id="@Model.Product.Id" class="btn btn-primary">Trade</a>
+            </div>
 
-        <div class="product-detail">
-            <h4>Trade</h4>
-            <a asp-page="/Buyer/ConfirmPurchase" asp-route-id="@Model.Product.Id" class="btn btn-primary">Trade</a>
-        </div>
+            <div class="product-detail">
+                <h4 class="section-title">Product Details</h4>
+                <p class="important"><strong>Title:</strong> @Model.Product.Title</p>
+                <p><strong>Description:</strong> @Model.Product.Description</p>
+                <p class="highlight"><strong>Price:</strong> @string.Format("{0:N2} Đ", @Model.Product.Price)</p>
+                <p><strong>Category:</strong> @Model.Product.Category?.Name</p>
+                <p><strong>Seller:</strong> @Model.Product.Seller?.Name</p>
+                <p><strong>Created At:</strong> @Model.Product.CreatedAt.ToString("yyyy-MM-dd HH:mm")</p>
+                <p>
+                    <strong>Image:</strong><br />
+                    @if (Model.Product.Image != null)
+                    {
+                        <img src="data:image;base64,@Convert.ToBase64String(Model.Product.Image)" alt="@Model.Product.Title" class="img-fluid" />
+                    }
+                    else
+                    {
+                        <span>No image available</span>
+                    }
+                </p>
+            </div>
 
-        <div class="comments-section">
-            <h4>Comments</h4>
-            <form method="post" asp-page-handler="Comment">
-                <input type="hidden" asp-for="Id" />
-                <div class="form-group">
-                    <label for="newComment">Add a comment:</label>
-                    <textarea id="newComment" class="form-control" asp-for="NewComment" rows="3"></textarea>
-                    <span asp-validation-for="NewComment" class="text-danger"></span>
-                </div>
-                <button type="submit" class="btn btn-primary">Send</button>
-            </form>
-            <ul>
-                @foreach (var comment in Model.Comments)
-                {
-                    <li><strong>@comment.User.Name:</strong> @comment.Comment1</li>
-                }
-            </ul>
-        </div>
-
-        <div class="rating-section">
-            <h4>Rating</h4>
-            @if (User.IsInRole("Buyer") || User.IsInRole("Moderator"))
-            {
-                <form method="post" asp-page-handler="Rating">
+            <div class="comments-section">
+                <h4 class="section-title">Comments</h4>
+                <form method="post" asp-page-handler="Comment">
                     <input type="hidden" asp-for="Id" />
                     <div class="form-group">
-                        <label for="newRating">Rating:</label>
-                        <select id="newRating" class="form-control" asp-for="NewRating">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </select>
+                        <label for="newComment">Add a comment:</label>
+                        <textarea id="newComment" class="form-control" asp-for="NewComment" rows="3"></textarea>
+                        <span asp-validation-for="NewComment" class="text-danger"></span>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit Rating</button>
+                    <button type="submit" class="btn btn-primary">Send</button>
                 </form>
+                <ul>
+                    @foreach (var comment in Model.Comments)
+                    {
+                        <li><strong>@comment.User.Name:</strong> @comment.Comment1</li>
+                    }
+                </ul>
+            </div>
 
-                @if (Model.UserRating != null)
+            <div class="rating-section">
+                <h4 class="section-title">Rating</h4>
+                @if (User.IsInRole("Buyer") || User.IsInRole("Moderator"))
                 {
-                    <div>
-                        <h5>Your Rating:</h5>
-                        <p>@Model.UserRating.Rating1</p>
-                    </div>
-                }
-                else
-                {
-                    <p>You have not rated this product yet.</p>
-                }
-            }
-            else if (User.IsInRole("Seller"))
-            {
-                @if (Model.AverageRating != null)
-                {
-                    <div>
-                        <h5>Average Rating:</h5>
-                        <p>@Model.AverageRating</p>
-                    </div>
-                }
-                else
-                {
-                    <p>No ratings available yet.</p>
-                }
-            }
-        </div>
+                    <form method="post" asp-page-handler="Rating">
+                        <input type="hidden" asp-for="Id" />
+                        <div class="form-group">
+                            <label for="newRating">Rating:</label>
+                            <div class="star-rating">
+                                <i class="fa fa-star" onclick="setRating(1)"></i>
+                                <i class="fa fa-star" onclick="setRating(2)"></i>
+                                <i class="fa fa-star" onclick="setRating(3)"></i>
+                                <i class="fa fa-star" onclick="setRating(4)"></i>
+                                <i class="fa fa-star" onclick="setRating(5)"></i>
+                            </div>
+                            <input type="hidden" id="newRating" asp-for="NewRating" />
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit Rating</button>
+                    </form>
 
-        <div class="text-center">
-            @{
-                string returnUrl = Url.Page("/Index");
-                if (User.IsInRole("Admin"))
-                {
-                    returnUrl = Url.Page("/Index");
+                    @if (Model.UserRating != null)
+                    {
+                        <div>
+                            <h5>Your Rating:</h5>
+                            <div class="star-rating rating-display">
+                                @for (int i = 1; i <= 5; i++)
+                                {
+                                    <i class="fa fa-star @(i <= Model.UserRating.Rating1 ? "checked" : "")"></i>
+                                }
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <p>You have not rated this product yet.</p>
+                    }
                 }
                 else if (User.IsInRole("Seller"))
                 {
-                    returnUrl = Url.Page("/General/ViewProduct");
+                    @if (Model.AverageRating != null)
+                    {
+                        <div>
+                            <h5>Average Rating:</h5>
+                            <div class="star-rating rating-display">
+                                @for (int i = 1; i <= 5; i++)
+                                {
+                                    <i class="fa fa-star @(i <= Model.AverageRating ? "checked" : "")"></i>
+                                }
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <p>No ratings available yet.</p>
+                    }
                 }
-                else if (User.IsInRole("Buyer"))
-                {
-                    returnUrl = Url.Page("/General/ViewProduct");
+            </div>
+
+            <div class="text-center">
+                @{
+                    string returnUrl = Url.Page("/Index");
+                    if (User.IsInRole("Seller") || User.IsInRole("Buyer"))
+                    {
+                        returnUrl = Url.Page("/General/ViewProduct");
+                    }
+                    else if (User.IsInRole("Moderator"))
+                    {
+                        returnUrl = Url.Page("/Moderator/ViewReport");
+                    }
                 }
-                else if (User.IsInRole("Moderator"))
-                {
-                    returnUrl = Url.Page("/Moderator/ViewReport");
-                }
-            }
-            <form asp-page="@returnUrl" method="get">
-                <button type="submit" class="btn btn-primary">Back</button>
-            </form>
+                <form asp-page="@returnUrl" method="get">
+                    <button type="submit" class="btn btn-primary">Back</button>
+                </form>
+            </div>
         </div>
     </div>
 </body>
