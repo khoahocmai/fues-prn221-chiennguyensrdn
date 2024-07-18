@@ -7,23 +7,82 @@
 
 <h2>@ViewData["Title"]</h2>
 
-<div>
-    <p>Product: @Model.Product.Title</p>
-    <p>Description: @Model.Product.Description</p>
-    <p>Seller: @Model.Product.Seller?.Name</p>
+<div class="container mt-4 p-4 bg-white rounded shadow-sm">
+    <div>
+        <p><strong>Product:</strong> @Model.Product.Title</p>
+        <p><strong>Description:</strong> @Model.Product.Description</p>
+        <p><strong>Seller:</strong> @Model.Product.Seller?.Name</p>
+    </div>
+
+    <hr />
+
+    <h4>Ban Reason</h4>
+    <form method="post">
+        <input type="hidden" asp-for="ProductId" />
+        <input type="hidden" asp-for="Product.Title" />
+        <div class="form-group">
+            <label for="reason">Reason:</label>
+            <textarea id="reason" class="form-control" asp-for="Reason" rows="3"></textarea>
+            <span asp-validation-for="Reason" class="text-danger"></span>
+        </div>
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-danger">Ban Product</button>
+            <a asp-page="/Moderator/ViewReport" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
 </div>
 
-<hr />
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
 
-<h4>Ban Reason</h4>
-<form method="post">
-    <input type="hidden" asp-for="ProductId" />
-    <input type="hidden" asp-for="Product.Title"/>
-    <div class="form-group">
-        <label for="reason">Reason:</label>
-        <textarea id="reason" class="form-control" asp-for="Reason" rows="3"></textarea>
-        <span asp-validation-for="Reason" class="text-danger"></span>
-    </div>
-    <button type="submit" class="btn btn-danger">Ban Product</button>
-    <a asp-page="/Moderator/ViewReport" class="btn btn-secondary">Cancel</a>
-</form>
+<style>
+    body {
+        background-color: #f8f9fa;
+        font-family: 'Arial', sans-serif;
+    }
+
+    h2 {
+        color: #333;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    .form-group label {
+        font-weight: bold;
+    }
+
+    .form-control {
+        border-radius: 5px;
+        padding: 10px;
+        font-size: 16px;
+    }
+
+    .btn {
+        border-radius: 20px;
+        padding: 10px 20px;
+        font-size: 16px;
+        transition: all 0.3s ease;
+        margin-top: 10px;
+    }
+
+    .btn-danger {
+        background-color: #dc3545;
+        border-color: #dc3545;
+    }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+            border-color: #bd2130;
+        }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        border-color: #6c757d;
+    }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            border-color: #545b62;
+        }
+</style>

@@ -8,39 +8,110 @@
 
 <h2>@ViewData["Title"]</h2>
 
-<form method="post" enctype="multipart/form-data">
-    <div class="form-group">
-        <label asp-for="Title">Title</label>
-        <input asp-for="Title" class="form-control" />
-        <span asp-validation-for="Title" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Description">Description</label>
-        <textarea asp-for="Description" class="form-control"></textarea>
-        <span asp-validation-for="Description" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Price">Price</label>
-        <input asp-for="Price" class="form-control" />
-        <span asp-validation-for="Price" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="CategoryId">Category Name</label>
-        <select asp-for="CategoryId" asp-items="@(new SelectList(Model.Categories, "Id", "Name"))" class="form-control">
-            <option value="">Select category</option>
-        </select>
-        <span asp-validation-for="CategoryId" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Image">Upload Image</label>
-        <input type="file" asp-for="Image" class="form-control-file" />
-        <span asp-validation-for="Image" class="text-danger"></span>
-    </div>
-    <button type="submit" class="btn btn-primary">Create</button>
-</form>
-
-<div>
-    <form asp-page="/Seller/ManageProduct/ViewOwnProduct" method="get">
-        <button type="submit" class="btn btn-primary">Back to List</button>
+<div class="create-product-container">
+    <form method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label asp-for="Title">Title</label>
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Description">Description</label>
+            <textarea asp-for="Description" class="form-control"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Price">Price</label>
+            <input asp-for="Price" class="form-control" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="CategoryId">Category Name</label>
+            <select asp-for="CategoryId" asp-items="@(new SelectList(Model.Categories, "Id", "Name"))" class="form-control">
+                <option value="">Select category</option>
+            </select>
+            <span asp-validation-for="CategoryId" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Image">Upload Image</label>
+            <input type="file" asp-for="Image" class="form-control-file" accept="image/*" onchange="previewImage(event)" />
+            <span asp-validation-for="Image" class="text-danger"></span>
+            <img id="image-preview" src="#" alt="Image Preview" style="display:none; margin-top:10px; max-width:100%; height:auto; border-radius:5px;" />
+        </div>
+        <div class="form-group d-flex justify-content-between">
+            <button type="submit" class="btn btn-primary">Create</button>
+            <a asp-page="/Seller/ManageProduct/ViewOwnProduct" class="btn btn-secondary">Back to List</a>
+        </div>
     </form>
 </div>
+
+<style>
+    .create-product-container {
+        margin: 30px auto;
+        max-width: 800px;
+        padding: 20px;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        margin-bottom: 20px;
+        color: #333;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    .form-group label {
+        font-weight: bold;
+    }
+
+    .form-control, .form-control-file {
+        border-radius: 5px;
+        padding: 10px;
+        font-size: 16px;
+    }
+
+    .btn {
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-size: 16px;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        border-color: #6c757d;
+    }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            border-color: #545b62;
+        }
+</style>
+
+@section Scripts {
+    <script>
+        function previewImage(event) {
+            var input = event.target;
+            var reader = new FileReader();
+            reader.onload = function () {
+                var dataURL = reader.result;
+                var imagePreview = document.getElementById('image-preview');
+                imagePreview.src = dataURL;
+                imagePreview.style.display = 'block';
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    </script>
+}

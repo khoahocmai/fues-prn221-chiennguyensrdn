@@ -10,100 +10,113 @@
     <link rel="stylesheet" href="~/fues_prn221_chiennguyensrdn.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">fues_prn221_chiennguyensrdn</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/General/UserInfor">User Information</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/General/ViewProduct">View Product</a>
-                        </li>
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            @if (User.IsInRole("Seller"))
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-page="/Seller/ManageProduct/ViewOwnProduct">View Own Product</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-page="/Seller/ManageProduct/CreateProduct">Create Product</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-page="/Seller/ManageER/ExchangeRequest">Exchange Request</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-page="/Seller/ManageER/HistoryExchangeRequest">History Exchange Request</a>
-                                </li>
-                            }
-                            @if (User.IsInRole("Buyer"))
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-page="/Buyer/ViewExchangeRequest">View Request</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-page="/Buyer/Transactions">Transaction</a>
-                                </li>
-                            }
-                            @if (User.IsInRole("Moderator"))
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-page="/Moderator/ViewReport">View Report</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-page="/Moderator/BanHistory">View History Ban</a>
-                                </li>
-                            }
-                            @if (User.IsInRole("Admin"))
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-page="/Admin/Dashboard">Dashboard</a>
-                                </li>
-                            }
-                        }
-                    </ul>
-                    <ul class="navbar-nav">
-                        @if (User.Identity.IsAuthenticated)
-                        {
+    @if (ViewData["HideHeaderAndFooter"] == null || !(bool)ViewData["HideHeaderAndFooter"])
+    {
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-light bg-light border-bottom shadow-sm mb-3">
+                <div class="container">
+                    <a class="navbar-brand" asp-area="" asp-page="/Index">Exchange Web</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <span class="navbar-text mr-2">Hello: @User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.UserData)?.Value</span>
-                                <form method="post" asp-page="/Account/Logout">
-                                    <button type="submit" class="btn btn-link nav-link text-dark">Logout</button>
-                                </form>
+                                <a class="nav-link" asp-area="" asp-page="/General/ViewProduct">View Product</a>
                             </li>
-                        }
-                        else
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/Account/Login">Login</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/Account/Register">Register</a>
-                            </li>
-                        }
-                    </ul>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                @if (User.IsInRole("Seller"))
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link" asp-area="" asp-page="/Seller/ManageProduct/ViewOwnProduct">View Own Product</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" asp-area="" asp-page="/Seller/ManageProduct/CreateProduct">Create Product</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" asp-area="" asp-page="/Seller/ManageER/ExchangeRequest">Exchange Request</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" asp-area="" asp-page="/Seller/ManageER/HistoryExchangeRequest">History Exchange Request</a>
+                                    </li>
+                                }
+                                @if (User.IsInRole("Buyer"))
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link" asp-area="" asp-page="/Buyer/ViewExchangeRequest">View Request</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" asp-area="" asp-page="/Buyer/Transactions">Transaction</a>
+                                    </li>
+                                }
+                                @if (User.IsInRole("Moderator"))
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link" asp-area="" asp-page="/Moderator/ViewReport">View Report</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" asp-area="" asp-page="/Moderator/BanHistory">View History Ban</a>
+                                    </li>
+                                }
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link" asp-area="" asp-page="/Admin/Dashboard">Dashboard</a>
+                                    </li>
+                                }
+                            }
+                        </ul>
+                        <ul class="navbar-nav ms-auto">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <li class="nav-item d-flex align-items-center">
+                                    <span class="navbar-text me-2">Hello, @User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.UserData)?.Value</span>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                        <li><a class="dropdown-item" asp-area="" asp-page="/General/UserInfor">User Information</a></li>
+                                        <li>
+                                            <form method="post" asp-page="/Account/Logout">
+                                                <button type="submit" class="dropdown-item">Logout</button>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </li>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-page="/Account/Login">Login</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-page="/Account/Register">Register</a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </nav>
-    </header>
+            </nav>
+        </header>
+    }
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - fues_prn221_chiennguyensrdn - <a asp-area="" asp-page="/Privacy">Privacy</a>
-        </div>
-    </footer>
+    @if (ViewData["HideHeaderAndFooter"] == null || !(bool)ViewData["HideHeaderAndFooter"])
+    {
+        <footer class="border-top footer text-muted mt-auto py-3 bg-light">
+            <div class="container">
+                &copy; 2024 - fues_prn221_chiennguyensrdn - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            </div>
+        </footer>
+    }
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.11/signalr.min.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

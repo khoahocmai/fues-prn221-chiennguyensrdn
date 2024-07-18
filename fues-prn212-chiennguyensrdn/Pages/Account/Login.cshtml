@@ -2,33 +2,40 @@
 @model fues_prn221_chiennguyensrdn.Pages.Account.LoginModel
 @{
     ViewData["Title"] = "Login";
+    ViewData["HideHeaderAndFooter"] = true; // Set the flag to hide header and footer
 }
 
-<div class="login-container">
-    <h3>@ViewData["Title"]</h3>
-    <hr />
-    <form method="post" class="login-form">
-        <div class="form-group">
-            <label asp-for="Username" class="control-label">Username</label>
-            <input asp-for="Username" class="form-control" />
-            <span asp-validation-for="Username" class="text-danger"></span>
+<div class="container d-flex align-items-center justify-content-center min-vh-100">
+    <div class="login-container position-relative">
+        <a href="/" class="close-button" aria-label="Close">&times;</a>
+        <h3>@ViewData["Title"]</h3>
+        <hr />
+        <form method="post" class="login-form">
+            <div class="form-group">
+                <label asp-for="Username" class="control-label">Username</label>
+                <input asp-for="Username" class="form-control" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label">Password</label>
+                <input asp-for="Password" type="password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group forgot-password">
+                <a href="/Account/ForgotPassword">Forgot Password?</a>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Login" class="btn btn-primary btn-block" />
+            </div>
+            @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+            {
+                <div class="alert alert-danger mt-3">@Model.ErrorMessage</div>
+            }
+        </form>
+        <div class="signup">
+            Not a Member? <a href="/Account/Register">Signup</a>
         </div>
-        <div class="form-group">
-            <label asp-for="Password" class="control-label">Password</label>
-            <input asp-for="Password" type="password" class="form-control" />
-            <span asp-validation-for="Password" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Login" class="btn btn-primary btn-block" />
-        </div>
-        <div class="form-group">
-            <a asp-page="/Account/ForgotPassword">Forgot Password?</a>
-        </div>
-        @if (!string.IsNullOrEmpty(Model.ErrorMessage))
-        {
-            <div class="alert alert-danger">@Model.ErrorMessage</div>
-        }
-    </form>
+    </div>
 </div>
 
 @section Scripts {
@@ -38,38 +45,76 @@
 <style>
     .login-container {
         max-width: 400px;
-        margin: 50px auto;
+        width: 100%;
         padding: 20px;
-        border: 1px solid #ccc;
+        background: #fff;
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        background-color: #fff;
+        text-align: center;
+        position: relative;
     }
 
-        .login-container h3 {
-            margin-bottom: 20px;
-            text-align: center;
-            color: #333;
+    .close-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 24px;
+        text-decoration: none;
+        color: #000;
+    }
+
+        .close-button:hover {
+            color: #f00;
         }
+
+    .login-container h3 {
+        margin-bottom: 20px;
+        font-weight: bold;
+    }
 
     .login-form .form-group {
         margin-bottom: 15px;
+        text-align: left;
     }
 
     .login-form .form-control {
-        border-radius: 5px;
+        border-radius: 0;
+        border: none;
+        border-bottom: 2px solid #ccc;
         padding: 10px;
         font-size: 16px;
     }
+
+        .login-form .form-control:focus {
+            border-bottom: 2px solid #6a11cb;
+            box-shadow: none;
+        }
 
     .login-form .btn {
         width: 100%;
         padding: 10px;
         font-size: 16px;
-        border-radius: 5px;
+        border-radius: 50px;
+        background-color: #fff;
+        color: #000;
+        border: 1px solid #ccc;
     }
 
-    .login-form .text-danger {
-        font-size: 14px;
+        .login-form .btn:hover {
+            background-color: #f1f1f1;
+        }
+
+    .login-form a {
+        color: #6a11cb;
+        text-decoration: none;
+    }
+
+        .login-form a:hover {
+            text-decoration: underline;
+        }
+
+    .login-form .forgot-password,
+    .login-form .signup {
+        margin: 10px 0;
     }
 </style>

@@ -5,67 +5,107 @@
     ViewData["Title"] = "My Exchange Requests";
 }
 
-<h1>@ViewData["Title"]</h1>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>Product</th>
-            <th>Message</th>
-            <th>Status</th>
-            <th>Created At</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var request in Model.ExchangeRequests)
-        {
-            <tr>
-                <td>@request.Product?.Title</td>
-                <td>@request.Message</td>
-                <td>@request.Status</td>
-                <td>@request.CreatedAt</td>
-                <td>
-                    @if (request.Status != "Accepted")
-                    {
-                        <form method="post" asp-page-handler="Delete" asp-route-id="@request.Id" onsubmit="return confirm('Are you sure you want to delete this request?');" style="display:inline-block; margin-right: 5px;">
-                            <button type="submit" class="btn btn-danger btn-custom">Delete</button>
-                        </form>
-                    }
-                    <form method="get" asp-page="/Chat/ChatPage" asp-route-receiverId="@request.Product.SellerId" style="display:inline-block;">
-                        <button type="submit" class="btn btn-primary btn-custom">Chat</button>
-                    </form>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-<style>
-    .btn-custom {
-        border-radius: 20px; /* Rounded corners */
-        padding: 10px 20px; /* Padding for a larger click area */
-        font-size: 16px; /* Larger text */
-        transition: all 0.3s ease; /* Smooth transition effect */
-    }
-
-    .btn-danger.btn-custom {
-        background-color: #dc3545;
-        border-color: #dc3545;
-    }
-
-        .btn-danger.btn-custom:hover {
-            background-color: #c82333;
-            border-color: #bd2130;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>@ViewData["Title"]</title>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
         }
 
-    .btn-primary.btn-custom {
-        background-color: #007bff;
-        border-color: #007bff;
-    }
-
-        .btn-primary.btn-custom:hover {
-            background-color: #0056b3;
-            border-color: #004085;
+        .container {
+            margin-top: 30px;
         }
-</style>
-                       
+
+        h1 {
+            margin-bottom: 30px;
+            color: #333;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .table {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+            .table th, .table td {
+                vertical-align: middle;
+            }
+
+        .btn-custom {
+            border-radius: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-danger.btn-custom {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+
+            .btn-danger.btn-custom:hover {
+                background-color: #c82333;
+                border-color: #bd2130;
+            }
+
+        .btn-primary.btn-custom {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+            .btn-primary.btn-custom:hover {
+                background-color: #0056b3;
+                border-color: #004085;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>@ViewData["Title"]</h1>
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Message</th>
+                    <th>Status</th>
+                    <th>Created At</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var request in Model.ExchangeRequests)
+                {
+                    <tr>
+                        <td>@request.Product?.Title</td>
+                        <td>@request.Message</td>
+                        <td>@request.Status</td>
+                        <td>@request.CreatedAt.ToString("yyyy-MM-dd HH:mm")</td>
+                        <td>
+                            @if (request.Status != "Accepted")
+                            {
+                                <form method="post" asp-page-handler="Delete" asp-route-id="@request.Id" onsubmit="return confirm('Are you sure you want to delete this request?');" style="display:inline-block; margin-right: 5px;">
+                                    <button type="submit" class="btn btn-danger btn-custom">Delete</button>
+                                </form>
+                            }
+                            <form method="get" asp-page="/Chat/ChatPage" asp-route-receiverId="@request.Product.SellerId" style="display:inline-block;">
+                                <button type="submit" class="btn btn-primary btn-custom">Chat</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

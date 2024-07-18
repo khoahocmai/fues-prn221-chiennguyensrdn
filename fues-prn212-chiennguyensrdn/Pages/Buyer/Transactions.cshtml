@@ -5,42 +5,111 @@
     ViewData["Title"] = "Transactions";
 }
 
-<h2>@ViewData["Title"]</h2>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>Product</th>
-            <th>Status</th>
-            <th>Created At</th>
-            <th>Updated At</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var transaction in Model.Transactions)
-        {
-            <tr>
-                <td>@transaction.Product?.Title</td>
-                <td>@transaction.Status</td>
-                <td>@transaction.CreatedAt.ToString("yyyy-MM-dd HH:mm")</td>
-                <td>@transaction.UpdatedAt.ToString("yyyy-MM-dd HH:mm")</td>
-                <td>
-                    @if (transaction.Status != "Completed" && transaction.Status != "Canceled")
-                    {
-                        <form method="post" asp-page-handler="UpdateStatus">
-                            <input type="hidden" name="transactionId" value="@transaction.Id" />
-                            <input type="hidden" name="productId" value="@transaction.ProductId" />
-                            <button type="submit" name="status" value="Completed" class="btn btn-success">Agree</button>
-                            <button type="submit" name="status" value="Canceled" class="btn btn-danger">Cancel</button>
-                        </form>
-                    }
-                    else
-                    {
-                        @transaction.Status
-                    }
-                </td>
-            </tr>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>@ViewData["Title"]</title>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
         }
-    </tbody>
-</table>
+
+        .container {
+            margin-top: 30px;
+        }
+
+        h2 {
+            margin-bottom: 30px;
+            color: #333;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .table {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+            .table th, .table td {
+                vertical-align: middle;
+            }
+
+        .btn-custom {
+            border-radius: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-success.btn-custom {
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+
+            .btn-success.btn-custom:hover {
+                background-color: #218838;
+                border-color: #1e7e34;
+            }
+
+        .btn-danger.btn-custom {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+
+            .btn-danger.btn-custom:hover {
+                background-color: #c82333;
+                border-color: #bd2130;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>@ViewData["Title"]</h2>
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Status</th>
+                    <th>Created At</th>
+                    <th>Updated At</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var transaction in Model.Transactions)
+                {
+                    <tr>
+                        <td>@transaction.Product?.Title</td>
+                        <td>@transaction.Status</td>
+                        <td>@transaction.CreatedAt.ToString("yyyy-MM-dd HH:mm")</td>
+                        <td>@transaction.UpdatedAt.ToString("yyyy-MM-dd HH:mm")</td>
+                        <td>
+                            @if (transaction.Status != "Completed" && transaction.Status != "Canceled")
+                            {
+                                <form method="post" asp-page-handler="UpdateStatus" class="d-inline-block">
+                                    <input type="hidden" name="transactionId" value="@transaction.Id" />
+                                    <input type="hidden" name="productId" value="@transaction.ProductId" />
+                                    <button type="submit" name="status" value="Completed" class="btn btn-success btn-custom">Agree</button>
+                                    <button type="submit" name="status" value="Canceled" class="btn btn-danger btn-custom">Cancel</button>
+                                </form>
+                            }
+                            else
+                            {
+                                @transaction.Status
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

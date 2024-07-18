@@ -5,37 +5,129 @@
     ViewData["Title"] = "View Report";
 }
 
-<h2>@ViewData["Title"]</h2>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>Reporter</th>
-            <th>Product</th>
-            <th>Reason</th>
-            <th>Status</th>
-            <th>Created At</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var report in Model.Reports)
-        {
-            <tr>
-                <td>@report.Reporter?.Name</td>
-                <td>@report.Product?.Title</td>
-                <td>@report.Reason</td>
-                <td>@report.Status</td>
-                <td>@report.CreatedAt.ToString("yyyy-MM-dd HH:mm")</td>
-                <td>
-                    <a asp-page="/General/ViewProductDetail" asp-route-id="@report.ProductId" class="btn btn-info">View Product Detail</a>
-                    <a asp-page="/Moderator/ConfirmBan" asp-route-productId="@report.ProductId" class="btn btn-danger">Ban</a>
-                    <form asp-page-handler="Reject" method="post">
-                        <input type="hidden" name="productId" value="@report.ProductId" />
-                        <button type="submit" class="btn btn-warning">Reject</button>
-                    </form>
-                </td>
-            </tr>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>@ViewData["Title"]</title>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
         }
-    </tbody>
-</table>
+
+        .container {
+            margin-top: 30px;
+            max-width: 1200px;
+        }
+
+        h2 {
+            margin-bottom: 30px;
+            color: #333;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .table {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+        }
+
+            .table th, .table td {
+                vertical-align: middle;
+            }
+
+        .btn-custom {
+            border-radius: 10px;
+            padding: 6px 12px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            margin-bottom: 5px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+                border-color: #004085;
+            }
+
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+
+            .btn-danger:hover {
+                background-color: #c82333;
+                border-color: #bd2130;
+            }
+
+        .btn-warning {
+            background-color: #ffc107;
+            border-color: #ffc107;
+        }
+
+            .btn-warning:hover {
+                background-color: #e0a800;
+                border-color: #d39e00;
+            }
+
+        .btn-info {
+            background-color: #17a2b8;
+            border-color: #17a2b8;
+        }
+
+            .btn-info:hover {
+                background-color: #117a8b;
+                border-color: #10707f;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>@ViewData["Title"]</h2>
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Reporter</th>
+                    <th>Product</th>
+                    <th>Reason</th>
+                    <th>Status</th>
+                    <th>Created At</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var report in Model.Reports)
+                {
+                    <tr>
+                        <td>@report.Reporter?.Name</td>
+                        <td>@report.Product?.Title</td>
+                        <td>@report.Reason</td>
+                        <td>@report.Status</td>
+                        <td>@report.CreatedAt.ToString("yyyy-MM-dd HH:mm")</td>
+                        <td>
+                            <a asp-page="/General/ViewProductDetail" asp-route-id="@report.ProductId" class="btn btn-info btn-custom">View Product Detail</a>
+                            <a asp-page="/Moderator/ConfirmBan" asp-route-productId="@report.ProductId" class="btn btn-danger btn-custom">Ban</a>
+                            <form asp-page-handler="Reject" method="post" style="display:inline-block;">
+                                <input type="hidden" name="productId" value="@report.ProductId" />
+                                <button type="submit" class="btn btn-warning btn-custom">Reject</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
