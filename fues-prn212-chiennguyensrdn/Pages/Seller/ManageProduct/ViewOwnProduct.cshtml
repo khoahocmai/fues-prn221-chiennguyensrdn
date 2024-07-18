@@ -86,6 +86,27 @@
                 background-color: #117a8b;
                 border-color: #10707f;
             }
+
+        .status {
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .status-available {
+            color: #28a745;
+            background-color: #d4edda;
+        }
+
+        .status-unavailable {
+            color: #dc3545;
+            background-color: #f8d7da;
+        }
+
+        .status-pending {
+            color: #ffc107;
+            background-color: #fff3cd;
+        }
     </style>
 </head>
 <body>
@@ -114,7 +135,11 @@
                         <td>@product.Description</td>
                         <td>@string.Format("{0:N2} Đ", product.Price)</td>
                         <td>@product.Category?.Name</td>
-                        <td>@product.Status</td>
+                        <td>
+                            <span class="status @(product.Status.ToLower() == "available" ? "status-available" : product.Status.ToLower() == "unavailable" ? "status-unavailable" : "status-pending")">
+                                @product.Status
+                            </span>
+                        </td>
                         <td>@product.CreatedAt.ToString("yyyy-MM-dd HH:mm")</td>
                         <td>@product.UpdatedAt.ToString("yyyy-MM-dd HH:mm")</td>
                         <td>

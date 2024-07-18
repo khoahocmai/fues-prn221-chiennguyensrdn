@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <title>@ViewData["Title"]</title>
     <style>
         body {
@@ -45,10 +46,10 @@
             transition: all 0.3s ease;
         }
 
-            .btn-primary:hover {
-                background-color: #0056b3;
-                border-color: #004085;
-            }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
 
         .card-container {
             display: flex;
@@ -57,6 +58,7 @@
         }
 
         .card {
+            position: relative;
             flex: 1 1 calc(33.333% - 20px);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border: none;
@@ -64,11 +66,11 @@
             overflow: hidden;
         }
 
-            .card img {
-                max-width: 100%;
-                height: 200px;
-                object-fit: cover;
-            }
+        .card img {
+            max-width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
 
         .card-body {
             padding: 15px;
@@ -103,30 +105,46 @@
             border-color: #007bff;
         }
 
-            .btn-primary:hover {
-                background-color: #0056b3;
-                border-color: #004085;
-            }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
 
         .btn-danger {
             background-color: #dc3545;
             border-color: #dc3545;
         }
 
-            .btn-danger:hover {
-                background-color: #c82333;
-                border-color: #bd2130;
-            }
+        .btn-danger:hover {
+            background-color: #c82333;
+            border-color: #bd2130;
+        }
 
         .btn-info {
             background-color: #17a2b8;
             border-color: #17a2b8;
         }
 
-            .btn-info:hover {
-                background-color: #117a8b;
-                border-color: #10707f;
-            }
+        .btn-info:hover {
+            background-color: #117a8b;
+            border-color: #10707f;
+        }
+
+        .icon-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            color: #17a2b8;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        .icon-btn:hover {
+            color: #10707f;
+        }
     </style>
 </head>
 <body>
@@ -170,9 +188,11 @@
                         <div class="card-actions">
                             <a asp-page="/Buyer/ConfirmPurchase" asp-route-id="@product.Id" class="btn btn-primary">Trade</a>
                             <a asp-page="/Buyer/ConfirmReport" asp-route-id="@product.Id" class="btn btn-danger">Report</a>
-                            <a asp-page="/General/ViewProductDetail" asp-route-id="@product.Id" class="btn btn-info">View Details</a>
                         </div>
                     </div>
+                    <a asp-page="/General/ViewProductDetail" asp-route-id="@product.Id" class="icon-btn">
+                        <i class="fas fa-exclamation-circle"></i>
+                    </a>
                 </div>
             }
         </div>
