@@ -30,7 +30,15 @@
             font-weight: bold;
         }
 
-        .product-detail, .comments-section, .rating-section {
+        .section-title {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #0056b3;
+            color: #0056b3;
+            font-weight: bold;
+        }
+
+        .product-detail, .comments-section, .rating-section, .trade-section {
             background-color: #fff;
             padding: 20px;
             border-radius: 10px;
@@ -46,6 +54,7 @@
 
             .product-detail p {
                 font-size: 1.1em;
+                margin-bottom: 10px;
             }
 
             .comments-section ul {
@@ -64,7 +73,7 @@
             font-weight: bold;
         }
 
-        .btn-primary {
+        .btn-primary, .btn-secondary {
             border-radius: 20px;
             padding: 10px 20px;
             font-size: 16px;
@@ -75,13 +84,6 @@
                 background-color: #0056b3;
                 border-color: #004085;
             }
-
-        .btn-secondary {
-            border-radius: 20px;
-            padding: 10px 20px;
-            font-size: 16px;
-            transition: all 0.3s ease;
-        }
 
             .btn-secondary:hover {
                 background-color: #5a6268;
@@ -94,6 +96,7 @@
         <h2>@ViewData["Title"]</h2>
 
         <div class="product-detail">
+            <h4 class="section-title">Product Details</h4>
             <p><strong>Title:</strong> @Model.Product.Title</p>
             <p><strong>Description:</strong> @Model.Product.Description</p>
             <p><strong>Price:</strong> @string.Format("{0:N2} Đ", @Model.Product.Price)</p>
@@ -113,13 +116,13 @@
             </p>
         </div>
 
-        <div class="product-detail">
-            <h4>Trade</h4>
+        <div class="trade-section">
+            <h4 class="section-title">Trade</h4>
             <a asp-page="/Buyer/ConfirmPurchase" asp-route-id="@Model.Product.Id" class="btn btn-primary">Trade</a>
         </div>
 
         <div class="comments-section">
-            <h4>Comments</h4>
+            <h4 class="section-title">Comments</h4>
             <form method="post" asp-page-handler="Comment">
                 <input type="hidden" asp-for="Id" />
                 <div class="form-group">
@@ -138,7 +141,7 @@
         </div>
 
         <div class="rating-section">
-            <h4>Rating</h4>
+            <h4 class="section-title">Rating</h4>
             @if (User.IsInRole("Buyer") || User.IsInRole("Moderator"))
             {
                 <form method="post" asp-page-handler="Rating">
